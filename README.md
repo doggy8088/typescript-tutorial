@@ -4,9 +4,7 @@
 
 ## 正體中文翻譯
 
-本書原文來自於 [TypeScript 入门教程](https://github.com/xcatliu/typescript-tutorial/) 專案，並將其內容翻譯為正體中文版。
-
-如有正體中文翻譯不妥的部分，歡迎發 [Issue](https://github.com/doggy8088/typescript-tutorial/issues) 給我，或連繫 [Will 保哥的技術交流中心](https://www.facebook.com/will.fans/)。
+本書 [TypeScript 新手指南](https://willh.gitbook.io/typescript-tutorial/) 的原文來自於簡體中文的 [TypeScript 入门教程](https://github.com/xcatliu/typescript-tutorial/) 專案，並將其內容翻譯為正體中文版。如有正體中文翻譯不妥的地方，歡迎發 [Issue](https://github.com/doggy8088/typescript-tutorial/issues) 給我，或到 [Will 保哥的技術交流中心](https://www.facebook.com/will.fans/) 粉絲團留言給我，謝謝！🙂
 
 ---
 
