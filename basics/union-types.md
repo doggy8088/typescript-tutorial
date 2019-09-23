@@ -1,8 +1,8 @@
-# 联合类型
+# 聯合型別
 
-联合类型（Union Types）表示取值可以为多种类型中的一种。
+聯合型別（Union Types）表示取值可以為多種型別中的一種。
 
-## 简单的例子
+## 簡單的例子
 
 ```ts
 let myFavoriteNumber: string | number;
@@ -18,13 +18,13 @@ myFavoriteNumber = true;
 //   Type 'boolean' is not assignable to type 'number'.
 ```
 
-联合类型使用 `|` 分隔每个类型。
+聯合型別使用 `|` 分隔每個型別。
 
-这里的 `let myFavoriteNumber: string | number` 的含义是，允许 `myFavoriteNumber` 的类型是 `string` 或者 `number`，但是不能是其他类型。
+這裡的 `let myFavoriteNumber: string | number` 的含義是，允許 `myFavoriteNumber` 的型別是 `string` 或者 `number`，但是不能是其他型別。
 
-## 访问联合类型的属性或方法
+## 訪問聯合型別的屬性或方法
 
-当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们**只能访问此联合类型的所有类型里共有的属性或方法**：
+當 TypeScript 不確定一個聯合型別的變數到底是哪個型別的時候，我們**只能訪問此聯合型別的所有型別裡共有的屬性或方法**：
 
 ```ts
 function getLength(something: string | number): number {
@@ -35,9 +35,9 @@ function getLength(something: string | number): number {
 //   Property 'length' does not exist on type 'number'.
 ```
 
-上例中，`length` 不是 `string` 和 `number` 的共有属性，所以会报错。
+上例中，`length` 不是 `string` 和 `number` 的共有屬性，所以會報錯。
 
-访问 `string` 和 `number` 的共有属性是没问题的：
+訪問 `string` 和 `number` 的共有屬性是沒問題的：
 
 ```ts
 function getString(something: string | number): string {
@@ -45,27 +45,27 @@ function getString(something: string | number): string {
 }
 ```
 
-联合类型的变量在被赋值的时候，会根据类型推论的规则推断出一个类型：
+聯合型別的變數在被賦值的時候，會根據型別推論的規則推斷出一個型別：
 
 ```ts
 let myFavoriteNumber: string | number;
 myFavoriteNumber = 'seven';
 console.log(myFavoriteNumber.length); // 5
 myFavoriteNumber = 7;
-console.log(myFavoriteNumber.length); // 编译时报错
+console.log(myFavoriteNumber.length); // 編譯時報錯
 
 // index.ts(5,30): error TS2339: Property 'length' does not exist on type 'number'.
 ```
 
-上例中，第二行的 `myFavoriteNumber` 被推断成了 `string`，访问它的 `length` 属性不会报错。
+上例中，第二行的 `myFavoriteNumber` 被推斷成了 `string`，訪問它的 `length` 屬性不會報錯。
 
-而第四行的 `myFavoriteNumber` 被推断成了 `number`，访问它的 `length` 属性时就报错了。
+而第四行的 `myFavoriteNumber` 被推斷成了 `number`，訪問它的 `length` 屬性時就報錯了。
 
-## 参考
+## 參考
 
-- [Advanced Types # Union Types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#联合类型)）
+- [Advanced Types # Union Types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#聯合型別)）
 
 ---
 
-- [上一章：类型推论](type-inference.md)
-- [下一章：对象的类型——接口](type-of-object-interfaces.md)
+- [上一章：型別推論](type-inference.md)
+- [下一章：物件的型別——介面](type-of-object-interfaces.md)

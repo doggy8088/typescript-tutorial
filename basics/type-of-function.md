@@ -1,24 +1,24 @@
-# 函数的类型
+# 函式的型別
 
-> [函数是 JavaScript 中的一等公民](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch2.html)
+> [函式是 JavaScript 中的一等公民](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch2.html)
 
-## 函数声明
+## 函式宣告
 
-在 JavaScript 中，有两种常见的定义函数的方式——函数声明（Function Declaration）和函数表达式（Function Expression）：
+在 JavaScript 中，有兩種常見的定義函式的方式——函式宣告（Function Declaration）和函式表示式（Function Expression）：
 
 ```js
-// 函数声明（Function Declaration）
+// 函式宣告（Function Declaration）
 function sum(x, y) {
     return x + y;
 }
 
-// 函数表达式（Function Expression）
+// 函式表示式（Function Expression）
 let mySum = function (x, y) {
     return x + y;
 };
 ```
 
-一个函数有输入和输出，要在 TypeScript 中对其进行约束，需要把输入和输出都考虑到，其中函数声明的类型定义较简单：
+一個函式有輸入和輸出，要在 TypeScript 中對其進行約束，需要把輸入和輸出都考慮到，其中函式宣告的型別定義較簡單：
 
 ```ts
 function sum(x: number, y: number): number {
@@ -26,7 +26,7 @@ function sum(x: number, y: number): number {
 }
 ```
 
-注意，**输入多余的（或者少于要求的）参数，是不被允许的**：
+注意，**輸入多餘的（或者少於要求的）引數，是不被允許的**：
 
 ```ts
 function sum(x: number, y: number): number {
@@ -46,9 +46,9 @@ sum(1);
 // index.ts(4,1): error TS2346: Supplied parameters do not match any signature of call target.
 ```
 
-## 函数表达式
+## 函式表示式
 
-如果要我们现在写一个对函数表达式（Function Expression）的定义，可能会写成这样：
+如果要我們現在寫一個對函式表示式（Function Expression）的定義，可能會寫成這樣：
 
 ```ts
 let mySum = function (x: number, y: number): number {
@@ -56,7 +56,7 @@ let mySum = function (x: number, y: number): number {
 };
 ```
 
-这是可以通过编译的，不过事实上，上面的代码只对等号右侧的匿名函数进行了类型定义，而等号左边的 `mySum`，是通过赋值操作进行类型推论而推断出来的。如果需要我们手动给 `mySum` 添加类型，则应该是这样：
+這是可以透過編譯的，不過事實上，上面的程式碼只對等號右側的匿名函式進行了型別定義，而等號左邊的 `mySum`，是透過賦值操作進行型別推論而推斷出來的。如果需要我們手動給 `mySum` 新增型別，則應該是這樣：
 
 ```ts
 let mySum: (x: number, y: number) => number = function (x: number, y: number): number {
@@ -66,13 +66,13 @@ let mySum: (x: number, y: number) => number = function (x: number, y: number): n
 
 注意不要混淆了 TypeScript 中的 `=>` 和 ES6 中的 `=>`。
 
-在 TypeScript 的类型定义中，`=>` 用来表示函数的定义，左边是输入类型，需要用括号括起来，右边是输出类型。
+在 TypeScript 的型別定義中，`=>` 用來表示函式的定義，左邊是輸入型別，需要用括號括起來，右邊是輸出型別。
 
-在 ES6 中，`=>` 叫做箭头函数，应用十分广泛，可以参考 [ES6 中的箭头函数][]。
+在 ES6 中，`=>` 叫做箭頭函式，應用十分廣泛，可以參考 [ES6 中的箭頭函式][]。
 
-## 用接口定义函数的形状
+## 用介面定義函式的形狀
 
-我们也可以使用接口的方式来定义一个函数需要符合的形状：
+我們也可以使用介面的方式來定義一個函式需要符合的形狀：
 
 ```ts
 interface SearchFunc {
@@ -85,11 +85,11 @@ mySearch = function(source: string, subString: string) {
 }
 ```
 
-## 可选参数
+## 可選引數
 
-前面提到，输入多余的（或者少于要求的）参数，是不允许的。那么如何定义可选的参数呢？
+前面提到，輸入多餘的（或者少於要求的）引數，是不允許的。那麼如何定義可選的引數呢？
 
-与接口中的可选属性类似，我们用 `?` 表示可选的参数：
+與介面中的可選屬性類似，我們用 `?` 表示可選的引數：
 
 ```ts
 function buildName(firstName: string, lastName?: string) {
@@ -103,7 +103,7 @@ let tomcat = buildName('Tom', 'Cat');
 let tom = buildName('Tom');
 ```
 
-需要注意的是，可选参数必须接在必需参数后面。换句话说，**可选参数后面不允许再出现必需参数了**：
+需要注意的是，可選引數必須接在必需引數後面。換句話說，**可選引數後面不允許再出現必需引數了**：
 
 ```ts
 function buildName(firstName?: string, lastName: string) {
@@ -119,9 +119,9 @@ let tom = buildName(undefined, 'Tom');
 // index.ts(1,40): error TS1016: A required parameter cannot follow an optional parameter.
 ```
 
-## 参数默认值
+## 引數預設值
 
-在 ES6 中，我们允许给函数的参数添加默认值，**TypeScript 会将添加了默认值的参数识别为可选参数**：
+在 ES6 中，我們允許給函式的引數新增預設值，**TypeScript 會將添加了預設值的引數識別為可選引數**：
 
 ```ts
 function buildName(firstName: string, lastName: string = 'Cat') {
@@ -131,7 +131,7 @@ let tomcat = buildName('Tom', 'Cat');
 let tom = buildName('Tom');
 ```
 
-此时就不受「可选参数必须接在必需参数后面」的限制了：
+此時就不受「可選引數必須接在必需引數後面」的限制了：
 
 ```ts
 function buildName(firstName: string = 'Tom', lastName: string) {
@@ -141,11 +141,11 @@ let tomcat = buildName('Tom', 'Cat');
 let cat = buildName(undefined, 'Cat');
 ```
 
-> 关于默认参数，可以参考 [ES6 中函数参数的默认值][]。
+> 關於預設引數，可以參考 [ES6 中函式引數的預設值][]。
 
-## 剩余参数
+## 剩餘引數
 
-ES6 中，可以使用 `...rest` 的方式获取函数中的剩余参数（rest 参数）：
+ES6 中，可以使用 `...rest` 的方式獲取函式中的剩餘引數（rest 引數）：
 
 ```js
 function push(array, ...items) {
@@ -158,7 +158,7 @@ let a = [];
 push(a, 1, 2, 3);
 ```
 
-事实上，`items` 是一个数组。所以我们可以用数组的类型来定义它：
+事實上，`items` 是一個數組。所以我們可以用陣列的型別來定義它：
 
 ```ts
 function push(array: any[], ...items: any[]) {
@@ -171,15 +171,15 @@ let a = [];
 push(a, 1, 2, 3);
 ```
 
-注意，rest 参数只能是最后一个参数，关于 rest 参数，可以参考 [ES6 中的 rest 参数][]。
+注意，rest 引數只能是最後一個引數，關於 rest 引數，可以參考 [ES6 中的 rest 引數][]。
 
-## 重载
+## 過載
 
-重载允许一个函数接受不同数量或类型的参数时，作出不同的处理。
+過載允許一個函式接受不同數量或型別的引數時，作出不同的處理。
 
-比如，我们需要实现一个函数 `reverse`，输入数字 `123` 的时候，输出反转的数字 `321`，输入字符串 `'hello'` 的时候，输出反转的字符串 `'olleh'`。
+比如，我們需要實現一個函式 `reverse`，輸入數字 `123` 的時候，輸出反轉的數字 `321`，輸入字串 `'hello'` 的時候，輸出反轉的字串 `'olleh'`。
 
-利用联合类型，我们可以这么实现：
+利用聯合型別，我們可以這麼實現：
 
 ```ts
 function reverse(x: number | string): number | string {
@@ -191,9 +191,9 @@ function reverse(x: number | string): number | string {
 }
 ```
 
-然而这样有一个缺点，就是不能够精确的表达，输入为数字的时候，输出也应该为数字，输入为字符串的时候，输出也应该为字符串。
+然而這樣有一個缺點，就是不能夠精確的表達，輸入為數字的時候，輸出也應該為數字，輸入為字串的時候，輸出也應該為字串。
 
-这时，我们可以使用重载定义多个 `reverse` 的函数类型：
+這時，我們可以使用過載定義多個 `reverse` 的函式型別：
 
 ```ts
 function reverse(x: number): number;
@@ -207,24 +207,24 @@ function reverse(x: number | string): number | string {
 }
 ```
 
-上例中，我们重复定义了多次函数 `reverse`，前几次都是函数定义，最后一次是函数实现。在编辑器的代码提示中，可以正确的看到前两个提示。
+上例中，我們重複定義了多次函式 `reverse`，前幾次都是函式定義，最後一次是函式實現。在編輯器的程式碼提示中，可以正確的看到前兩個提示。
 
-注意，TypeScript 会优先从最前面的函数定义开始匹配，所以多个函数定义如果有包含关系，需要优先把精确的定义写在前面。
+注意，TypeScript 會優先從最前面的函式定義開始匹配，所以多個函式定義如果有包含關係，需要優先把精確的定義寫在前面。
 
-## 参考
+## 參考
 
 - [Functions](http://www.typescriptlang.org/docs/handbook/functions.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Functions.html)）
-- [Functions # Function Types](http://www.typescriptlang.org/docs/handbook/interfaces.html#function-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html#函数类型)）
-- [JS 函数式编程指南](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
-- [ES6 中的箭头函数]
-- [ES6 中函数参数的默认值]
-- [ES6 中的 rest 参数]
+- [Functions # Function Types](http://www.typescriptlang.org/docs/handbook/interfaces.html#function-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html#函式型別)）
+- [JS 函數語言程式設計指南](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
+- [ES6 中的箭頭函式]
+- [ES6 中函式引數的預設值]
+- [ES6 中的 rest 引數]
 
-[ES6 中的箭头函数]: http://es6.ruanyifeng.com/#docs/function#箭头函数
-[ES6 中函数参数的默认值]: http://es6.ruanyifeng.com/#docs/function#函数参数的默认值
-[ES6 中的 rest 参数]: http://es6.ruanyifeng.com/#docs/function#rest参数
+[ES6 中的箭頭函式]: http://es6.ruanyifeng.com/#docs/function#箭頭函式
+[ES6 中函式引數的預設值]: http://es6.ruanyifeng.com/#docs/function#函式引數的預設值
+[ES6 中的 rest 引數]: http://es6.ruanyifeng.com/#docs/function#rest引數
 
 ---
 
-- [上一章：数组的类型](type-of-array.md)
-- [下一章：类型断言](type-assertion.md)
+- [上一章：陣列的型別](type-of-array.md)
+- [下一章：型別斷言](type-assertion.md)

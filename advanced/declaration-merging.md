@@ -1,10 +1,10 @@
-# 声明合并
+# 宣告合併
 
-如果定义了两个相同名字的函数、接口或类，那么它们会合并成一个类型：
+如果定義了兩個相同名字的函式、介面或類別，那麼它們會合併成一個型別：
 
-## 函数的合并
+## 函式的合併
 
-[之前学习过](../basics/type-of-function.md#重载)，我们可以使用重载定义多个函数类型：
+[之前學習過](../basics/type-of-function.md#過載)，我們可以使用過載定義多個函式型別：
 
 ```ts
 function reverse(x: number): number;
@@ -18,9 +18,9 @@ function reverse(x: number | string): number | string {
 }
 ```
 
-## 接口的合并
+## 介面的合併
 
-接口中的属性在合并时会简单的合并到一个接口中：
+介面中的屬性在合併時會簡單的合併到一個介面中：
 
 ```ts
 interface Alarm {
@@ -31,7 +31,7 @@ interface Alarm {
 }
 ```
 
-相当于：
+相當於：
 
 ```ts
 interface Alarm {
@@ -40,14 +40,14 @@ interface Alarm {
 }
 ```
 
-注意，**合并的属性的类型必须是唯一的**：
+注意，**合併的屬性的型別必須是唯一的**：
 
 ```ts
 interface Alarm {
     price: number;
 }
 interface Alarm {
-    price: number;  // 虽然重复了，但是类型都是 `number`，所以不会报错
+    price: number;  // 雖然重複了，但是型別都是 `number`，所以不會報錯
     weight: number;
 }
 ```
@@ -57,14 +57,14 @@ interface Alarm {
     price: number;
 }
 interface Alarm {
-    price: string;  // 类型不一致，会报错
+    price: string;  // 型別不一致，會報錯
     weight: number;
 }
 
 // index.ts(5,3): error TS2403: Subsequent variable declarations must have the same type.  Variable 'price' must be of type 'number', but here has type 'string'.
 ```
 
-接口中方法的合并，与函数的合并一样：
+介面中方法的合併，與函式的合併一樣：
 
 ```ts
 interface Alarm {
@@ -77,7 +77,7 @@ interface Alarm {
 }
 ```
 
-相当于：
+相當於：
 
 ```ts
 interface Alarm {
@@ -88,15 +88,15 @@ interface Alarm {
 }
 ```
 
-## 类的合并
+## 類別的合併
 
-类的合并与接口的合并规则一致。
+類別的合併與介面的合併規則一致。
 
-## 参考
+## 參考
 
 - [Declaration Merging](http://www.typescriptlang.org/docs/handbook/declaration-merging.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Declaration%20Merging.html)）
 
 ---
 
 - [上一章：泛型](generics.md)
-- [下一章：扩展阅读](further-reading.md)
+- [下一章：擴充套件閱讀](further-reading.md)

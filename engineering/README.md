@@ -1,14 +1,14 @@
 # 工程
 
-掌握了 TypeScript 的语法就像学会了砌墙的工艺。
+掌握了 TypeScript 的語法就像學會了砌牆的工藝。
 
-我们学习 TypeScript 的目的不是为了造一间小茅屋，而是为了造高楼大厦，这也正是 TypeScript 的类型系统带来的优势。
+我們學習 TypeScript 的目的不是為了造一間小茅屋，而是為了造高樓大廈，這也正是 TypeScript 的型別系統帶來的優勢。
 
-那么一项大工程应该如何开展呢？本部分的内容就会介绍 TypeScript 工程化的最佳实践，具体内容包括：
+那麼一項大工程應該如何開展呢？本部分的內容就會介紹 TypeScript 工程化的最佳實踐，具體內容包括：
 
-- [代码检查](lint.md)
+- [程式碼檢查](lint.md)
 
 ---
 
-- [上一章：扩展阅读](../advanced/further-reading.md)
-- [下一章：代码检查](lint.md)
+- [上一章：擴充套件閱讀](../advanced/further-reading.md)
+- [下一章：程式碼檢查](lint.md)

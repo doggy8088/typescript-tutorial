@@ -1,10 +1,10 @@
 # 任意值
 
-任意值（Any）用来表示允许赋值为任意类型。
+任意值（Any）用來表示允許賦值為任意型別。
 
-## 什么是任意值类型
+## 什麼是任意值型別
 
-如果是一个普通类型，在赋值过程中改变类型是不被允许的：
+如果是一個普通型別，在賦值過程中改變型別是不被允許的：
 
 ```ts
 let myFavoriteNumber: string = 'seven';
@@ -13,16 +13,16 @@ myFavoriteNumber = 7;
 // index.ts(2,1): error TS2322: Type 'number' is not assignable to type 'string'.
 ```
 
-但如果是 `any` 类型，则允许被赋值为任意类型。
+但如果是 `any` 型別，則允許被賦值為任意型別。
 
 ```ts
 let myFavoriteNumber: any = 'seven';
 myFavoriteNumber = 7;
 ```
 
-## 任意值的属性和方法
+## 任意值的屬性和方法
 
-在任意值上访问任何属性都是允许的：
+在任意值上訪問任何屬性都是允許的：
 
 ```ts
 let anyThing: any = 'hello';
@@ -30,7 +30,7 @@ console.log(anyThing.myName);
 console.log(anyThing.myName.firstName);
 ```
 
-也允许调用任何方法：
+也允許呼叫任何方法：
 
 ```ts
 let anyThing: any = 'Tom';
@@ -39,11 +39,11 @@ anyThing.setName('Jerry').sayHello();
 anyThing.myName.setFirstName('Cat');
 ```
 
-可以认为，**声明一个变量为任意值之后，对它的任何操作，返回的内容的类型都是任意值**。
+可以認為，**宣告一個變數為任意值之後，對它的任何操作，返回的內容的型別都是任意值**。
 
-## 未声明类型的变量
+## 未宣告型別的變數
 
-**变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型**：
+**變數如果在宣告的時候，未指定其型別，那麼它會被識別為任意值型別**：
 
 ```ts
 let something;
@@ -53,7 +53,7 @@ something = 7;
 something.setName('Tom');
 ```
 
-等价于
+等價於
 
 ```ts
 let something: any;
@@ -63,11 +63,11 @@ something = 7;
 something.setName('Tom');
 ```
 
-## 参考
+## 參考
 
 - [Basic Types # Any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Basic%20Types.html#任意值)）
 
 ---
 
-- [上一章：原始数据类型](primitive-data-types.md)
-- [下一章：类型推论](type-inference.md)
+- [上一章：原始資料型別](primitive-data-types.md)
+- [下一章：型別推論](type-inference.md)

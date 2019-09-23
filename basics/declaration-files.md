@@ -1,31 +1,31 @@
-# 声明文件
+# 宣告檔案
 
-当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能。
+當使用第三方函式庫時，我們需要參考它的宣告檔案，才能獲得對應的程式碼自動完成、介面提示等功能。
 
-## 新语法索引
+## 新語法索引
 
-由于本章涉及大量新语法，故在本章开头列出新语法的索引，方便大家在使用这些新语法时能快速查找到对应的讲解：
+由於本章涉及大量新語法，故在本章開頭列出新語法的索引，方便大家在使用這些新語法時能快速查詢到對應的講解：
 
-- [`declare var`](#declare-var) 声明全局变量
-- [`declare function`](#declare-function) 声明全局方法
-- [`declare class`](#declare-class) 声明全局类
-- [`declare enum`](#declare-enum) 声明全局枚举类型
-- [`declare namespace`](#declare-namespace) 声明（含有子属性的）全局对象
-- [`interface` 和 `type`](#interface-he-type) 声明全局类型
-- [`export`](#export) 导出变量
-- [`export namespace`](#export-namespace) 导出（含有子属性的）对象
-- [`export default`](#export-default) ES6 默认导出
-- [`export =`](#export-1) commonjs 导出模块
-- [`export as namespace`](#export-as-namespace) UMD 库声明全局变量
-- [`declare global`](#declare-global) 扩展全局变量
-- [`declare module`](#declare-module) 扩展模块
-- [`/// <reference />`](#san-xie-xian-zhi-ling) 三斜线指令
+- [`declare var`](#declare-var) 宣告全域性變數
+- [`declare function`](#declare-function) 宣告全域性方法
+- [`declare class`](#declare-class) 宣告全域性類別
+- [`declare enum`](#declare-enum) 宣告全域性列舉型別
+- [`declare namespace`](#declare-namespace) 宣告（含有子屬性的）全域性物件
+- [`interface` 和 `type`](#interface-he-type) 宣告全域性型別
+- [`export`](#export) 匯出變數
+- [`export namespace`](#export-namespace) 匯出（含有子屬性的）物件
+- [`export default`](#export-default) ES6 預設匯出
+- [`export =`](#export-1) commonjs 匯出模組
+- [`export as namespace`](#export-as-namespace) UMD 函式庫宣告全域性變數
+- [`declare global`](#declare-global) 擴充套件全域性變數
+- [`declare module`](#declare-module) 擴充套件模組
+- [`/// <reference />`](#san-xie-xian-zhi-ling) 三斜線指令
 
-## 什么是声明语句
+## 什麼是宣告語句
 
-假如我们想使用第三方库 jQuery，一种常见的方式是在 html 中通过 `<script>` 标签引入 jQuery，然后就可以使用全局变量 `$` 或 `jQuery` 了。
+假如我們想使用第三方函式庫 jQuery，一種常見的方式是在 html 中透過 `<script>` 標籤引入 jQuery，然後就可以使用全域性變數 `$` 或 `jQuery` 了。
 
-我们通常这样获取一个 `id` 是 `foo` 的元素：
+我們通常這樣獲取一個 `id` 是 `foo` 的元素：
 
 ```js
 $('#foo');
@@ -33,14 +33,14 @@ $('#foo');
 jQuery('#foo');
 ```
 
-但是在 ts 中，编译器并不知道 `$` 或 `jQuery` 是什么东西[<sup>1</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/01-jquery)：
+但是在 ts 中，編譯器並不知道 `$` 或 `jQuery` 是什麼東西[<sup>1</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/01-jquery)：
 
 ```ts
 jQuery('#foo');
 // ERROR: Cannot find name 'jQuery'.
 ```
 
-这时，我们需要使用 `declare var` 来定义它的类型[<sup>2</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/02-declare-var)：
+這時，我們需要使用 `declare var` 來定義它的型別[<sup>2</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/02-declare-var)：
 
 ```ts
 declare var jQuery: (selector: string) => any;
@@ -48,17 +48,17 @@ declare var jQuery: (selector: string) => any;
 jQuery('#foo');
 ```
 
-上例中，`declare var` 并没有真的定义一个变量，只是定义了全局变量 `jQuery` 的类型，仅仅会用于编译时的检查，在编译结果中会被删除。它编译结果是：
+上例中，`declare var` 並沒有真的定義一個變數，只是定義了全域性變數 `jQuery` 的型別，僅僅會用於編譯時的檢查，在編譯結果中會被刪除。它編譯結果是：
 
 ```js
 jQuery('#foo');
 ```
 
-除了 `declare var` 之外，还有其他很多种声明语句，将会在后面详细介绍。
+除了 `declare var` 之外，還有其他很多種宣告語句，將會在後面詳細介紹。
 
-## 什么是声明文件
+## 什麼是宣告檔案
 
-通常我们会把声明语句放到一个单独的文件（`jQuery.d.ts`）中，这就是声明文件[<sup>3</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/03-jquery-d-ts)：
+通常我們會把宣告語句放到一個單獨的檔案（`jQuery.d.ts`）中，這就是宣告檔案[<sup>3</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/03-jquery-d-ts)：
 
 ```ts
 // src/jQuery.d.ts
@@ -72,9 +72,9 @@ declare var jQuery: (selector: string) => any;
 jQuery('#foo');
 ```
 
-声明文件必需以 `.d.ts` 为后缀。
+宣告檔案必需以 `.d.ts` 為字尾。
 
-一般来说，ts 会解析项目中所有的 `*.ts` 文件，当然也包含以 `.d.ts` 结尾的文件。所以当我们将 `jQuery.d.ts` 放到项目中时，其他所有 `*.ts` 文件就都可以获得 `jQuery` 的类型定义了。
+一般來說，ts 會解析專案中所有的 `*.ts` 檔案，當然也包含以 `.d.ts` 結尾的檔案。所以當我們將 `jQuery.d.ts` 放到專案中時，其他所有 `*.ts` 檔案就都可以獲得 `jQuery` 的型別定義了。
 
 ```plain
 /path/to/project
@@ -84,44 +84,44 @@ jQuery('#foo');
 └── tsconfig.json
 ```
 
-假如仍然无法解析，那么可以检查下 `tsconfig.json` 中的 `files`、`include` 和 `exclude` 配置，确保其包含了 `jQuery.d.ts` 文件。
+假如仍然無法解析，那麼可以檢查下 `tsconfig.json` 中的 `files`、`include` 和 `exclude` 配置，確保其包含了 `jQuery.d.ts` 檔案。
 
-这里只演示了全局变量这种模式的声明文件，假如是通过模块导入的方式使用第三方库的话，那么引入声明文件又是另一种方式了，将会在后面详细介绍。
+這裡只演示了全域性變數這種模式的宣告檔案，假如是透過模組匯入的方式使用第三方函式庫的話，那麼引入宣告檔案又是另一種方式了，將會在後面詳細介紹。
 
-### 第三方声明文件
+### 第三方宣告檔案
 
-当然，jQuery 的声明文件不需要我们定义了，社区已经帮我们定义好了：[jQuery in DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/jquery/index.d.ts)。
+當然，jQuery 的宣告檔案不需要我們定義了，社群已經幫我們定義好了：[jQuery in DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/jquery/index.d.ts)。
 
-我们可以直接下载下来使用，但是更推荐的是使用 `@types` 统一管理第三方库的声明文件。
+我們可以直接下載下來使用，但是更推薦的是使用 `@types` 統一管理第三方函式庫的宣告檔案。
 
-`@types` 的使用方式很简单，直接用 npm 安装对应的声明模块即可，以 jQuery 举例：
+`@types` 的使用方式很簡單，直接用 npm 安裝對應的宣告模組即可，以 jQuery 舉例：
 
 ```bash
 npm install @types/jquery --save-dev
 ```
 
-可以在[这个页面](https://microsoft.github.io/TypeSearch/)搜索你需要的声明文件。
+可以在[這個頁面](https://microsoft.github.io/TypeSearch/)搜尋你需要的宣告檔案。
 
-## 书写声明文件
+## 書寫宣告檔案
 
-当一个第三方库没有提供声明文件时，我们就需要自己书写声明文件了。前面只介绍了最简单的声明文件内容，而真正书写一个声明文件并不是一件简单的事，以下会详细介绍如何书写声明文件。
+當一個第三方函式庫沒有提供宣告檔案時，我們就需要自己書寫宣告檔案了。前面只介紹了最簡單的宣告檔案內容，而真正書寫一個宣告檔案並不是一件簡單的事，以下會詳細介紹如何書寫宣告檔案。
 
-在不同的场景下，声明文件的内容和使用方式会有所区别。
+在不同的場景下，宣告檔案的內容和使用方式會有所區別。
 
-库的使用场景主要有以下几种：
+函式庫的使用場景主要有以下幾種：
 
-- [全局变量](#quan-ju-bian-liang)：通过 `<script>` 标签引入第三方库，注入全局变量
-- [npm 包](#npm-bao)：通过 `import foo from 'foo'` 导入，符合 ES6 模块规范
-- [UMD 库](#umd-ku)：既可以通过 `<script>` 标签引入，又可以通过 `import` 导入
-- [直接扩展全局变量](#zhi-jie-kuo-zhan-quan-ju-bian-liang)：通过 `<script>` 标签引入后，改变一个全局变量的结构
-- [在 npm 包或 UMD 库中扩展全局变量](#zai-npm-bao-huo-umd-ku-zhong-kuo-zhan-quan-ju-bian-liang)：引用 npm 包或 UMD 库后，改变一个全局变量的结构
-- [模块插件](#mo-kuai-cha-jian)：通过 `<script>` 或 `import` 导入后，改变另一个模块的结构
+- [全域性變數](#quan-ju-bian-liang)：透過 `<script>` 標籤引入第三方函式庫，注入全域性變數
+- [npm 包](#npm-bao)：透過 `import foo from 'foo'` 匯入，符合 ES6 模組規範
+- [UMD 函式庫](#umd-ku)：既可以透過 `<script>` 標籤引入，又可以透過 `import` 匯入
+- [直接擴充套件全域性變數](#zhi-jie-kuo-zhan-quan-ju-bian-liang)：透過 `<script>` 標籤引入後，改變一個全域性變數的結構
+- [在 npm 包或 UMD 函式庫中擴充套件全域性變數](#zai-npm-bao-huo-umd-ku-zhong-kuo-zhan-quan-ju-bian-liang)：參考 npm 包或 UMD 函式庫後，改變一個全域性變數的結構
+- [模組外掛](#mo-kuai-cha-jian)：透過 `<script>` 或 `import` 匯入後，改變另一個模組的結構
 
-### 全局变量
+### 全域性變數
 
-全局变量是最简单的一种场景，之前举的例子就是通过 `<script>` 标签引入 jQuery，注入全局变量 `$` 和 `jQuery`。
+全域性變數是最簡單的一種場景，之前舉的例子就是透過 `<script>` 標籤引入 jQuery，注入全域性變數 `$` 和 `jQuery`。
 
-使用全局变量的声明文件时，如果是以 `npm install @types/xxx --save-dev` 安装的，则不需要任何配置。如果是将声明文件直接存放于当前项目中，则建议和其他源码一起放到 `src` 目录下（或者对应的源码目录下）：
+使用全域性變數的宣告檔案時，如果是以 `npm install @types/xxx --save-dev` 安裝的，則不需要任何配置。如果是將宣告檔案直接存放於當前專案中，則建議和其他原始碼一起放到 `src` 目錄下（或者對應的原始碼目錄下）：
 
 ```plain
 /path/to/project
@@ -131,20 +131,20 @@ npm install @types/jquery --save-dev
 └── tsconfig.json
 ```
 
-如果没有生效，可以检查下 `tsconfig.json` 中的 `files`、`include` 和 `exclude` 配置，确保其包含了 `jQuery.d.ts` 文件。
+如果沒有生效，可以檢查下 `tsconfig.json` 中的 `files`、`include` 和 `exclude` 配置，確保其包含了 `jQuery.d.ts` 檔案。
 
-全局变量的声明文件主要有以下几种语法：
+全域性變數的宣告檔案主要有以下幾種語法：
 
-- [`declare var`](#declare-var) 声明全局变量
-- [`declare function`](#declare-function) 声明全局方法
-- [`declare class`](#declare-class) 声明全局类
-- [`declare enum`](#declare-enum) 声明全局枚举类型
-- [`declare namespace`](#declare-namespace) 声明（含有子属性的）全局对象
-- [`interface` 和 `type`](#interface-he-type) 声明全局类型
+- [`declare var`](#declare-var) 宣告全域性變數
+- [`declare function`](#declare-function) 宣告全域性方法
+- [`declare class`](#declare-class) 宣告全域性類別
+- [`declare enum`](#declare-enum) 宣告全域性列舉型別
+- [`declare namespace`](#declare-namespace) 宣告（含有子屬性的）全域性物件
+- [`interface` 和 `type`](#interface-he-type) 宣告全域性型別
 
 #### `declare var`
 
-在所有的声明语句中，`declare var` 是最简单的，如之前所学，它能够用来定义一个全局变量的类型。与其类似的，还有 `declare let` 和 `declare const`，使用 `let` 与使用 `var` 没有什么区别：
+在所有的宣告語句中，`declare var` 是最簡單的，如之前所學，它能夠用來定義一個全域性變數的型別。與其類似的，還有 `declare let` 和 `declare const`，使用 `let` 與使用 `var` 沒有什麼區別：
 
 ```ts
 // src/jQuery.d.ts
@@ -156,13 +156,13 @@ declare let jQuery: (selector: string) => any;
 // src/index.ts
 
 jQuery('#foo');
-// 使用 declare let 定义的 jQuery 类型，允许修改这个全局变量
+// 使用 declare let 定義的 jQuery 型別，允許修改這個全域性變數
 jQuery = function(selector) {
     return document.querySelector(selector);
 };
 ```
 
-而当我们使用 `const` 定义时，表示此时的全局变量是一个常量，不允许再去修改它的值了[<sup>4</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/04-declare-const-jquery)：
+而當我們使用 `const` 定義時，表示此時的全域性變數是一個常量，不允許再去修改它的值了[<sup>4</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/04-declare-const-jquery)：
 
 ```ts
 // src/jQuery.d.ts
@@ -170,16 +170,16 @@ jQuery = function(selector) {
 declare const jQuery: (selector: string) => any;
 
 jQuery('#foo');
-// 使用 declare const 定义的 jQuery 类型，禁止修改这个全局变量
+// 使用 declare const 定義的 jQuery 型別，禁止修改這個全域性變數
 jQuery = function(selector) {
     return document.querySelector(selector);
 };
 // ERROR: Cannot assign to 'jQuery' because it is a constant or a read-only property.
 ```
 
-一般来说，全局变量都是禁止修改的常量，所以大部分情况都应该使用 `const` 而不是 `var` 或 `let`。
+一般來說，全域性變數都是禁止修改的常量，所以大部分情況都應該使用 `const` 而不是 `var` 或 `let`。
 
-需要注意的是，声明语句中只能定义类型，切勿在声明语句中定义具体的实现[<sup>5</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/05-declare-jquery-value)：
+需要注意的是，宣告語句中只能定義型別，切勿在宣告語句中定義具體的實現[<sup>5</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/05-declare-jquery-value)：
 
 ```ts
 declare const jQuery = function(selector) {
@@ -190,7 +190,7 @@ declare const jQuery = function(selector) {
 
 #### `declare function`
 
-`declare function` 用来定义全局函数的类型。jQuery 其实就是一个函数，所以也可以用 `function` 来定义：
+`declare function` 用來定義全域性函式的型別。jQuery 其實就是一個函式，所以也可以用 `function` 來定義：
 
 ```ts
 // src/jQuery.d.ts
@@ -204,7 +204,7 @@ declare function jQuery(selector: string): any;
 jQuery('#foo');
 ```
 
-在函数类型的声明语句中，函数重载也是支持的[<sup>6</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/06-declare-function)：
+在函式型別的宣告語句中，函式過載也是支援的[<sup>6</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/06-declare-function)：
 
 ```ts
 // src/jQuery.d.ts
@@ -224,7 +224,7 @@ jQuery(function() {
 
 #### `declare class`
 
-当全局变量是一个类的时候，我们用 `declare class` 来定义它的类型[<sup>7</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/07-declare-class)：
+當全域性變數是一個類別的時候，我們用 `declare class` 來定義它的型別[<sup>7</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/07-declare-class)：
 
 ```ts
 // src/Animal.d.ts
@@ -242,7 +242,7 @@ declare class Animal {
 let cat = new Animal('Tom');
 ```
 
-同样的，`declare class` 语句也只能用来定义类型，不能用来定义具体的实现，比如定义 `sayHi` 方法的具体实现则会报错：
+同樣的，`declare class` 語句也只能用來定義型別，不能用來定義具體的實現，比如定義 `sayHi` 方法的具體實現則會報錯：
 
 ```ts
 // src/Animal.d.ts
@@ -259,7 +259,7 @@ declare class Animal {
 
 #### `declare enum`
 
-使用 `declare enum` 定义的枚举类型也称作外部枚举（Ambient Enums），举例如下[<sup>8</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/08-declare-enum)：
+使用 `declare enum` 定義的列舉型別也稱作外部列舉（Ambient Enums），舉例如下[<sup>8</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/08-declare-enum)：
 
 ```ts
 // src/Directions.d.ts
@@ -278,27 +278,27 @@ declare enum Directions {
 let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
 ```
 
-与其他全局变量的类型声明一致，`declare enum` 仅用来定义类型，而不是具体的值。
+與其他全域性變數的型別宣告一致，`declare enum` 僅用來定義型別，而不是具體的值。
 
-`Directions.d.ts` 仅仅会用于编译时的检查，声明文件里的内容在编译结果中会被删除。它编译结果是：
+`Directions.d.ts` 僅僅會用於編譯時的檢查，宣告檔案裡的內容在編譯結果中會被刪除。它編譯結果是：
 
 ```js
 var directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
 ```
 
-其中 `Directions` 是由第三方库定义好的全局变量。
+其中 `Directions` 是由第三方函式庫定義好的全域性變數。
 
 #### `declare namespace`
 
-`namespace` 是 ts 早期时为了解决模块化而创造的关键字，中文称为命名空间。
+`namespace` 是 ts 早期時為了解決模組化而創造的關鍵字，中文稱為名稱空間。
 
-由于历史遗留原因，在早期还没有 ES6 的时候，ts 提供了一种模块化方案，使用 `module` 关键字表示内部模块。但由于后来 ES6 也使用了 `module` 关键字，ts 为了兼容 ES6，使用 `namespace` 替代了自己的 `module`，更名为命名空间。
+由於歷史遺留原因，在早期還沒有 ES6 的時候，ts 提供了一種模組化方案，使用 `module` 關鍵字表示內部模組。但由於後來 ES6 也使用了 `module` 關鍵字，ts 為了相容 ES6，使用 `namespace` 替代了自己的 `module`，更名為名稱空間。
 
-随着 ES6 的广泛应用，现在已经不建议再使用 ts 中的 `namespace`，而推荐使用 ES6 的模块化方案了，故我们不再需要学习 `namespace` 的使用了。
+隨著 ES6 的廣泛應用，現在已經不建議再使用 ts 中的 `namespace`，而推薦使用 ES6 的模組化方案了，故我們不再需要學習 `namespace` 的使用了。
 
-`namespace` 被淘汰了，但是在声明文件中，`declare namespace` 还是比较常用的，它用来表示全局变量是一个对象，包含很多子属性。
+`namespace` 被淘汰了，但是在宣告檔案中，`declare namespace` 還是比較常用的，它用來表示全域性變數是一個物件，包含很多子屬性。
 
-比如 `jQuery` 是一个全局变量，它是一个对象，提供了一个 `jQuery.ajax` 方法可以调用，那么我们就应该使用 `declare namespace jQuery` 来声明这个拥有多个子属性的全局变量。
+比如 `jQuery` 是一個全域性變數，它是一個物件，提供了一個 `jQuery.ajax` 方法可以呼叫，那麼我們就應該使用 `declare namespace jQuery` 來宣告這個擁有多個子屬性的全域性變數。
 
 ```ts
 // src/jQuery.d.ts
@@ -314,7 +314,7 @@ declare namespace jQuery {
 jQuery.ajax('/api/get_something');
 ```
 
-注意，在 `declare namespace` 内部，我们直接使用 `function ajax` 来声明函数，而不是使用 `declare function ajax`。类似的，也可以使用 `const`, `class`, `enum` 等语句[<sup>9</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/09-declare-namespace)：
+注意，在 `declare namespace` 內部，我們直接使用 `function ajax` 來宣告函式，而不是使用 `declare function ajax`。類似的，也可以使用 `const`, `class`, `enum` 等語句[<sup>9</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/09-declare-namespace)：
 
 ```ts
 // src/jQuery.d.ts
@@ -340,9 +340,9 @@ const e = new jQuery.Event();
 e.blur(jQuery.EventType.CustomClick);
 ```
 
-##### 嵌套的命名空间
+##### 巢狀的名稱空間
 
-如果对象拥有深层的层级，则需要用嵌套的 `namespace` 来声明深层的属性的类型[<sup>10</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/10-declare-namespace-nesting)：
+如果物件擁有深層的層級，則需要用巢狀的 `namespace` 來宣告深層的屬性的型別[<sup>10</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/10-declare-namespace-nesting)：
 
 ```ts
 // src/jQuery.d.ts
@@ -368,7 +368,7 @@ jQuery.fn.extend({
 });
 ```
 
-假如 `jQuery` 下仅有 `fn` 这一个属性（没有 `ajax` 等其他属性或方法），则可以不需要嵌套 `namespace`[<sup>11</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/11-declare-namespace-dot)：
+假如 `jQuery` 下僅有 `fn` 這一個屬性（沒有 `ajax` 等其他屬性或方法），則可以不需要巢狀 `namespace`[<sup>11</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/11-declare-namespace-dot)：
 
 ```ts
 // src/jQuery.d.ts
@@ -392,7 +392,7 @@ jQuery.fn.extend({
 
 #### `interface` 和 `type`
 
-除了全局变量之外，可能有一些类型我们也希望能暴露出来。在类型声明文件中，我们可以直接使用 `interface` 或 `type` 来声明一个全局的接口或类型[<sup>12</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/12-interface)：
+除了全域性變數之外，可能有一些型別我們也希望能暴露出來。在型別宣告檔案中，我們可以直接使用 `interface` 或 `type` 來宣告一個全域性的介面或型別[<sup>12</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/12-interface)：
 
 ```ts
 // src/jQuery.d.ts
@@ -406,7 +406,7 @@ declare namespace jQuery {
 }
 ```
 
-这样的话，在其他文件中也可以使用这个接口或类型了：
+這樣的話，在其他檔案中也可以使用這個介面或型別了：
 
 ```ts
 // src/index.ts
@@ -420,11 +420,11 @@ let settings: AjaxSettings = {
 jQuery.ajax('/api/post_something', settings);
 ```
 
-`type` 与 `interface` 类似，不再赘述。
+`type` 與 `interface` 類似，不再贅述。
 
-##### 防止命名冲突
+##### 防止命名衝突
 
-暴露在最外层的 `interface` 或 `type` 会作为全局类型作用于整个项目中，我们应该尽可能的减少全局变量或全局类型的数量。故最好将他们放到 `namespace` 下[<sup>13</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/13-avoid-name-conflict)：
+暴露在最外層的 `interface` 或 `type` 會作為全域性型別作用於整個專案中，我們應該儘可能的減少全域性變數或全域性型別的數量。故最好將他們放到 `namespace` 下[<sup>13</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/13-avoid-name-conflict)：
 
 ```ts
 // src/jQuery.d.ts
@@ -438,7 +438,7 @@ declare namespace jQuery {
 }
 ```
 
-注意，在使用这个 `interface` 的时候，也应该加上 `jQuery` 前缀：
+注意，在使用這個 `interface` 的時候，也應該加上 `jQuery` 字首：
 
 ```ts
 // src/index.ts
@@ -452,9 +452,9 @@ let settings: jQuery.AjaxSettings = {
 jQuery.ajax('/api/post_something', settings);
 ```
 
-#### 声明合并
+#### 宣告合併
 
-假如 jQuery 既是一个函数，可以直接被调用 `jQuery('#foo')`，又是一个对象，拥有子属性 `jQuery.ajax()`（事实确实如此），那么我们可以组合多个声明语句，它们会不冲突的合并起来[<sup>14</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/14-declaration-merging)：
+假如 jQuery 既是一個函式，可以直接被呼叫 `jQuery('#foo')`，又是一個物件，擁有子屬性 `jQuery.ajax()`（事實確實如此），那麼我們可以組合多個宣告語句，它們會不衝突的合併起來[<sup>14</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/14-declaration-merging)：
 
 ```ts
 // src/jQuery.d.ts
@@ -472,23 +472,23 @@ jQuery('#foo');
 jQuery.ajax('/api/get_something');
 ```
 
-关于声明合并的更多用法，可以查看[声明合并](../advanced/declaration-merging.md)章节。
+關於宣告合併的更多用法，可以檢視[宣告合併](../advanced/declaration-merging.md)章節。
 
 ### npm 包
 
-一般我们通过 `import foo from 'foo'` 导入一个 npm 包，这是符合 ES6 模块规范的。
+一般我們透過 `import foo from 'foo'` 匯入一個 npm 包，這是符合 ES6 模組規範的。
 
-在我们尝试给一个 npm 包创建声明文件之前，需要先看看它的声明文件是否已经存在。一般来说，npm 包的声明文件可能存在于两个地方：
+在我們嘗試給一個 npm 包建立宣告檔案之前，需要先看看它的宣告檔案是否已經存在。一般來說，npm 包的宣告檔案可能存在於兩個地方：
 
-1. 与该 npm 包绑定在一起。判断依据是 `package.json` 中有 `types` 字段，或者有一个 `index.d.ts` 声明文件。这种模式不需要额外安装其他包，是最为推荐的，所以以后我们自己创建 npm 包的时候，最好也将声明文件与 npm 包绑定在一起。
-2. 发布到 `@types` 里。我们只需要尝试安装一下对应的 `@types` 包就知道是否存在该声明文件，安装命令是 `npm install @types/foo --save-dev`。这种模式一般是由于 npm 包的维护者没有提供声明文件，所以只能由其他人将声明文件发布到 `@types` 里了。
+1. 與該 npm 包繫結在一起。判斷依據是 `package.json` 中有 `types` 欄位，或者有一個 `index.d.ts` 宣告檔案。這種模式不需要額外安裝其他包，是最為推薦的，所以以後我們自己建立 npm 包的時候，最好也將宣告檔案與 npm 包繫結在一起。
+2. 釋出到 `@types` 裡。我們只需要嘗試安裝一下對應的 `@types` 包就知道是否存在該宣告檔案，安裝命令是 `npm install @types/foo --save-dev`。這種模式一般是由於 npm 包的維護者沒有提供宣告檔案，所以只能由其他人將宣告檔案釋出到 `@types` 裡了。
 
-假如以上两种方式都没有找到对应的声明文件，那么我们就需要自己为它写声明文件了。由于是通过 `import` 语句导入的模块，所以声明文件存放的位置也有所约束，一般有两种方案：
+假如以上兩種方式都沒有找到對應的宣告檔案，那麼我們就需要自己為它寫宣告檔案了。由於是透過 `import` 語句匯入的模組，所以宣告檔案存放的位置也有所約束，一般有兩種方案：
 
-1. 创建一个 `node_modules/@types/foo/index.d.ts` 文件，存放 `foo` 模块的声明文件。这种方式不需要额外的配置，但是 `node_modules` 目录不稳定，代码也没有被保存到仓库中，无法回溯版本，有不小心被删除的风险，故不太建议用这种方案，一般只用作临时测试。
-2. 创建一个 `types` 目录，专门用来管理自己写的声明文件，将 `foo` 的声明文件放到 `types/foo/index.d.ts` 中。这种方式需要配置下 `tsconfig.json` 中的 `paths` 和 `baseUrl` 字段。
+1. 建立一個 `node_modules/@types/foo/index.d.ts` 檔案，存放 `foo` 模組的宣告檔案。這種方式不需要額外的配置，但是 `node_modules` 目錄不穩定，程式碼也沒有被儲存到儲存庫中，無法回溯版本，有不小心被刪除的風險，故不太建議用這種方案，一般只用作臨時測試。
+2. 建立一個 `types` 目錄，專門用來管理自己寫的宣告檔案，將 `foo` 的宣告檔案放到 `types/foo/index.d.ts` 中。這種方式需要配置下 `tsconfig.json` 中的 `paths` 和 `baseUrl` 欄位。
 
-目录结构：
+目錄結構：
 
 ```plain
 /path/to/project
@@ -500,7 +500,7 @@ jQuery.ajax('/api/get_something');
 └── tsconfig.json
 ```
 
-`tsconfig.json` 内容：
+`tsconfig.json` 內容：
 
 ```json
 {
@@ -514,24 +514,24 @@ jQuery.ajax('/api/get_something');
 }
 ```
 
-如此配置之后，通过 `import` 导入 `foo` 的时候，也会去 `types` 目录下寻找对应的模块的声明文件了。
+如此配置之後，透過 `import` 匯入 `foo` 的時候，也會去 `types` 目錄下尋找對應的模組的宣告檔案了。
 
-注意 `module` 配置可以有很多种选项，不同的选项会影响模块的导入导出模式。这里我们使用了 `commonjs` 这个最常用的选项，后面的教程也都默认使用的这个选项。
+注意 `module` 配置可以有很多種選項，不同的選項會影響模組的匯入匯出模式。這裡我們使用了 `commonjs` 這個最常用的選項，後面的課程也都預設使用的這個選項。
 
-不管采用了以上两种方式中的哪一种，我都**强烈建议**大家将书写好的声明文件（通过给第三方库发 pull request，或者直接提交到 `@types` 里）发布到开源社区中，享受了这么多社区的优秀的资源，就应该在力所能及的时候给出一些回馈。只有所有人都参与进来，才能让 ts 社区更加繁荣。
+不管採用了以上兩種方式中的哪一種，我都**強烈建議**大家將書寫好的宣告檔案（透過給第三方函式庫發 pull request，或者直接提交到 `@types` 裡）釋出到開源社群中，享受了這麼多社群的優秀的資源，就應該在力所能及的時候給出一些回饋。只有所有人都參與進來，才能讓 ts 社群更加繁榮。
 
-npm 包的声明文件主要有以下几种语法：
+npm 包的宣告檔案主要有以下幾種語法：
 
-- [`export`](#export) 导出变量
-- [`export namespace`](#export-namespace) 导出（含有子属性的）对象
-- [`export default`](#export-default) ES6 默认导出
-- [`export =`](#export-1) commonjs 导出模块
+- [`export`](#export) 匯出變數
+- [`export namespace`](#export-namespace) 匯出（含有子屬性的）物件
+- [`export default`](#export-default) ES6 預設匯出
+- [`export =`](#export-1) commonjs 匯出模組
 
 #### `export`
 
-npm 包的声明文件与全局变量的声明文件有很大区别。在 npm 包的声明文件中，使用 `declare` 不再会声明一个全局变量，而只会在当前文件中声明一个局部变量。只有在声明文件中使用 `export` 导出，然后在使用方 `import` 导入后，才会应用到这些类型声明。
+npm 包的宣告檔案與全域性變數的宣告檔案有很大區別。在 npm 包的宣告檔案中，使用 `declare` 不再會宣告一個全域性變數，而只會在當前檔案中宣告一個區域性變數。只有在宣告檔案中使用 `export` 匯出，然後在使用方 `import` 匯入後，才會應用到這些型別宣告。
 
-`export` 的语法与普通的 ts 中的语法类似，区别仅在于声明文件中禁止定义具体的实现[<sup>15</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/15-export)：
+`export` 的語法與普通的 ts 中的語法類似，區別僅在於宣告檔案中禁止定義具體的實現[<sup>15</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/15-export)：
 
 ```ts
 // types/foo/index.d.ts
@@ -553,7 +553,7 @@ export interface Options {
 }
 ```
 
-对应的导入和使用模块应该是这样：
+對應的匯入和使用模組應該是這樣：
 
 ```ts
 // src/index.ts
@@ -573,7 +573,7 @@ let options: Options = {
 
 ##### 混用 `declare` 和 `export`
 
-我们也可以使用 `declare` 先声明多个变量，最后再用 `export` 一次性导出。上例的声明文件可以等价的改写为[<sup>16</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/16-declare-and-export)：
+我們也可以使用 `declare` 先宣告多個變數，最後再用 `export` 一次性匯出。上例的宣告檔案可以等價的改寫為[<sup>16</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/16-declare-and-export)：
 
 ```ts
 // types/foo/index.d.ts
@@ -597,11 +597,11 @@ interface Options {
 export { name, getName, Animal, Directions, Options };
 ```
 
-注意，与全局变量的声明文件类似，`interface` 前是不需要 `declare` 的。
+注意，與全域性變數的宣告檔案類似，`interface` 前是不需要 `declare` 的。
 
 #### `export namespace`
 
-与 `declare namespace` 类似，`export namespace` 用来导出一个拥有子属性的对象[<sup>17</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/17-export-namespace)：
+與 `declare namespace` 類似，`export namespace` 用來匯出一個擁有子屬性的物件[<sup>17</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/17-export-namespace)：
 
 ```ts
 // types/foo/index.d.ts
@@ -625,9 +625,9 @@ foo.bar.baz();
 
 #### `export default`
 
-在 ES6 模块系统中，使用 `export default` 可以导出一个默认值，使用方可以用 `import foo from 'foo'` 而不是 `import { foo } from 'foo'` 来导入这个默认值。
+在 ES6 模組系統中，使用 `export default` 可以匯出一個預設值，使用方可以用 `import foo from 'foo'` 而不是 `import { foo } from 'foo'` 來匯入這個預設值。
 
-在类型声明文件中，`export default` 用来导出默认值的类型[<sup>18</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/18-export-default)：
+在型別宣告檔案中，`export default` 用來匯出預設值的型別[<sup>18</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/18-export-default)：
 
 ```ts
 // types/foo/index.d.ts
@@ -643,7 +643,7 @@ import foo from 'foo';
 foo();
 ```
 
-注意，只有 `function`、`class` 和 `interface` 可以直接默认导出，其他的变量需要先定义出来，再默认导出[<sup>19</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/19-export-default-enum-error)：
+注意，只有 `function`、`class` 和 `interface` 可以直接預設匯出，其他的變數需要先定義出來，再預設匯出[<sup>19</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/19-export-default-enum-error)：
 
 ```ts
 // types/foo/index.d.ts
@@ -657,7 +657,7 @@ export default enum Directions {
 }
 ```
 
-上例中 `export default enum` 是错误的语法，需要使用 `declare enum` 定义出来，然后使用 `export default` 导出：
+上例中 `export default enum` 是錯誤的語法，需要使用 `declare enum` 定義出來，然後使用 `export default` 匯出：
 
 ```ts
 // types/foo/index.d.ts
@@ -672,7 +672,7 @@ declare enum Directions {
 export default Directions;
 ```
 
-针对这种默认导出，我们一般会将导出语句放在整个声明文件的最前面[<sup>20</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/20-export-default-enum)：
+針對這種預設匯出，我們一般會將匯出語句放在整個宣告檔案的最前面[<sup>20</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/20-export-default-enum)：
 
 ```ts
 // types/foo/index.d.ts
@@ -689,43 +689,43 @@ declare enum Directions {
 
 #### `export =`
 
-在 commonjs 规范中，我们用以下方式来导出一个模块：
+在 commonjs 規範中，我們用以下方式來匯出一個模組：
 
 ```js
-// 整体导出
+// 整體匯出
 module.exports = foo;
-// 单个导出
+// 單個匯出
 exports.bar = bar;
 ```
 
-在 ts 中，针对这种模块导出，有多种方式可以导入，第一种方式是 `const ... = require`：
+在 ts 中，針對這種模組匯出，有多種方式可以匯入，第一種方式是 `const ... = require`：
 
 ```js
-// 整体导入
+// 整體匯入
 const foo = require('foo');
-// 单个导入
+// 單個匯入
 const bar = require('foo').bar;
 ```
 
-第二种方式是 `import ... from`，注意针对整体导出，需要使用 `import * as` 来导入：
+第二種方式是 `import ... from`，注意針對整體匯出，需要使用 `import * as` 來匯入：
 
 ```ts
-// 整体导入
+// 整體匯入
 import * as foo from 'foo';
-// 单个导入
+// 單個匯入
 import { bar } from 'foo';
 ```
 
-第三种方式是 `import ... require`，这也是 ts 官方推荐的方式：
+第三種方式是 `import ... require`，這也是 ts 官方推薦的方式：
 
 ```ts
-// 整体导入
+// 整體匯入
 import foo = require('foo');
-// 单个导入
+// 單個匯入
 import bar = foo.bar;
 ```
 
-对于这种使用 commonjs 规范的库，假如要为它写类型声明文件的话，就需要使用到 `export =` 这种语法了[<sup>21</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/21-export-equal)：
+對於這種使用 commonjs 規範的函式庫，假如要為它寫型別宣告檔案的話，就需要使用到 `export =` 這種語法了[<sup>21</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/21-export-equal)：
 
 ```ts
 // types/foo/index.d.ts
@@ -738,19 +738,19 @@ declare namespace foo {
 }
 ```
 
-需要注意的是，上例中使用了 `export =` 之后，就不能再单个导出 `export { bar }` 了。所以我们通过声明合并，使用 `declare namespace foo` 来将 `bar` 合并到 `foo` 里。
+需要注意的是，上例中使用了 `export =` 之後，就不能再單個匯出 `export { bar }` 了。所以我們透過宣告合併，使用 `declare namespace foo` 來將 `bar` 合併到 `foo` 裡。
 
-准确地讲，`export =` 不仅可以用在声明文件中，也可以用在普通的 ts 文件中。实际上，`import ... require` 和 `export =` 都是 ts 为了兼容 AMD 规范和 commonjs 规范而创立的新语法，由于并不常用也不推荐使用，所以这里就不详细介绍了，感兴趣的可以看[官方文档](https://www.typescriptlang.org/docs/handbook/modules.html#export--and-import--require)。
+準確地講，`export =` 不僅可以用在宣告檔案中，也可以用在普通的 ts 檔案中。實際上，`import ... require` 和 `export =` 都是 ts 為了相容 AMD 規範和 commonjs 規範而創立的新語法，由於並不常用也不推薦使用，所以這裡就不詳細介紹了，感興趣的可以看[官方文件](https://www.typescriptlang.org/docs/handbook/modules.html#export--and-import--require)。
 
-由于很多第三方库是 commonjs 规范的，所以声明文件也就不得不用到 `export =` 这种语法了。但是还是需要再强调下，相比与 `export =`，我们更推荐使用 ES6 标准的 `export default` 和 `export`。
+由於很多第三方函式庫是 commonjs 規範的，所以宣告檔案也就不得不用到 `export =` 這種語法了。但是還是需要再強調下，相比與 `export =`，我們更推薦使用 ES6 標準的 `export default` 和 `export`。
 
-### UMD 库
+### UMD 函式庫
 
-既可以通过 `<script>` 标签引入，又可以通过 `import` 导入的库，称为 UMD 库。相比于 npm 包的类型声明文件，我们需要额外声明一个全局变量，为了实现这种方式，ts 提供了一个新语法 `export as namespace`。
+既可以透過 `<script>` 標籤引入，又可以透過 `import` 匯入的函式庫，稱為 UMD 函式庫。相比於 npm 包的型別宣告檔案，我們需要額外宣告一個全域性變數，為了實現這種方式，ts 提供了一個新語法 `export as namespace`。
 
 #### `export as namespace`
 
-一般使用 `export as namespace` 时，都是先有了 npm 包的声明文件，再基于它添加一条 `export as namespace` 语句，即可将声明好的一个变量声明为全局变量，举例如下[<sup>22</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/22-export-as-namespace)：
+一般使用 `export as namespace` 時，都是先有了 npm 包的宣告檔案，再基於它新增一條 `export as namespace` 語句，即可將宣告好的一個變數宣告為全域性變數，舉例如下[<sup>22</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/22-export-as-namespace)：
 
 ```ts
 // types/foo/index.d.ts
@@ -764,7 +764,7 @@ declare namespace foo {
 }
 ```
 
-当然它也可以与 `export default` 一起使用：
+當然它也可以與 `export default` 一起使用：
 
 ```ts
 // types/foo/index.d.ts
@@ -778,9 +778,9 @@ declare namespace foo {
 }
 ```
 
-### 直接扩展全局变量
+### 直接擴充套件全域性變數
 
-有的第三方库扩展了一个全局变量，可是此全局变量的类型却没有相应的更新过来，就会导致 ts 编译错误，此时就需要扩展全局变量的类型。比如扩展 `String` 类型[<sup>23</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/23-merge-global-interface)：
+有的第三方函式庫擴充套件了一個全域性變數，可是此全域性變數的型別卻沒有相應的更新過來，就會導致 ts 編譯錯誤，此時就需要擴充套件全域性變數的型別。比如擴充套件 `String` 型別[<sup>23</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/23-merge-global-interface)：
 
 ```ts
 interface String {
@@ -790,9 +790,9 @@ interface String {
 'foo'.prependHello();
 ```
 
-通过声明合并，使用 `interface String` 即可给 `String` 添加属性或方法。
+透過宣告合併，使用 `interface String` 即可給 `String` 新增屬性或方法。
 
-也可以使用 `declare namespace` 给已有的命名空间添加类型声明[<sup>24</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/24-merge-global-namespace)：
+也可以使用 `declare namespace` 給已有的名稱空間新增型別宣告[<sup>24</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/24-merge-global-namespace)：
 
 ```ts
 // types/jquery-plugin/index.d.ts
@@ -816,13 +816,13 @@ jQuery.foo({
 });
 ```
 
-### 在 npm 包或 UMD 库中扩展全局变量
+### 在 npm 包或 UMD 函式庫中擴充套件全域性變數
 
-如之前所说，对于一个 npm 包或者 UMD 库的声明文件，只有 `export` 导出的类型声明才能被导入。所以对于 npm 包或 UMD 库，如果导入此库之后会扩展全局变量，则需要使用另一种语法在声明文件中扩展全局变量的类型，那就是 `declare global`。
+如之前所說，對於一個 npm 包或者 UMD 函式庫的宣告檔案，只有 `export` 匯出的型別宣告才能被匯入。所以對於 npm 包或 UMD 函式庫，如果匯入此函式庫之後會擴充套件全域性變數，則需要使用另一種語法在宣告檔案中擴充套件全域性變數的型別，那就是 `declare global`。
 
 #### `declare global`
 
-使用 `declare global` 可以在 npm 包或者 UMD 库的声明文件中扩展全局变量的类型[<sup>25</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/25-declare-global)：
+使用 `declare global` 可以在 npm 包或者 UMD 函式庫的宣告檔案中擴充套件全域性變數的型別[<sup>25</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/25-declare-global)：
 
 ```ts
 // types/foo/index.d.ts
@@ -842,15 +842,15 @@ export {};
 'bar'.prependHello();
 ```
 
-注意即使此声明文件不需要导出任何东西，仍然需要导出一个空对象，用来告诉编译器这是一个模块的声明文件，而不是一个全局变量的声明文件。
+注意即使此宣告檔案不需要匯出任何東西，仍然需要匯出一個空物件，用來告訴編譯器這是一個模組的宣告檔案，而不是一個全域性變數的宣告檔案。
 
-### 模块插件
+### 模組外掛
 
-有时通过 `import` 导入一个模块插件，可以改变另一个原有模块的结构。此时如果原有模块已经有了类型声明文件，而插件模块没有类型声明文件，就会导致类型不完整，缺少插件部分的类型。ts 提供了一个语法 `declare module`，它可以用来扩展原有模块的类型。
+有時透過 `import` 匯入一個模組外掛，可以改變另一個原有模組的結構。此時如果原有模組已經有了型別宣告檔案，而外掛模組沒有型別宣告檔案，就會導致型別不完整，缺少外掛部分的型別。ts 提供了一個語法 `declare module`，它可以用來擴充套件原有模組的型別。
 
 #### `declare module`
 
-如果是需要扩展原有模块的话，需要在类型声明文件中先引用原有模块，再使用 `declare module` 扩展原有模块[<sup>26</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/26-declare-module)：
+如果是需要擴充套件原有模組的話，需要在型別宣告檔案中先參考原有模組，再使用 `declare module` 擴充套件原有模組[<sup>26</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/26-declare-module)：
 
 ```ts
 // types/moment-plugin/index.d.ts
@@ -871,7 +871,7 @@ import 'moment-plugin';
 moment.foo();
 ```
 
-`declare module` 也可用于在一个文件中一次性声明多个模块的类型[<sup>27</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/27-multiple-declare-module)：
+`declare module` 也可用於在一個檔案中一次性宣告多個模組的型別[<sup>27</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/27-multiple-declare-module)：
 
 ```ts
 // types/foo-bar.d.ts
@@ -897,9 +897,9 @@ let f: Foo;
 bar.bar();
 ```
 
-### 声明文件中的依赖
+### 宣告檔案中的依賴
 
-一个声明文件有时会依赖另一个声明文件中的类型，比如在前面的 `declare module` 的例子中，我们就在声明文件中导入了 `moment`，并且使用了 `moment.CalendarKey` 这个类型：
+一個宣告檔案有時會依賴另一個宣告檔案中的型別，比如在前面的 `declare module` 的例子中，我們就在宣告檔案中匯入了 `moment`，並且使用了 `moment.CalendarKey` 這個型別：
 
 ```ts
 // types/moment-plugin/index.d.ts
@@ -911,22 +911,22 @@ declare module 'moment' {
 }
 ```
 
-除了可以在声明文件中通过 `import` 导入另一个声明文件中的类型之外，还有一个语法也可以用来导入另一个声明文件，那就是三斜线指令。
+除了可以在宣告檔案中透過 `import` 匯入另一個宣告檔案中的型別之外，還有一個語法也可以用來匯入另一個宣告檔案，那就是三斜線指令。
 
-#### 三斜线指令
+#### 三斜線指令
 
-与 `namespace` 类似，三斜线指令也是 ts 在早期版本中为了描述模块之间的依赖关系而创造的语法。随着 ES6 的广泛应用，现在已经不建议再使用 ts 中的三斜线指令来声明模块之间的依赖关系了。
+與 `namespace` 類似，三斜線指令也是 ts 在早期版本中為了描述模組之間的依賴關係而創造的語法。隨著 ES6 的廣泛應用，現在已經不建議再使用 ts 中的三斜線指令來宣告模組之間的依賴關係了。
 
-但是在声明文件中，它还是有一定的用武之地。
+但是在宣告檔案中，它還是有一定的用武之地。
 
-类似于声明文件中的 `import`，它可以用来导入另一个声明文件。与 `import` 的区别是，当且仅当在以下几个场景下，我们才需要使用三斜线指令替代 `import`：
+類似於宣告檔案中的 `import`，它可以用來匯入另一個宣告檔案。與 `import` 的區別是，當且僅當在以下幾個場景下，我們才需要使用三斜線指令替代 `import`：
 
-- 当我们在**书写**一个全局变量的声明文件时
-- 当我们需要**依赖**一个全局变量的声明文件时
+- 當我們在**書寫**一個全域性變數的宣告檔案時
+- 當我們需要**依賴**一個全域性變數的宣告檔案時
 
-##### **书写**一个全局变量的声明文件
+##### **書寫**一個全域性變數的宣告檔案
 
-这些场景听上去很拗口，但实际上很好理解——在全局变量的声明文件中，是不允许出现 `import`, `export` 关键字的。一旦出现了，那么他就会被视为一个 npm 包或 UMD 库，就不再是全局变量的声明文件了。故当我们在书写一个全局变量的声明文件时，如果需要引用另一个库的类型，那么就必须用三斜线指令了[<sup>28</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/28-triple-slash-directives)：
+這些場景聽上去很拗口，但實際上很好理解——在全域性變數的宣告檔案中，是不允許出現 `import`, `export` 關鍵字的。一旦出現了，那麼他就會被視為一個 npm 包或 UMD 函式庫，就不再是全域性變數的宣告檔案了。故當我們在書寫一個全域性變數的宣告檔案時，如果需要參考另一個函式庫的型別，那麼就必須用三斜線指令了[<sup>28</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/28-triple-slash-directives)：
 
 ```ts
 // types/jquery-plugin/index.d.ts
@@ -942,13 +942,13 @@ declare function foo(options: JQuery.AjaxSettings): string;
 foo({});
 ```
 
-三斜线指令的语法如上，`///` 后面使用 xml 的格式添加了对 `jquery` 类型的依赖，这样就可以在声明文件中使用 `JQuery.AjaxSettings` 类型了。
+三斜線指令的語法如上，`///` 後面使用 xml 的格式添加了對 `jquery` 型別的依賴，這樣就可以在宣告檔案中使用 `JQuery.AjaxSettings` 型別了。
 
-注意，三斜线指令必须放在文件的最顶端，三斜线指令的前面只允许出现单行或多行注释。
+注意，三斜線指令必須放在檔案的最頂端，三斜線指令的前面只允許出現單行或多行註釋。
 
-##### **依赖**一个全局变量的声明文件
+##### **依賴**一個全域性變數的宣告檔案
 
-在另一个场景下，当我们需要依赖一个全局变量的声明文件时，由于全局变量不支持通过 `import` 导入，当然也就必须使用三斜线指令来引入了[<sup>29</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/29-triple-slash-directives-global)：
+在另一個場景下，當我們需要依賴一個全域性變數的宣告檔案時，由於全域性變數不支援透過 `import` 匯入，當然也就必須使用三斜線指令來引入了[<sup>29</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/29-triple-slash-directives-global)：
 
 ```ts
 // types/node-plugin/index.d.ts
@@ -966,15 +966,15 @@ import { foo } from 'node-plugin';
 foo(global.process);
 ```
 
-在上面的例子中，我们通过三斜线指引入了 `node` 的类型，然后在声明文件中使用了 `NodeJS.Process` 这个类型。最后在使用到 `foo` 的时候，传入了 `node` 中的全局变量 `process`。
+在上面的例子中，我們透過三斜線指引入了 `node` 的型別，然後在宣告檔案中使用了 `NodeJS.Process` 這個型別。最後在使用到 `foo` 的時候，傳入了 `node` 中的全域性變數 `process`。
 
-由于引入的 `node` 中的类型都是全局变量的类型，它们是没有办法通过 `import` 来导入的，所以这种场景下也只能通过三斜线指令来引入了。
+由於引入的 `node` 中的型別都是全域性變數的型別，它們是沒有辦法透過 `import` 來匯入的，所以這種場景下也只能透過三斜線指令來引入了。
 
-以上两种使用场景下，都是由于需要书写或需要依赖全局变量的声明文件，所以必须使用三斜线指令。在其他的一些不是必要使用三斜线指令的情况下，就都需要使用 `import` 来导入。
+以上兩種使用場景下，都是由於需要書寫或需要依賴全域性變數的宣告檔案，所以必須使用三斜線指令。在其他的一些不是必要使用三斜線指令的情況下，就都需要使用 `import` 來匯入。
 
-##### 拆分声明文件
+##### 拆分宣告檔案
 
-当我们的全局变量的声明文件太大时，可以通过拆分为多个文件，然后在一个入口文件中将它们一一引入，来提高代码的可维护性。比如 `jQuery` 的声明文件就是这样的：
+當我們的全域性變數的宣告檔案太大時，可以透過拆分為多個檔案，然後在一個入口檔案中將它們一一引入，來提高程式碼的可維護性。比如 `jQuery` 的宣告檔案就是這樣的：
 
 ```ts
 // node_modules/@types/jquery/index.d.ts
@@ -988,19 +988,19 @@ foo(global.process);
 export = jQuery;
 ```
 
-其中用到了 `types` 和 `path` 两种不同的指令。它们的区别是：`types` 用于声明对另一个库的依赖，而 `path` 用于声明对另一个文件的依赖。
+其中用到了 `types` 和 `path` 兩種不同的指令。它們的區別是：`types` 用於宣告對另一個函式庫的依賴，而 `path` 用於宣告對另一個檔案的依賴。
 
-上例中，`sizzle` 是与 `jquery` 平行的另一个库，所以需要使用 `types="sizzle"` 来声明对它的依赖。而其他的三斜线指令就是将 `jquery` 的声明拆分到不同的文件中了，然后在这个入口文件中使用 `path="foo"` 将它们一一引入。
+上例中，`sizzle` 是與 `jquery` 平行的另一個函式庫，所以需要使用 `types="sizzle"` 來宣告對它的依賴。而其他的三斜線指令就是將 `jquery` 的宣告拆分到不同的檔案中了，然後在這個入口檔案中使用 `path="foo"` 將它們一一引入。
 
-##### 其他三斜线指令
+##### 其他三斜線指令
 
-除了这两种三斜线指令之外，还有其他的三斜线指令，比如 `/// <reference no-default-lib="true"/>`, `/// <amd-module />` 等，但它们都是废弃的语法，故这里就不介绍了，详情可见[官网](http://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)。
+除了這兩種三斜線指令之外，還有其他的三斜線指令，比如 `/// <reference no-default-lib="true"/>`, `/// <amd-module />` 等，但它們都是廢棄的語法，故這裡就不介紹了，詳情可見[官網](http://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)。
 
-### 自动生成声明文件
+### 自動產生宣告檔案
 
-如果库的源码本身就是由 ts 写的，那么在使用 `tsc` 脚本将 ts 编译为 js 的时候，添加 `declaration` 选项，就可以同时也生成 `.d.ts` 声明文件了。
+如果函式庫的原始碼本身就是由 ts 寫的，那麼在使用 `tsc` 指令碼將 ts 編譯為 js 的時候，新增 `declaration` 選項，就可以同時也產生 `.d.ts` 宣告檔案了。
 
-我们可以在命令行中添加 `--declaration`（简写 `-d`），或者在 `tsconfig.json` 中添加 `declaration` 选项。这里以 `tsconfig.json` 为例：
+我們可以在命令列中新增 `--declaration`（簡寫 `-d`），或者在 `tsconfig.json` 中新增 `declaration` 選項。這裡以 `tsconfig.json` 為例：
 
 ```json
 {
@@ -1012,9 +1012,9 @@ export = jQuery;
 }
 ```
 
-上例中我们添加了 `outDir` 选项，将 ts 文件的编译结果输出到 `lib` 目录下，然后添加了 `declaration` 选项，设置为 `true`，表示将会由 ts 文件自动生成 `.d.ts` 声明文件，也会输出到 `lib` 目录下。
+上例中我們添加了 `outDir` 選項，將 ts 檔案的編譯結果輸出到 `lib` 目錄下，然後添加了 `declaration` 選項，設定為 `true`，表示將會由 ts 檔案自動產生 `.d.ts` 宣告檔案，也會輸出到 `lib` 目錄下。
 
-运行 `tsc` 之后，目录结构如下[<sup>30</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/30-auto-d-ts)：
+執行 `tsc` 之後，目錄結構如下[<sup>30</sup>](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/30-auto-d-ts)：
 
 ```plain
 /path/to/project
@@ -1032,7 +1032,7 @@ export = jQuery;
 └── tsconfig.json
 ```
 
-在这个例子中，`src` 目录下有两个 ts 文件，分别是 `src/index.ts` 和 `src/bar/index.ts`，它们被编译到 `lib` 目录下的同时，也会生成对应的两个声明文件 `lib/index.d.ts` 和 `lib/bar/index.d.ts`。它们的内容分别是：
+在這個例子中，`src` 目錄下有兩個 ts 檔案，分別是 `src/index.ts` 和 `src/bar/index.ts`，它們被編譯到 `lib` 目錄下的同時，也會產生對應的兩個宣告檔案 `lib/index.d.ts` 和 `lib/bar/index.d.ts`。它們的內容分別是：
 
 ```ts
 // src/index.ts
@@ -1065,40 +1065,40 @@ export default function foo(): string;
 export declare function bar(): string;
 ```
 
-可见，自动生成的声明文件基本保持了源码的结构，而将具体实现去掉了，生成了对应的类型声明。
+可見，自動產生的宣告檔案基本保持了原始碼的結構，而將具體實現去掉了，生成了對應的型別宣告。
 
-使用 `tsc` 自动生成声明文件时，每个 ts 文件都会对应一个 `.d.ts` 声明文件。这样的好处是，使用方不仅可以在使用 `import foo from 'foo'` 导入默认的模块时获得类型提示，还可以在使用 `import bar from 'foo/lib/bar'` 导入一个子模块时，也获得对应的类型提示。
+使用 `tsc` 自動產生宣告檔案時，每個 ts 檔案都會對應一個 `.d.ts` 宣告檔案。這樣的好處是，使用方不僅可以在使用 `import foo from 'foo'` 匯入預設的模組時獲得型別提示，還可以在使用 `import bar from 'foo/lib/bar'` 匯入一個子模組時，也獲得對應的型別提示。
 
-除了 `declaration` 选项之外，还有几个选项也与自动生成声明文件有关，这里只简单列举出来，不做详细演示了：
+除了 `declaration` 選項之外，還有幾個選項也與自動產生宣告檔案有關，這裡只簡單列舉出來，不做詳細示範了：
 
-- `declarationDir` 设置生成 `.d.ts` 文件的目录
-- `declarationMap` 对每个 `.d.ts` 文件，都生成对应的 `.d.ts.map`（sourcemap）文件
-- `emitDeclarationOnly` 仅生成 `.d.ts` 文件，不生成 `.js` 文件
+- `declarationDir` 設定產生 `.d.ts` 檔案的目錄
+- `declarationMap` 對每個 `.d.ts` 檔案，都產生對應的 `.d.ts.map`（sourcemap）檔案
+- `emitDeclarationOnly` 僅產生 `.d.ts` 檔案，不產生 `.js` 檔案
 
-## 发布声明文件
+## 釋出宣告檔案
 
-当我们为一个库写好了声明文件之后，下一步就是将它发布出去了。
+當我們為一個函式庫寫好了宣告檔案之後，下一步就是將它釋出出去了。
 
-此时有两种方案：
+此時有兩種方案：
 
-1. 将声明文件和源码放在一起
-2. 将声明文件发布到 `@types` 下
+1. 將宣告檔案和原始碼放在一起
+2. 將宣告檔案釋出到 `@types` 下
 
-这两种方案中优先选择第一种方案。保持声明文件与源码在一起，使用时就不需要额外增加单独的声明文件库的依赖了，而且也能保证声明文件的版本与源码的版本保持一致。
+這兩種方案中優先選擇第一種方案。保持宣告檔案與原始碼在一起，使用時就不需要額外增加單獨的宣告檔案函式庫的依賴了，而且也能保證宣告檔案的版本與原始碼的版本保持一致。
 
-仅当我们在给别人的仓库添加类型声明文件，但原作者不愿意合并 pull request 时，才需要使用第二种方案，将声明文件发布到 `@types` 下。
+僅當我們在給別人的儲存庫新增型別宣告檔案，但原作者不願意合併 pull request 時，才需要使用第二種方案，將宣告檔案釋出到 `@types` 下。
 
-### 将声明文件和源码放在一起
+### 將宣告檔案和原始碼放在一起
 
-如果声明文件是通过 `tsc` 自动生成的，那么无需做任何其他配置，只需要把编译好的文件也发布到 npm 上，使用方就可以获取到类型提示了。
+如果宣告檔案是透過 `tsc` 自動產生的，那麼無需做任何其他配置，只需要把編譯好的檔案也釋出到 npm 上，使用方就可以獲取到型別提示了。
 
-如果是手动写的声明文件，那么需要满足以下条件之一，才能被正确的识别：
+如果是手動寫的宣告檔案，那麼需要滿足以下條件之一，才能被正確的識別：
 
-- 给 `package.json` 中的 `types` 或 `typings` 字段指定一个类型声明文件地址
-- 在项目根目录下，编写一个 `index.d.ts` 文件
-- 针对入口文件（`package.json` 中的 `main` 字段指定的入口文件），编写一个同名不同后缀的 `.d.ts` 文件
+- 給 `package.json` 中的 `types` 或 `typings` 欄位指定一個型別宣告檔案地址
+- 在專案根目錄下，編寫一個 `index.d.ts` 檔案
+- 針對入口檔案（`package.json` 中的 `main` 欄位指定的入口檔案），編寫一個同名不同字尾的 `.d.ts` 檔案
 
-第一种方式是给 `package.json` 中的 `types` 或 `typings` 字段指定一个类型声明文件地址。比如：
+第一種方式是給 `package.json` 中的 `types` 或 `typings` 欄位指定一個型別宣告檔案地址。比如：
 
 ```json
 {
@@ -1109,15 +1109,15 @@ export declare function bar(): string;
 }
 ```
 
-指定了 `types` 为 `foo.d.ts` 之后，导入此库的时候，就会去找 `foo.d.ts` 作为此库的类型声明文件了。
+指定了 `types` 為 `foo.d.ts` 之後，匯入此函式庫的時候，就會去找 `foo.d.ts` 作為此函式庫的型別宣告檔案了。
 
-`typings` 与 `types` 一样，只是另一种写法。
+`typings` 與 `types` 一樣，只是另一種寫法。
 
-如果没有指定 `types` 或 `typings`，那么就会在根目录下寻找 `index.d.ts` 文件，将它视为此库的类型声明文件。
+如果沒有指定 `types` 或 `typings`，那麼就會在根目錄下尋找 `index.d.ts` 檔案，將它視為此函式庫的型別宣告檔案。
 
-如果没有找到 `index.d.ts` 文件，那么就会寻找入口文件（`package.json` 中的 `main` 字段指定的入口文件）是否存在对应同名不同后缀的 `.d.ts` 文件。
+如果沒有找到 `index.d.ts` 檔案，那麼就會尋找入口檔案（`package.json` 中的 `main` 欄位指定的入口檔案）是否存在對應同名不同字尾的 `.d.ts` 檔案。
 
-比如 `package.json` 是这样时：
+比如 `package.json` 是這樣時：
 
 ```json
 {
@@ -1127,23 +1127,23 @@ export declare function bar(): string;
 }
 ```
 
-就会先识别 `package.json` 中是否存在 `types` 或 `typings` 字段。发现不存在，那么就会寻找是否存在 `index.d.ts` 文件。如果还是不存在，那么就会寻找是否存在 `lib/index.d.ts` 文件。假如说连 `lib/index.d.ts` 都不存在的话，就会被认为是一个没有提供类型声明文件的库了。
+就會先識別 `package.json` 中是否存在 `types` 或 `typings` 欄位。發現不存在，那麼就會尋找是否存在 `index.d.ts` 檔案。如果還是不存在，那麼就會尋找是否存在 `lib/index.d.ts` 檔案。假如說連 `lib/index.d.ts` 都不存在的話，就會被認為是一個沒有提供型別宣告檔案的函式庫了。
 
-有的库为了支持导入子模块，比如 `import bar from 'foo/lib/bar'`，就需要额外再编写一个类型声明文件 `lib/bar.d.ts` 或者 `lib/bar/index.d.ts`，这与自动生成声明文件类似，一个库中同时包含了多个类型声明文件。
+有的函式庫為了支援匯入子模組，比如 `import bar from 'foo/lib/bar'`，就需要額外再編寫一個型別宣告檔案 `lib/bar.d.ts` 或者 `lib/bar/index.d.ts`，這與自動產生宣告檔案類似，一個函式庫中同時包含了多個型別宣告檔案。
 
-### 将声明文件发布到 `@types` 下
+### 將宣告檔案釋出到 `@types` 下
 
-如果我们是在给别人的仓库添加类型声明文件，但原作者不愿意合并 pull request，那么就需要将声明文件发布到 `@types` 下。
+如果我們是在給別人的儲存庫新增型別宣告檔案，但原作者不願意合併 pull request，那麼就需要將宣告檔案釋出到 `@types` 下。
 
-与普通的 npm 模块不同，`@types` 是统一由 [DefinitelyTyped][] 管理的。要将声明文件发布到 `@types` 下，就需要给 [DefinitelyTyped][] 创建一个 pull-request，其中包含了类型声明文件，测试代码，以及 `tsconfig.json` 等。
+與普通的 npm 模組不同，`@types` 是統一由 [DefinitelyTyped][] 管理的。要將宣告檔案釋出到 `@types` 下，就需要給 [DefinitelyTyped][] 建立一個 pull-request，其中包含了型別宣告檔案，測試程式碼，以及 `tsconfig.json` 等。
 
-pull-request 需要符合它们的规范，并且通过测试，才能被合并，稍后就会被自动发布到 `@types` 下。
+pull-request 需要符合它們的規範，並且透過測試，才能被合併，稍後就會被自動釋出到 `@types` 下。
 
-在 [DefinitelyTyped][] 中创建一个新的类型声明，需要用到一些工具，[DefinitelyTyped][] 的文档中已经有了[详细的介绍](https://github.com/DefinitelyTyped/DefinitelyTyped#create-a-new-package)，这里就不赘述了，以官方文档为准。
+在 [DefinitelyTyped][] 中建立一個新的型別宣告，需要用到一些工具，[DefinitelyTyped][] 的文件中已經有了[詳細的介紹](https://github.com/DefinitelyTyped/DefinitelyTyped#create-a-new-package)，這裡就不贅述了，以官方文件為準。
 
-如果大家有此类需求，可以参考下笔者[提交的 pull-request](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/30336/files) 。
+如果大家有此類別需求，可以參考下筆者[提交的 pull-request](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/30336/files) 。
 
-## 参考
+## 參考
 
 - [Writing Declaration Files](http://www.typescriptlang.org/docs/handbook/writing-declaration-files.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/declaration%20files/Introduction.html)）
 - [Triple-Slash Directives](http://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Triple-Slash%20Directives.html)）
@@ -1152,7 +1152,7 @@ pull-request 需要符合它们的规范，并且通过测试，才能被合并�
 
 ---
 
-- [上一章：类型断言](type-assertion.md)
-- [下一章：内置对象](built-in-objects.md)
+- [上一章：型別斷言](type-assertion.md)
+- [下一章：內建物件](built-in-objects.md)
 
 [DefinitelyTyped]: https://github.com/DefinitelyTyped/DefinitelyTyped/

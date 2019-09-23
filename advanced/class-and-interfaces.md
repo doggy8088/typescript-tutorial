@@ -1,14 +1,14 @@
-# 类与接口
+# 類別與介面
 
-[之前学习过](../basics/type-of-object-interfaces.md)，接口（Interfaces）可以用于对「对象的形状（Shape）」进行描述。
+[之前學習過](../basics/type-of-object-interfaces.md)，介面（Interfaces）可以用於對「物件的形狀（Shape）」進行描述。
 
-这一章主要介绍接口的另一个用途，对类的一部分行为进行抽象。
+這一章主要介紹介面的另一個用途，對類別的一部分行為進行抽象。
 
-## 类实现接口
+## 類別實現介面
 
-实现（implements）是面向对象中的一个重要概念。一般来讲，一个类只能继承自另一个类，有时候不同类之间可以有一些共有的特性，这时候就可以把特性提取成接口（interfaces），用 `implements` 关键字来实现。这个特性大大提高了面向对象的灵活性。
+實現（implements）是面向物件中的一個重要概念。一般來講，一個類別只能繼承自另一個類別，有時候不同類別之間可以有一些共有的特性，這時候就可以把特性提取成介面（interfaces），用 `implements` 關鍵字來實現。這個特性大大提高了面向物件的靈活性。
 
-举例来说，门是一个类，防盗门是门的子类。如果防盗门有一个报警器的功能，我们可以简单的给防盗门添加一个报警方法。这时候如果有另一个类，车，也有报警器的功能，就可以考虑把报警器提取出来，作为一个接口，防盗门和车都去实现它：
+舉例來說，門是一個類別，防盜門是門的子類別。如果防盜門有一個報警器的功能，我們可以簡單的給防盜門新增一個報警方法。這時候如果有另一個類別，車，也有報警器的功能，就可以考慮把報警器提取出來，作為一個介面，防盜門和車都去實現它：
 
 ```ts
 interface Alarm {
@@ -31,7 +31,7 @@ class Car implements Alarm {
 }
 ```
 
-一个类可以实现多个接口：
+一個類別可以實現多個介面：
 
 ```ts
 interface Alarm {
@@ -56,11 +56,11 @@ class Car implements Alarm, Light {
 }
 ```
 
-上例中，`Car` 实现了 `Alarm` 和 `Light` 接口，既能报警，也能开关车灯。
+上例中，`Car` 實現了 `Alarm` 和 `Light` 介面，既能報警，也能開關車燈。
 
-## 接口继承接口
+## 介面繼承介面
 
-接口与接口之间可以是继承关系：
+介面與介面之間可以是繼承關係：
 
 ```ts
 interface Alarm {
@@ -73,11 +73,11 @@ interface LightableAlarm extends Alarm {
 }
 ```
 
-上例中，我们使用 `extends` 使 `LightableAlarm` 继承 `Alarm`。
+上例中，我們使用 `extends` 使 `LightableAlarm` 繼承 `Alarm`。
 
-## 接口继承类
+## 介面繼承類別
 
-接口也可以继承类：
+介面也可以繼承類別：
 
 ```ts
 class Point {
@@ -92,9 +92,9 @@ interface Point3d extends Point {
 let point3d: Point3d = {x: 1, y: 2, z: 3};
 ```
 
-## 混合类型
+## 混合型別
 
-[之前学习过](../basics/type-of-function.md#接口中函数的定义)，可以使用接口的方式来定义一个函数需要符合的形状：
+[之前學習過](../basics/type-of-function.md#介面中函式的定義)，可以使用介面的方式來定義一個函式需要符合的形狀：
 
 ```ts
 interface SearchFunc {
@@ -107,7 +107,7 @@ mySearch = function(source: string, subString: string) {
 }
 ```
 
-有时候，一个函数还可以有自己的属性和方法：
+有時候，一個函式還可以有自己的屬性和方法：
 
 ```ts
 interface Counter {
@@ -129,11 +129,11 @@ c.reset();
 c.interval = 5.0;
 ```
 
-## 参考
+## 參考
 
 - [Interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html)）
 
 ---
 
-- [上一章：类](class.md)
+- [上一章：類別](class.md)
 - [下一章：泛型](generics.md)

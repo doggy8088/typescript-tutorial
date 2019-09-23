@@ -1,24 +1,24 @@
-# 类型断言
+# 型別斷言
 
-类型断言（Type Assertion）可以用来手动指定一个值的类型。
+型別斷言（Type Assertion）可以用來手動指定一個值的型別。
 
-## 语法
+## 語法
 
 ```ts
-<类型>值
+<型別>值
 ```
 
 或
 
 ```ts
-值 as 类型
+值 as 型別
 ```
 
-在 tsx 语法（React 的 jsx 语法的 ts 版）中必须用后一种。
+在 tsx 語法（React 的 jsx 語法的 ts 版）中必須用後一種。
 
-## 例子：将一个联合类型的变量指定为一个更加具体的类型
+## 例子：將一個聯合型別的變數指定為一個更加具體的型別
 
-[之前提到过](union-types.md#访问联合类型的属性或方法)，当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们**只能访问此联合类型的所有类型里共有的属性或方法**：
+[之前提到過](union-types.md#訪問聯合型別的屬性或方法)，當 TypeScript 不確定一個聯合型別的變數到底是哪個型別的時候，我們**只能訪問此聯合型別的所有型別裡共有的屬性或方法**：
 
 ```ts
 function getLength(something: string | number): number {
@@ -29,7 +29,7 @@ function getLength(something: string | number): number {
 //   Property 'length' does not exist on type 'number'.
 ```
 
-而有时候，我们确实需要在还不确定类型的时候就访问其中一个类型的属性或方法，比如：
+而有時候，我們確實需要在還不確定型別的時候就訪問其中一個型別的屬性或方法，比如：
 
 ```ts
 function getLength(something: string | number): number {
@@ -46,9 +46,9 @@ function getLength(something: string | number): number {
 //   Property 'length' does not exist on type 'number'.
 ```
 
-上例中，获取 `something.length` 的时候会报错。
+上例中，獲取 `something.length` 的時候會報錯。
 
-此时可以使用类型断言，将 `something` 断言成 `string`：
+此時可以使用型別斷言，將 `something` 斷言成 `string`：
 
 ```ts
 function getLength(something: string | number): number {
@@ -60,9 +60,9 @@ function getLength(something: string | number): number {
 }
 ```
 
-类型断言的用法如上，在需要断言的变量前加上 `<Type>` 即可。
+型別斷言的用法如上，在需要斷言的變數前加上 `<Type>` 即可。
 
-**类型断言不是类型转换，断言成一个联合类型中不存在的类型是不允许的**：
+**型別斷言不是型別轉換，斷言成一個聯合型別中不存在的型別是不允許的**：
 
 ```ts
 function toBoolean(something: string | number): boolean {
@@ -73,12 +73,12 @@ function toBoolean(something: string | number): boolean {
 //   Type 'number' is not comparable to type 'boolean'.
 ```
 
-## 参考
+## 參考
 
 - [TypeScript Deep Dive / Type Assertion](https://basarat.gitbooks.io/typescript/content/docs/types/type-assertion.html)
-- [Advanced Types # Type Guards and Differentiating Types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#类型保护与区分类型（type-guards-and-differentiating-types）)）
+- [Advanced Types # Type Guards and Differentiating Types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#型別保護與區分類型（type-guards-and-differentiating-types）)）
 
 ---
 
-- [上一章：函数的类型](type-of-function.md)
-- [下一章：声明文件](declaration-files.md)
+- [上一章：函式的型別](type-of-function.md)
+- [下一章：宣告檔案](declaration-files.md)

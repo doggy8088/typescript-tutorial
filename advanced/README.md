@@ -1,18 +1,18 @@
-## 进阶
+## 進階
 
-本部分介绍一些高级的类型与技术，具体内容包括：
+本部分介紹一些進階的型別與技術，具體內容包括：
 
-- [类型别名](type-aliases.md)
-- [字符串字面量类型](string-literal-types.md)
-- [元组](tuple.md)
-- [枚举](enum.md)
-- [类](class.md)
-- [类与接口](class-and-interfaces.md)
+- [型別別名](type-aliases.md)
+- [字串字面量型別](string-literal-types.md)
+- [元組](tuple.md)
+- [列舉](enum.md)
+- [類別](class.md)
+- [類別與介面](class-and-interfaces.md)
 - [泛型](generics.md)
-- [声明合并](declaration-merging.md)
-- [扩展阅读](further-reading.md)
+- [宣告合併](declaration-merging.md)
+- [擴充套件閱讀](further-reading.md)
 
 ---
 
-- [上一章：内置对象](built-in-objects.md)
-- [下一章：类型别名](type-aliases.md)
+- [上一章：內建物件](built-in-objects.md)
+- [下一章：型別別名](type-aliases.md)

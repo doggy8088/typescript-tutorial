@@ -1,34 +1,34 @@
-# 安装 TypeScript
+# 安裝 TypeScript
 
-TypeScript 的命令行工具安装方法如下：
+TypeScript 的命令列工具安裝方法如下：
 
 ```bash
 npm install -g typescript
 ```
 
-以上命令会在全局环境下安装 `tsc` 命令，安装完成之后，我们就可以在任何地方执行 `tsc` 命令了。
+以上命令會在全域性環境下安裝 `tsc` 命令，安裝完成之後，我們就可以在任何地方執行 `tsc` 命令了。
 
-编译一个 TypeScript 文件很简单：
+編譯一個 TypeScript 檔案很簡單：
 
 ```bash
 tsc hello.ts
 ```
 
-我们约定使用 TypeScript 编写的文件以 `.ts` 为后缀，用 TypeScript 编写 React 时，以 `.tsx` 为后缀。
+我們約定使用 TypeScript 編寫的檔案以 `.ts` 為字尾，用 TypeScript 編寫 React 時，以 `.tsx` 為字尾。
 
-## 编辑器
+## 編輯器
 
-TypeScript 最大的优势便是增强了编辑器和 IDE 的功能，包括代码补全、接口提示、跳转到定义、重构等。
+TypeScript 最大的優勢便是增強了編輯器和 IDE 的功能，包括程式碼自動完成、介面提示、跳轉到定義、重構等。
 
-主流的编辑器都支持 TypeScript，这里我推荐使用 [Visual Studio Code](https://code.visualstudio.com/)。
+主流的編輯器都支援 TypeScript，這裡我推薦使用 [Visual Studio Code](https://code.visualstudio.com/)。
 
-它是一款开源，跨终端的轻量级编辑器，内置了 TypeScript 支持。
+它是一款開源，跨終端的輕量級編輯器，內建了 TypeScript 支援。
 
-另外它本身也是[用 TypeScript 编写的](https://github.com/Microsoft/vscode/)。
+另外它本身也是[用 TypeScript 編寫的](https://github.com/Microsoft/vscode/)。
 
-下载安装：https://code.visualstudio.com/
+下載安裝：https://code.visualstudio.com/
 
-获取其他编辑器或 IDE 对 TypeScript 的支持：
+獲取其他編輯器或 IDE 對 TypeScript 的支援：
 
 - [Sublime Text](https://github.com/Microsoft/TypeScript-Sublime-Plugin)
 - [Atom](https://atom.io/packages/atom-typescript)
@@ -41,5 +41,5 @@ TypeScript 最大的优势便是增强了编辑器和 IDE 的功能，包括代�
 
 ---
 
-- [上一章：什么是 TypeScript](what-is-typescript.md)
+- [上一章：什麼是 TypeScript](what-is-typescript.md)
 - [下一章：Hello TypeScript](hello-typescript.md)

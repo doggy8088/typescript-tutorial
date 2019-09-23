@@ -1,18 +1,18 @@
-# 元组
+# 元組
 
-数组合并了相同类型的对象，而元组（Tuple）合并了不同类型的对象。
+數組合並了相同型別的物件，而元組（Tuple）合併了不同型別的物件。
 
-元组起源于函数编程语言（如 F#），这些语言中会频繁使用元组。
+元組起源於函式程式語言（如 F#），這些語言中會頻繁使用元組。
 
-## 简单的例子
+## 簡單的例子
 
-定义一对值分别为 `string` 和 `number` 的元组：
+定義一對值分別為 `string` 和 `number` 的元組：
 
 ```ts
 let tom: [string, number] = ['Tom', 25];
 ```
 
-当赋值或访问一个已知索引的元素时，会得到正确的类型：
+當賦值或訪問一個已知索引的元素時，會得到正確的型別：
 
 ```ts
 let tom: [string, number];
@@ -23,14 +23,14 @@ tom[0].slice(1);
 tom[1].toFixed(2);
 ```
 
-也可以只赋值其中一项：
+也可以只賦值其中一項：
 
 ```ts
 let tom: [string, number];
 tom[0] = 'Tom';
 ```
 
-但是当直接对元组类型的变量进行初始化或者赋值的时候，需要提供所有元组类型中指定的项。
+但是當直接對元組型別的變數進行初始化或者賦值的時候，需要提供所有元組型別中指定的項。
 
 ```ts
 let tom: [string, number];
@@ -46,7 +46,7 @@ tom = ['Tom'];
 
 ## 越界的元素
 
-当添加越界的元素时，它的类型会被限制为元组中每个类型的联合类型：
+當新增越界的元素時，它的型別會被限制為元組中每個型別的聯合型別：
 
 ```ts
 let tom: [string, number];
@@ -57,11 +57,11 @@ tom.push(true);
 // Argument of type 'true' is not assignable to parameter of type 'string | number'.
 ```
 
-## 参考
+## 參考
 
-- [Basic Types # Tuple](http://www.typescriptlang.org/docs/handbook/basic-types.html#tuple)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Basic%20Types.html#元组-tuple)）
+- [Basic Types # Tuple](http://www.typescriptlang.org/docs/handbook/basic-types.html#tuple)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Basic%20Types.html#元組-tuple)）
 
 ---
 
-- [上一章：字符串字面量类型](string-literal-types.md)
-- [下一章：枚举](enum.md)
+- [上一章：字串字面量型別](string-literal-types.md)
+- [下一章：列舉](enum.md)

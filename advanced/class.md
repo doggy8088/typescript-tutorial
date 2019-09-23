@@ -1,35 +1,35 @@
-# 类
+# 類別
 
-传统方法中，JavaScript 通过构造函数实现类的概念，通过原型链实现继承。而在 ES6 中，我们终于迎来了 `class`。
+傳統方法中，JavaScript 透過建構函式實現類別的概念，透過原型鏈實現繼承。而在 ES6 中，我們終於迎來了 `class`。
 
-TypeScript 除了实现了所有 ES6 中的类的功能以外，还添加了一些新的用法。
+TypeScript 除了實現了所有 ES6 中的類別的功能以外，還添加了一些新的用法。
 
-这一节主要介绍类的用法，下一节再介绍如何定义类的类型。
+這一節主要介紹類別的用法，下一節再介紹如何定義類別的型別。
 
-## 类的概念
+## 類別的概念
 
-虽然 JavaScript 中有类的概念，但是可能大多数 JavaScript 程序员并不是非常熟悉类，这里对类相关的概念做一个简单的介绍。
+雖然 JavaScript 中有類別的概念，但是可能大多數 JavaScript 程式設計師並不是非常熟悉類別，這裡對類別相關的概念做一個簡單的介紹。
 
-- 类(Class)：定义了一件事物的抽象特点，包含它的属性和方法
-- 对象（Object）：类的实例，通过 `new` 生成
-- 面向对象（OOP）的三大特性：封装、继承、多态
-- 封装（Encapsulation）：将对数据的操作细节隐藏起来，只暴露对外的接口。外界调用端不需要（也不可能）知道细节，就能通过对外提供的接口来访问该对象，同时也保证了外界无法任意更改对象内部的数据
-- 继承（Inheritance）：子类继承父类，子类除了拥有父类的所有特性外，还有一些更具体的特性
-- 多态（Polymorphism）：由继承而产生了相关的不同的类，对同一个方法可以有不同的响应。比如 `Cat` 和 `Dog` 都继承自 `Animal`，但是分别实现了自己的 `eat` 方法。此时针对某一个实例，我们无需了解它是 `Cat` 还是 `Dog`，就可以直接调用 `eat` 方法，程序会自动判断出来应该如何执行 `eat`
-- 存取器（getter & setter）：用以改变属性的读取和赋值行为
-- 修饰符（Modifiers）：修饰符是一些关键字，用于限定成员或类型的性质。比如 `public` 表示公有属性或方法
-- 抽象类（Abstract Class）：抽象类是供其他类继承的基类，抽象类不允许被实例化。抽象类中的抽象方法必须在子类中被实现
-- 接口（Interfaces）：不同类之间公有的属性或方法，可以抽象成一个接口。接口可以被类实现（implements）。一个类只能继承自另一个类，但是可以实现多个接口
+- 類別(Class)：定義了一件事物的抽象特點，包含它的屬性和方法
+- 物件（Object）：類別的實例，透過 `new` 產生
+- 面向物件（OOP）的三大特性：封裝、繼承、多型
+- 封裝（Encapsulation）：將對資料的操作細節隱藏起來，只暴露對外的介面。外界呼叫端不需要（也不可能）知道細節，就能透過對外提供的介面來訪問該物件，同時也保證了外界無法任意更改物件內部的資料
+- 繼承（Inheritance）：子類別繼承父類別，子類別除了擁有父類別的所有特性外，還有一些更具體的特性
+- 多型（Polymorphism）：由繼承而產生了相關的不同的類別，對同一個方法可以有不同的響應。比如 `Cat` 和 `Dog` 都繼承自 `Animal`，但是分別實現了自己的 `eat` 方法。此時針對某一個實例，我們無需瞭解它是 `Cat` 還是 `Dog`，就可以直接呼叫 `eat` 方法，程式會自動判斷出來應該如何執行 `eat`
+- 存取器（getter & setter）：用以改變屬性的讀取和賦值行為
+- 修飾符（Modifiers）：修飾符是一些關鍵字，用於限定成員或型別的性質。比如 `public` 表示公有屬性或方法
+- 抽象類別（Abstract Class）：抽象類別是供其他類別繼承的基底類別，抽象類別不允許被實例化。抽象類別中的抽象方法必須在子類別中被實現
+- 介面（Interfaces）：不同類別之間公有的屬性或方法，可以抽象成一個介面。介面可以被類別實現（implements）。一個類別只能繼承自另一個類別，但是可以實現多個介面
 
-## ES6 中类的用法
+## ES6 中類別的用法
 
-下面我们先回顾一下 ES6 中类的用法，更详细的介绍可以参考 [ECMAScript 6 入门 - Class]。
+下面我們先回顧一下 ES6 中類別的用法，更詳細的介紹可以參考 [ECMAScript 6 入門 - Class]。
 
-### 属性和方法
+### 屬性和方法
 
-使用 `class` 定义类，使用 `constructor` 定义构造函数。
+使用 `class` 定義類別，使用 `constructor` 定義建構函式。
 
-通过 `new` 生成新实例的时候，会自动调用构造函数。
+透過 `new` 產生新實例的時候，會自動呼叫建構函式。
 
 ```js
 class Animal {
@@ -45,18 +45,18 @@ let a = new Animal('Jack');
 console.log(a.sayHi()); // My name is Jack
 ```
 
-### 类的继承
+### 類別的繼承
 
-使用 `extends` 关键字实现继承，子类中使用 `super` 关键字来调用父类的构造函数和方法。
+使用 `extends` 關鍵字實現繼承，子類別中使用 `super` 關鍵字來呼叫父類別的建構函式和方法。
 
 ```js
 class Cat extends Animal {
     constructor(name) {
-        super(name); // 调用父类的 constructor(name)
+        super(name); // 呼叫父類別的 constructor(name)
         console.log(this.name);
     }
     sayHi() {
-        return 'Meow, ' + super.sayHi(); // 调用父类的 sayHi()
+        return 'Meow, ' + super.sayHi(); // 呼叫父類別的 sayHi()
     }
 }
 
@@ -66,7 +66,7 @@ console.log(c.sayHi()); // Meow, My name is Tom
 
 ### 存取器
 
-使用 getter 和 setter 可以改变属性的赋值和读取行为：
+使用 getter 和 setter 可以改變屬性的賦值和讀取行為：
 
 ```js
 class Animal {
@@ -86,9 +86,9 @@ a.name = 'Tom'; // setter: Tom
 console.log(a.name); // Jack
 ```
 
-### 静态方法
+### 靜態方法
 
-使用 `static` 修饰符修饰的方法称为静态方法，它们不需要实例化，而是直接通过类来调用：
+使用 `static` 修飾符修飾的方法稱為靜態方法，它們不需要實例化，而是直接透過類別來呼叫：
 
 ```js
 class Animal {
@@ -102,13 +102,13 @@ Animal.isAnimal(a); // true
 a.isAnimal(a); // TypeError: a.isAnimal is not a function
 ```
 
-## ES7 中类的用法
+## ES7 中類別的用法
 
-ES7 中有一些关于类的提案，TypeScript 也实现了它们，这里做一个简单的介绍。
+ES7 中有一些關於類別的提案，TypeScript 也實現了它們，這裡做一個簡單的介紹。
 
-### 实例属性
+### 實例屬性
 
-ES6 中实例的属性只能通过构造函数中的 `this.xxx` 来定义，ES7 提案中可以直接在类里面定义：
+ES6 中實例的屬性只能透過建構函式中的 `this.xxx` 來定義，ES7 提案中可以直接在類別裡面定義：
 
 ```js
 class Animal {
@@ -123,9 +123,9 @@ let a = new Animal();
 console.log(a.name); // Jack
 ```
 
-### 静态属性
+### 靜態屬性
 
-ES7 提案中，可以使用 `static` 定义一个静态属性：
+ES7 提案中，可以使用 `static` 定義一個靜態屬性：
 
 ```js
 class Animal {
@@ -139,17 +139,17 @@ class Animal {
 console.log(Animal.num); // 42
 ```
 
-## TypeScript 中类的用法
+## TypeScript 中類別的用法
 
 ### public private 和 protected
 
-TypeScript 可以使用三种访问修饰符（Access Modifiers），分别是 `public`、`private` 和 `protected`。
+TypeScript 可以使用三種訪問修飾符（Access Modifiers），分別是 `public`、`private` 和 `protected`。
 
-- `public` 修饰的属性或方法是公有的，可以在任何地方被访问到，默认所有的属性和方法都是 `public` 的
-- `private` 修饰的属性或方法是私有的，不能在声明它的类的外部访问
-- `protected` 修饰的属性或方法是受保护的，它和 `private` 类似，区别是它在子类中也是允许被访问的
+- `public` 修飾的屬性或方法是公有的，可以在任何地方被訪問到，預設所有的屬性和方法都是 `public` 的
+- `private` 修飾的屬性或方法是私有的，不能在宣告它的類別的外部訪問
+- `protected` 修飾的屬性或方法是受保護的，它和 `private` 類似，區別是它在子類別中也是允許被訪問的
 
-下面举一些例子：
+下面舉一些例子：
 
 ```ts
 class Animal {
@@ -165,9 +165,9 @@ a.name = 'Tom';
 console.log(a.name); // Tom
 ```
 
-上面的例子中，`name` 被设置为了 `public`，所以直接访问实例的 `name` 属性是允许的。
+上面的例子中，`name` 被設定為了 `public`，所以直接訪問實例的 `name` 屬性是允許的。
 
-很多时候，我们希望有的属性是无法直接存取的，这时候就可以用 `private` 了：
+很多時候，我們希望有的屬性是無法直接存取的，這時候就可以用 `private` 了：
 
 ```ts
 class Animal {
@@ -185,9 +185,9 @@ a.name = 'Tom';
 // index.ts(10,1): error TS2341: Property 'name' is private and only accessible within class 'Animal'.
 ```
 
-需要注意的是，TypeScript 编译之后的代码中，并没有限制 `private` 属性在外部的可访问性。
+需要注意的是，TypeScript 編譯之後的程式碼中，並沒有限制 `private` 屬性在外部的可及性。
 
-上面的例子编译后的代码是：
+上面的例子編譯後的程式碼是：
 
 ```js
 var Animal = (function () {
@@ -201,7 +201,7 @@ console.log(a.name);
 a.name = 'Tom';
 ```
 
-使用 `private` 修饰的属性或方法，在子类中也是不允许访问的：
+使用 `private` 修飾的屬性或方法，在子類別中也是不允許訪問的：
 
 ```ts
 class Animal {
@@ -221,7 +221,7 @@ class Cat extends Animal {
 // index.ts(11,17): error TS2341: Property 'name' is private and only accessible within class 'Animal'.
 ```
 
-而如果是用 `protected` 修饰，则允许在子类中访问：
+而如果是用 `protected` 修飾，則允許在子類別中訪問：
 
 ```ts
 class Animal {
@@ -239,7 +239,7 @@ class Cat extends Animal {
 }
 ```
 
-当构造函数修饰为 `private` 时，该类不允许被继承或者实例化：
+當建構函式修飾為 `private` 時，該類別不允許被繼承或者實例化：
 
 ```ts
 class Animal {
@@ -260,7 +260,7 @@ let a = new Animal('Jack');
 // index.ts(13,9): TS2673: Constructor of class 'Animal' is private and only accessible within the class declaration.
 ```
 
-当构造函数修饰为 `protected` 时，该类只允许被继承：
+當建構函式修飾為 `protected` 時，該類別只允許被繼承：
 
 ```ts
 class Animal {
@@ -280,7 +280,7 @@ let a = new Animal('Jack');
 // index.ts(13,9): TS2674: Constructor of class 'Animal' is protected and only accessible within the class declaration.
 ```
 
-修饰符还可以使用在构造函数参数中，等同于类中定义该属性，使代码更简洁。
+修飾符還可以使用在建構函式引數中，等同於類別中定義該屬性，使程式碼更簡潔。
 
 ```ts
 class Animal {
@@ -293,7 +293,7 @@ class Animal {
 
 ### readonly
 
-只读属性关键字，只允许出现在属性声明或索引签名中。
+只讀屬性關鍵字，只允許出現在屬性宣告或索引簽名中。
 
 ```ts
 class Animal {
@@ -310,7 +310,7 @@ a.name = 'Tom';
 // index.ts(10,3): TS2540: Cannot assign to 'name' because it is a read-only property.
 ```
 
-注意如果 `readonly` 和其他访问修饰符同时存在的话，需要写在其后面。
+注意如果 `readonly` 和其他訪問修飾符同時存在的話，需要寫在其後面。
 
 ```ts
 class Animal {
@@ -321,13 +321,13 @@ class Animal {
 }
 ```
 
-### 抽象类
+### 抽象類別
 
-`abstract` 用于定义抽象类和其中的抽象方法。
+`abstract` 用於定義抽象類別和其中的抽象方法。
 
-什么是抽象类？
+什麼是抽象類別？
 
-首先，抽象类是不允许被实例化的：
+首先，抽象類別是不允許被實例化的：
 
 ```ts
 abstract class Animal {
@@ -343,9 +343,9 @@ let a = new Animal('Jack');
 // index.ts(9,11): error TS2511: Cannot create an instance of the abstract class 'Animal'.
 ```
 
-上面的例子中，我们定义了一个抽象类 `Animal`，并且定义了一个抽象方法 `sayHi`。在实例化抽象类的时候报错了。
+上面的例子中，我們定義了一個抽象類別 `Animal`，並且定義了一個抽象方法 `sayHi`。在實例化抽象類別的時候報錯了。
 
-其次，抽象类中的抽象方法必须被子类实现：
+其次，抽象類別中的抽象方法必須被子類別實現：
 
 ```ts
 abstract class Animal {
@@ -367,9 +367,9 @@ let cat = new Cat('Tom');
 // index.ts(9,7): error TS2515: Non-abstract class 'Cat' does not implement inherited abstract member 'sayHi' from class 'Animal'.
 ```
 
-上面的例子中，我们定义了一个类 `Cat` 继承了抽象类 `Animal`，但是没有实现抽象方法 `sayHi`，所以编译报错了。
+上面的例子中，我們定義了一個類別 `Cat` 繼承了抽象類別 `Animal`，但是沒有實現抽象方法 `sayHi`，所以編譯報錯了。
 
-下面是一个正确使用抽象类的例子：
+下面是一個正確使用抽象類別的例子：
 
 ```ts
 abstract class Animal {
@@ -389,9 +389,9 @@ class Cat extends Animal {
 let cat = new Cat('Tom');
 ```
 
-上面的例子中，我们实现了抽象方法 `sayHi`，编译通过了。
+上面的例子中，我們實現了抽象方法 `sayHi`，編譯通過了。
 
-需要注意的是，即使是抽象方法，TypeScript 的编译结果中，仍然会存在这个类，上面的代码的编译结果是：
+需要注意的是，即使是抽象方法，TypeScript 的編譯結果中，仍然會存在這個類別，上面的程式碼的編譯結果是：
 
 ```js
 var __extends = (this && this.__extends) || function (d, b) {
@@ -418,9 +418,9 @@ var Cat = (function (_super) {
 var cat = new Cat('Tom');
 ```
 
-## 类的类型
+## 類別的型別
 
-给类加上 TypeScript 的类型很简单，与接口类似：
+給類別加上 TypeScript 的型別很簡單，與介面類似：
 
 ```ts
 class Animal {
@@ -437,14 +437,14 @@ let a: Animal = new Animal('Jack');
 console.log(a.sayHi()); // My name is Jack
 ```
 
-## 参考
+## 參考
 
 - [Classes](http://www.typescriptlang.org/docs/handbook/classes.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Classes.html)）
-- [ECMAScript 6 入门 - Class]
+- [ECMAScript 6 入門 - Class]
 
-[ECMAScript 6 入门 - Class]: http://es6.ruanyifeng.com/#docs/class
+[ECMAScript 6 入門 - Class]: http://es6.ruanyifeng.com/#docs/class
 
 ---
 
-- [上一章：枚举](enum.md)
-- [下一章：类与接口](class-and-interfaces.md)
+- [上一章：列舉](enum.md)
+- [下一章：類別與介面](class-and-interfaces.md)

@@ -1,14 +1,14 @@
-# 对象的类型——接口
+# 物件的型別——介面
 
-在 TypeScript 中，我们使用接口（Interfaces）来定义对象的类型。
+在 TypeScript 中，我們使用介面（Interfaces）來定義物件的型別。
 
-## 什么是接口
+## 什麼是介面
 
-在面向对象语言中，接口（Interfaces）是一个很重要的概念，它是对行为的抽象，而具体如何行动需要由类（classes）去实现（implement）。
+在面嚮物件語言中，介面（Interfaces）是一個很重要的概念，它是對行為的抽象，而具體如何行動需要由類別（classes）去實現（implement）。
 
-TypeScript 中的接口是一个非常灵活的概念，除了可用于[对类的一部分行为进行抽象](../advanced/class-and-interfaces.md#类实现接口)以外，也常用于对「对象的形状（Shape）」进行描述。
+TypeScript 中的介面是一個非常靈活的概念，除了可用於[對類別的一部分行為進行抽象](../advanced/class-and-interfaces.md#類別實現介面)以外，也常用於對「物件的形狀（Shape）」進行描述。
 
-## 简单的例子
+## 簡單的例子
 
 ```ts
 interface Person {
@@ -22,11 +22,11 @@ let tom: Person = {
 };
 ```
 
-上面的例子中，我们定义了一个接口 `Person`，接着定义了一个变量 `tom`，它的类型是 `Person`。这样，我们就约束了 `tom` 的形状必须和接口 `Person` 一致。
+上面的例子中，我們定義了一個介面 `Person`，接著定義了一個變數 `tom`，它的型別是 `Person`。這樣，我們就約束了 `tom` 的形狀必須和介面 `Person` 一致。
 
-接口一般首字母大写。[有的编程语言中会建议接口的名称加上 `I` 前缀](https://msdn.microsoft.com/en-us/library/8bc1fexb%28v=vs.71%29.aspx)。
+介面一般首字母大寫。[有的程式語言中會建議介面的名稱加上 `I` 字首](https://msdn.microsoft.com/en-us/library/8bc1fexb%28v=vs.71%29.aspx)。
 
-定义的变量比接口少了一些属性是不允许的：
+定義的變數比介面少了一些屬性是不允許的：
 
 ```ts
 interface Person {
@@ -42,7 +42,7 @@ let tom: Person = {
 //   Property 'age' is missing in type '{ name: string; }'.
 ```
 
-多一些属性也是不允许的：
+多一些屬性也是不允許的：
 
 ```ts
 interface Person {
@@ -60,11 +60,11 @@ let tom: Person = {
 //   Object literal may only specify known properties, and 'gender' does not exist in type 'Person'.
 ```
 
-可见，**赋值的时候，变量的形状必须和接口的形状保持一致**。
+可見，**賦值的時候，變數的形狀必須和介面的形狀保持一致**。
 
-## 可选属性
+## 可選屬性
 
-有时我们希望不要完全匹配一个形状，那么可以用可选属性：
+有時我們希望不要完全匹配一個形狀，那麼可以用可選屬性：
 
 ```ts
 interface Person {
@@ -89,9 +89,9 @@ let tom: Person = {
 };
 ```
 
-可选属性的含义是该属性可以不存在。
+可選屬性的含義是該屬性可以不存在。
 
-这时**仍然不允许添加未定义的属性**：
+這時**仍然不允許新增未定義的屬性**：
 
 ```ts
 interface Person {
@@ -109,9 +109,9 @@ let tom: Person = {
 //   Object literal may only specify known properties, and 'gender' does not exist in type 'Person'.
 ```
 
-## 任意属性
+## 任意屬性
 
-有时候我们希望一个接口允许有任意的属性，可以使用如下方式：
+有時候我們希望一個介面允許有任意的屬性，可以使用如下方式：
 
 ```ts
 interface Person {
@@ -126,9 +126,9 @@ let tom: Person = {
 };
 ```
 
-使用 `[propName: string]` 定义了任意属性取 `string` 类型的值。
+使用 `[propName: string]` 定義了任意屬性取 `string` 型別的值。
 
-需要注意的是，**一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集**：
+需要注意的是，**一旦定義了任意屬性，那麼確定屬性和可選屬性的型別都必須是它的型別的子集**：
 
 ```ts
 interface Person {
@@ -150,13 +150,13 @@ let tom: Person = {
 //       Type 'number' is not assignable to type 'string'.
 ```
 
-上例中，任意属性的值允许是 `string`，但是可选属性 `age` 的值却是 `number`，`number` 不是 `string` 的子属性，所以报错了。
+上例中，任意屬性的值允許是 `string`，但是可選屬性 `age` 的值卻是 `number`，`number` 不是 `string` 的子屬性，所以報錯了。
 
-另外，在报错信息中可以看出，此时 `{ name: 'Tom', age: 25, gender: 'male' }` 的类型被推断成了 `{ [x: string]: string | number; name: string; age: number; gender: string; }`，这是联合类型和接口的结合。
+另外，在報錯資訊中可以看出，此時 `{ name: 'Tom', age: 25, gender: 'male' }` 的型別被推斷成了 `{ [x: string]: string | number; name: string; age: number; gender: string; }`，這是聯合型別和介面的結合。
 
-## 只读属性
+## 只讀屬性
 
-有时候我们希望对象中的一些字段只能在创建的时候被赋值，那么可以用 `readonly` 定义只读属性：
+有時候我們希望物件中的一些欄位只能在建立的時候被賦值，那麼可以用 `readonly` 定義只讀屬性：
 
 ```ts
 interface Person {
@@ -177,9 +177,9 @@ tom.id = 9527;
 // index.ts(14,5): error TS2540: Cannot assign to 'id' because it is a constant or a read-only property.
 ```
 
-上例中，使用 `readonly` 定义的属性 `id` 初始化后，又被赋值了，所以报错了。
+上例中，使用 `readonly` 定義的屬性 `id` 初始化後，又被賦值了，所以報錯了。
 
-**注意，只读的约束存在于第一次给对象赋值的时候，而不是第一次给只读属性赋值的时候**：
+**注意，只讀的約束存在於第一次給物件賦值的時候，而不是第一次給只讀屬性賦值的時候**：
 
 ```ts
 interface Person {
@@ -201,15 +201,15 @@ tom.id = 89757;
 // index.ts(13,5): error TS2540: Cannot assign to 'id' because it is a constant or a read-only property.
 ```
 
-上例中，报错信息有两处，第一处是在对 `tom` 进行赋值的时候，没有给 `id` 赋值。
+上例中，報錯資訊有兩處，第一處是在對 `tom` 進行賦值的時候，沒有給 `id` 賦值。
 
-第二处是在给 `tom.id` 赋值的时候，由于它是只读属性，所以报错了。
+第二處是在給 `tom.id` 賦值的時候，由於它是隻讀屬性，所以報錯了。
 
-## 参考 
+## 參考 
 
 - [Interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html)）
 
 ---
 
-- [上一章：联合类型](union-types.md)
-- [下一章：数组的类型](type-of-array.md)
+- [上一章：聯合型別](union-types.md)
+- [下一章：陣列的型別](type-of-array.md)

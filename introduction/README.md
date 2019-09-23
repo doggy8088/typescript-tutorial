@@ -1,12 +1,12 @@
-# 简介
+# 簡介
 
-本部分介绍了在学习 TypeScript 之前需要了解的知识，具体内容包括：
+本部分介紹了在學習 TypeScript 之前需要了解的知識，具體內容包括：
 
-- [什么是 TypeScript](what-is-typescript.md)
-- [安装 TypeScript](get-typescript.md)
+- [什麼是 TypeScript](what-is-typescript.md)
+- [安裝 TypeScript](get-typescript.md)
 - [Hello TypeScript](hello-typescript.md)
 
 ---
 
 - [上一章：前言](../README.md)
-- [下一章：什么是 TypeScript](what-is-typescript.md)
+- [下一章：什麼是 TypeScript](what-is-typescript.md)

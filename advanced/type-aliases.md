@@ -1,8 +1,8 @@
-# 类型别名
+# 型別別名
 
-类型别名用来给一个类型起个新名字。
+型別別名用來給一個型別起個新名字。
 
-## 简单的例子
+## 簡單的例子
 
 ```ts
 type Name = string;
@@ -17,15 +17,15 @@ function getName(n: NameOrResolver): Name {
 }
 ```
 
-上例中，我们使用 `type` 创建类型别名。
+上例中，我們使用 `type` 建立型別別名。
 
-类型别名常用于联合类型。
+型別別名常用於聯合型別。
 
-## 参考
+## 參考
 
-- [Advanced Types # Type Aliases](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#类型别名)）
+- [Advanced Types # Type Aliases](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#型別別名)）
 
 ---
 
-- [上一章：进阶](../advanced/README.md)
-- [下一章：字符串字面量类型](string-literal-types.md)
+- [上一章：進階](../advanced/README.md)
+- [下一章：字串字面量型別](string-literal-types.md)

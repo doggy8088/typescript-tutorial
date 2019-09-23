@@ -1,8 +1,8 @@
 # Hello TypeScript
 
-我们从一个简单的例子开始。
+我們從一個簡單的例子開始。
 
-将以下代码复制到 `hello.ts` 中：
+將以下程式碼複製到 `hello.ts` 中：
 
 ```ts
 function sayHello(person: string) {
@@ -13,13 +13,13 @@ let user = 'Tom';
 console.log(sayHello(user));
 ```
 
-然后执行
+然後執行
 
 ```bash
 tsc hello.ts
 ```
 
-这时候会生成一个编译好的文件 `hello.js`：
+這時候會產生一個編譯好的檔案 `hello.js`：
 
 ```js
 function sayHello(person) {
@@ -29,15 +29,15 @@ var user = 'Tom';
 console.log(sayHello(user));
 ```
 
-TypeScript 中，使用 `:` 指定变量的类型，`:` 的前后有没有空格都可以。
+TypeScript 中，使用 `:` 指定變數的型別，`:` 的前後有沒有空格都可以。
 
-上述例子中，我们用 `:` 指定 `person` 参数类型为 `string`。但是编译为 js 之后，并没有什么检查的代码被插入进来。
+上述例子中，我們用 `:` 指定 `person` 引數型別為 `string`。但是編譯為 js 之後，並沒有什麼檢查的程式碼被插入進來。
 
-**TypeScript 只会进行静态检查，如果发现有错误，编译的时候就会报错。**
+**TypeScript 只會進行靜態檢查，如果發現有錯誤，編譯的時候就會報錯。**
 
-> `let` 是 ES6 中的关键字，和 `var` 类似，用于定义一个局部变量，可以参阅 [let 和 const 命令](http://es6.ruanyifeng.com/#docs/let)。
+> `let` 是 ES6 中的關鍵字，和 `var` 類似，用於定義一個區域性變數，可以參閱 [let 和 const 命令](http://es6.ruanyifeng.com/#docs/let)。
 
-下面尝试把这段代码编译一下：
+下面嘗試把這段程式碼編譯一下：
 
 ```ts
 function sayHello(person: string) {
@@ -48,13 +48,13 @@ let user = [0, 1, 2];
 console.log(sayHello(user));
 ```
 
-编辑器中会提示错误，编译的时候也会出错：
+編輯器中會提示錯誤，編譯的時候也會出錯：
 
 ```bash
 index.ts(6,22): error TS2345: Argument of type 'number[]' is not assignable to parameter of type 'string'.
 ```
 
-但是还是生成了 js 文件：
+但是還是生成了 js 檔案：
 
 ```js
 function sayHello(person) {
@@ -64,11 +64,11 @@ var user = [0, 1, 2];
 console.log(sayHello(user));
 ```
 
-**TypeScript 编译的时候即使报错了，还是会生成编译结果**，我们仍然可以使用这个编译之后的文件。
+**TypeScript 編譯的時候即使報錯了，還是會產生編譯結果**，我們仍然可以使用這個編譯之後的檔案。
 
-如果要在报错的时候终止 js 文件的生成，可以在 `tsconfig.json` 中配置 `noEmitOnError` 即可。关于 `tsconfig.json`，请参阅[官方手册](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/tsconfig.json.html)）。
+如果要在報錯的時候終止 js 檔案的產生，可以在 `tsconfig.json` 中配置 `noEmitOnError` 即可。關於 `tsconfig.json`，請參閱[官方手冊](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/tsconfig.json.html)）。
 
 ---
 
-- [上一章：安装 TypeScript](get-typescript.md)
-- [下一章：基础](../basics/README.md)
+- [上一章：安裝 TypeScript](get-typescript.md)
+- [下一章：基礎](../basics/README.md)
