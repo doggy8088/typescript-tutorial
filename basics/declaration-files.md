@@ -102,26 +102,26 @@ npm install @types/jquery --save-dev
 
 可以在[這個頁面](https://microsoft.github.io/TypeSearch/)搜尋你需要的宣告檔案。
 
-## 書寫宣告檔案
+## 撰寫宣告檔案
 
-當一個第三方函式庫沒有提供宣告檔案時，我們就需要自己書寫宣告檔案了。前面只介紹了最簡單的宣告檔案內容，而真正書寫一個宣告檔案並不是一件簡單的事，以下會詳細介紹如何書寫宣告檔案。
+當一個第三方函式庫沒有提供宣告檔案時，我們就需要自己撰寫宣告檔案了。前面只介紹了最簡單的宣告檔案內容，而真正撰寫一個宣告檔案並不是一件簡單的事，以下會詳細介紹如何撰寫宣告檔案。
 
 在不同的場景下，宣告檔案的內容和使用方式會有所區別。
 
 函式庫的使用場景主要有以下幾種：
 
-* [全域性變數](declaration-files.md#quan-ju-bian-liang)：透過 `<script>` 標籤引入第三方函式庫，注入全域性變數
-* [npm 包](declaration-files.md#npm-bao)：透過 `import foo from 'foo'` 匯入，符合 ES6 模組規範
+* [全域變數](declaration-files.md#quan-ju-bian-liang)：透過 `<script>` 標籤引入第三方函式庫，注入全域變數
+* [npm 套件](declaration-files.md#npm-bao)：透過 `import foo from 'foo'` 匯入，符合 ES6 模組規範
 * [UMD 函式庫](declaration-files.md#umd-ku)：既可以透過 `<script>` 標籤引入，又可以透過 `import` 匯入
-* [直接擴充套件全域性變數](declaration-files.md#zhi-jie-kuo-zhan-quan-ju-bian-liang)：透過 `<script>` 標籤引入後，改變一個全域性變數的結構
-* [在 npm 包或 UMD 函式庫中擴充套件全域性變數](declaration-files.md#zai-npm-bao-huo-umd-ku-zhong-kuo-zhan-quan-ju-bian-liang)：參考 npm 包或 UMD 函式庫後，改變一個全域性變數的結構
+* [直接擴充套件全域變數](declaration-files.md#zhi-jie-kuo-zhan-quan-ju-bian-liang)：透過 `<script>` 標籤引入後，改變一個全域變數的結構
+* [在 npm 套件或 UMD 函式庫中擴充套件全域變數](declaration-files.md#zai-npm-bao-huo-umd-ku-zhong-kuo-zhan-quan-ju-bian-liang)：參考 npm 套件或 UMD 函式庫後，改變一個全域變數的結構
 * [模組外掛](declaration-files.md#mo-kuai-cha-jian)：透過 `<script>` 或 `import` 匯入後，改變另一個模組的結構
 
-### 全域性變數
+### 全域變數
 
-全域性變數是最簡單的一種場景，之前舉的例子就是透過 `<script>` 標籤引入 jQuery，注入全域性變數 `$` 和 `jQuery`。
+全域變數是最簡單的一種場景，之前舉的例子就是透過 `<script>` 標籤引入 jQuery，注入全域變數 `$` 和 `jQuery`。
 
-使用全域性變數的宣告檔案時，如果是以 `npm install @types/xxx --save-dev` 安裝的，則不需要任何配置。如果是將宣告檔案直接存放於當前專案中，則建議和其他原始碼一起放到 `src` 目錄下（或者對應的原始碼目錄下）：
+使用全域變數的宣告檔案時，如果是以 `npm install @types/xxx --save-dev` 安裝的，則不需要任何配置。如果是將宣告檔案直接存放於當前專案中，則建議和其他原始碼一起放到 `src` 目錄下（或者對應的原始碼目錄下）：
 
 ```text
 /path/to/project
@@ -135,16 +135,16 @@ npm install @types/jquery --save-dev
 
 全域性變數的宣告檔案主要有以下幾種語法：
 
-* [`declare var`](declaration-files.md#declare-var) 宣告全域性變數
-* [`declare function`](declaration-files.md#declare-function) 宣告全域性方法
-* [`declare class`](declaration-files.md#declare-class) 宣告全域性類別
-* [`declare enum`](declaration-files.md#declare-enum) 宣告全域性列舉型別
-* [`declare namespace`](declaration-files.md#declare-namespace) 宣告（含有子屬性的）全域性物件
-* [`interface` 和 `type`](declaration-files.md#interface-he-type) 宣告全域性型別
+* [`declare var`](declaration-files.md#declare-var) 宣告全域變數
+* [`declare function`](declaration-files.md#declare-function) 宣告全域方法
+* [`declare class`](declaration-files.md#declare-class) 宣告全域類別
+* [`declare enum`](declaration-files.md#declare-enum) 宣告全域列舉型別
+* [`declare namespace`](declaration-files.md#declare-namespace) 宣告（含有子屬性的）全域物件
+* [`interface` 和 `type`](declaration-files.md#interface-he-type) 宣告全域型別
 
 #### `declare var`
 
-在所有的宣告語句中，`declare var` 是最簡單的，如之前所學，它能夠用來定義一個全域性變數的型別。與其類似的，還有 `declare let` 和 `declare const`，使用 `let` 與使用 `var` 沒有什麼區別：
+在所有的宣告語句中，`declare var` 是最簡單的，如之前所學，它能夠用來定義一個全域變數的型別。與其類似的，還有 `declare let` 和 `declare const`，使用 `let` 與使用 `var` 沒有什麼區別：
 
 ```typescript
 // src/jQuery.d.ts
@@ -156,13 +156,13 @@ declare let jQuery: (selector: string) => any;
 // src/index.ts
 
 jQuery('#foo');
-// 使用 declare let 定義的 jQuery 型別，允許修改這個全域性變數
+// 使用 declare let 定義的 jQuery 型別，允許修改這個全域變數
 jQuery = function(selector) {
     return document.querySelector(selector);
 };
 ```
 
-而當我們使用 `const` 定義時，表示此時的全域性變數是一個常量，不允許再去修改它的值了[4](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/04-declare-const-jquery)：
+而當我們使用 `const` 定義時，表示此時的全域變數是一個常數，不允許再去修改它的值了[4](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/04-declare-const-jquery)：
 
 ```typescript
 // src/jQuery.d.ts
@@ -170,14 +170,14 @@ jQuery = function(selector) {
 declare const jQuery: (selector: string) => any;
 
 jQuery('#foo');
-// 使用 declare const 定義的 jQuery 型別，禁止修改這個全域性變數
+// 使用 declare const 定義的 jQuery 型別，禁止修改這個全域變數
 jQuery = function(selector) {
     return document.querySelector(selector);
 };
 // ERROR: Cannot assign to 'jQuery' because it is a constant or a read-only property.
 ```
 
-一般來說，全域性變數都是禁止修改的常量，所以大部分情況都應該使用 `const` 而不是 `var` 或 `let`。
+一般來說，全域變數都是禁止修改的常數，所以大部分情況都應該使用 `const` 而不是 `var` 或 `let`。
 
 需要注意的是，宣告語句中只能定義型別，切勿在宣告語句中定義具體的實現[5](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/05-declare-jquery-value)：
 
@@ -224,7 +224,7 @@ jQuery(function() {
 
 #### `declare class`
 
-當全域性變數是一個類別的時候，我們用 `declare class` 來定義它的型別[7](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/07-declare-class)：
+當全域變數是一個類別的時候，我們用 `declare class` 來定義它的型別[7](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/07-declare-class)：
 
 ```typescript
 // src/Animal.d.ts
@@ -278,7 +278,7 @@ declare enum Directions {
 let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
 ```
 
-與其他全域性變數的型別宣告一致，`declare enum` 僅用來定義型別，而不是具體的值。
+與其他全域變數的型別宣告一致，`declare enum` 僅用來定義型別，而不是具體的值。
 
 `Directions.d.ts` 僅僅會用於編譯時的檢查，宣告檔案裡的內容在編譯結果中會被刪除。它編譯結果是：
 
@@ -286,7 +286,7 @@ let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Ri
 var directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
 ```
 
-其中 `Directions` 是由第三方函式庫定義好的全域性變數。
+其中 `Directions` 是由第三方函式庫定義好的全域變數。
 
 #### `declare namespace`
 
@@ -296,9 +296,9 @@ var directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Ri
 
 隨著 ES6 的廣泛應用，現在已經不建議再使用 ts 中的 `namespace`，而推薦使用 ES6 的模組化方案了，故我們不再需要學習 `namespace` 的使用了。
 
-`namespace` 被淘汰了，但是在宣告檔案中，`declare namespace` 還是比較常用的，它用來表示全域性變數是一個物件，包含很多子屬性。
+`namespace` 被淘汰了，但是在宣告檔案中，`declare namespace` 還是比較常用的，它用來表示全域變數是一個物件，包含很多子屬性。
 
-比如 `jQuery` 是一個全域性變數，它是一個物件，提供了一個 `jQuery.ajax` 方法可以呼叫，那麼我們就應該使用 `declare namespace jQuery` 來宣告這個擁有多個子屬性的全域性變數。
+比如 `jQuery` 是一個全域變數，它是一個物件，提供了一個 `jQuery.ajax` 方法可以呼叫，那麼我們就應該使用 `declare namespace jQuery` 來宣告這個擁有多個子屬性的全域變數。
 
 ```typescript
 // src/jQuery.d.ts
@@ -392,7 +392,7 @@ jQuery.fn.extend({
 
 #### `interface` 和 `type`
 
-除了全域性變數之外，可能有一些型別我們也希望能暴露出來。在型別宣告檔案中，我們可以直接使用 `interface` 或 `type` 來宣告一個全域性的介面或型別[12](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/12-interface)：
+除了全域變數之外，可能有一些型別我們也希望能暴露出來。在型別宣告檔案中，我們可以直接使用 `interface` 或 `type` 來宣告一個全域性的介面或型別[12](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/12-interface)：
 
 ```typescript
 // src/jQuery.d.ts
@@ -424,7 +424,7 @@ jQuery.ajax('/api/post_something', settings);
 
 **防止命名衝突**
 
-暴露在最外層的 `interface` 或 `type` 會作為全域性型別作用於整個專案中，我們應該儘可能的減少全域性變數或全域性型別的數量。故最好將他們放到 `namespace` 下[13](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/13-avoid-name-conflict)：
+暴露在最外層的 `interface` 或 `type` 會作為全域性型別作用於整個專案中，我們應該儘可能的減少全域變數或全域性型別的數量。故最好將他們放到 `namespace` 下[13](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/13-avoid-name-conflict)：
 
 ```typescript
 // src/jQuery.d.ts
@@ -474,14 +474,14 @@ jQuery.ajax('/api/get_something');
 
 關於宣告合併的更多用法，可以檢視[宣告合併](../advanced/declaration-merging.md)章節。
 
-### npm 包
+### npm 套件
 
-一般我們透過 `import foo from 'foo'` 匯入一個 npm 包，這是符合 ES6 模組規範的。
+一般我們透過 `import foo from 'foo'` 匯入一個 npm 套件，這是符合 ES6 模組規範的。
 
-在我們嘗試給一個 npm 包建立宣告檔案之前，需要先看看它的宣告檔案是否已經存在。一般來說，npm 包的宣告檔案可能存在於兩個地方：
+在我們嘗試給一個 npm 套件建立宣告檔案之前，需要先看看它的宣告檔案是否已經存在。一般來說，npm 套件的宣告檔案可能存在於兩個地方：
 
-1. 與該 npm 包繫結在一起。判斷依據是 `package.json` 中有 `types` 欄位，或者有一個 `index.d.ts` 宣告檔案。這種模式不需要額外安裝其他包，是最為推薦的，所以以後我們自己建立 npm 包的時候，最好也將宣告檔案與 npm 包繫結在一起。
-2. 釋出到 `@types` 裡。我們只需要嘗試安裝一下對應的 `@types` 包就知道是否存在該宣告檔案，安裝命令是 `npm install @types/foo --save-dev`。這種模式一般是由於 npm 包的維護者沒有提供宣告檔案，所以只能由其他人將宣告檔案釋出到 `@types` 裡了。
+1. 與該 npm 套件繫結在一起。判斷依據是 `package.json` 中有 `types` 欄位，或者有一個 `index.d.ts` 宣告檔案。這種模式不需要額外安裝其他包，是最為推薦的，所以以後我們自己建立 npm 套件的時候，最好也將宣告檔案與 npm 套件繫結在一起。
+2. 釋出到 `@types` 裡。我們只需要嘗試安裝一下對應的 `@types` 包就知道是否存在該宣告檔案，安裝命令是 `npm install @types/foo --save-dev`。這種模式一般是由於 npm 套件的維護者沒有提供宣告檔案，所以只能由其他人將宣告檔案釋出到 `@types` 裡了。
 
 假如以上兩種方式都沒有找到對應的宣告檔案，那麼我們就需要自己為它寫宣告檔案了。由於是透過 `import` 語句匯入的模組，所以宣告檔案存放的位置也有所約束，一般有兩種方案：
 
@@ -520,7 +520,7 @@ jQuery.ajax('/api/get_something');
 
 不管採用了以上兩種方式中的哪一種，我都**強烈建議**大家將書寫好的宣告檔案（透過給第三方函式庫發 pull request，或者直接提交到 `@types` 裡）釋出到開源社群中，享受了這麼多社群的優秀的資源，就應該在力所能及的時候給出一些回饋。只有所有人都參與進來，才能讓 ts 社群更加繁榮。
 
-npm 包的宣告檔案主要有以下幾種語法：
+npm 套件的宣告檔案主要有以下幾種語法：
 
 * [`export`](declaration-files.md#export) 匯出變數
 * [`export namespace`](declaration-files.md#export-namespace) 匯出（含有子屬性的）物件
@@ -529,7 +529,7 @@ npm 包的宣告檔案主要有以下幾種語法：
 
 #### `export`
 
-npm 包的宣告檔案與全域性變數的宣告檔案有很大區別。在 npm 包的宣告檔案中，使用 `declare` 不再會宣告一個全域性變數，而只會在當前檔案中宣告一個區域性變數。只有在宣告檔案中使用 `export` 匯出，然後在使用方 `import` 匯入後，才會應用到這些型別宣告。
+npm 套件的宣告檔案與全域變數的宣告檔案有很大區別。在 npm 套件的宣告檔案中，使用 `declare` 不再會宣告一個全域變數，而只會在當前檔案中宣告一個區域性變數。只有在宣告檔案中使用 `export` 匯出，然後在使用方 `import` 匯入後，才會應用到這些型別宣告。
 
 `export` 的語法與普通的 ts 中的語法類似，區別僅在於宣告檔案中禁止定義具體的實現[15](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/15-export)：
 
@@ -597,7 +597,7 @@ interface Options {
 export { name, getName, Animal, Directions, Options };
 ```
 
-注意，與全域性變數的宣告檔案類似，`interface` 前是不需要 `declare` 的。
+注意，與全域變數的宣告檔案類似，`interface` 前是不需要 `declare` 的。
 
 #### `export namespace`
 
@@ -746,11 +746,11 @@ declare namespace foo {
 
 ### UMD 函式庫
 
-既可以透過 `<script>` 標籤引入，又可以透過 `import` 匯入的函式庫，稱為 UMD 函式庫。相比於 npm 包的型別宣告檔案，我們需要額外宣告一個全域性變數，為了實現這種方式，ts 提供了一個新語法 `export as namespace`。
+既可以透過 `<script>` 標籤引入，又可以透過 `import` 匯入的函式庫，稱為 UMD 函式庫。相比於 npm 套件的型別宣告檔案，我們需要額外宣告一個全域變數，為了實現這種方式，ts 提供了一個新語法 `export as namespace`。
 
 #### `export as namespace`
 
-一般使用 `export as namespace` 時，都是先有了 npm 包的宣告檔案，再基於它新增一條 `export as namespace` 語句，即可將宣告好的一個變數宣告為全域性變數，舉例如下[22](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/22-export-as-namespace)：
+一般使用 `export as namespace` 時，都是先有了 npm 套件的宣告檔案，再基於它新增一條 `export as namespace` 語句，即可將宣告好的一個變數宣告為全域變數，舉例如下[22](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/22-export-as-namespace)：
 
 ```typescript
 // types/foo/index.d.ts
@@ -778,9 +778,9 @@ declare namespace foo {
 }
 ```
 
-### 直接擴充套件全域性變數
+### 直接擴充套件全域變數
 
-有的第三方函式庫擴充套件了一個全域性變數，可是此全域性變數的型別卻沒有相應的更新過來，就會導致 ts 編譯錯誤，此時就需要擴充套件全域性變數的型別。比如擴充套件 `String` 型別[23](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/23-merge-global-interface)：
+有的第三方函式庫擴充套件了一個全域變數，可是此全域變數的型別卻沒有相應的更新過來，就會導致 ts 編譯錯誤，此時就需要擴充套件全域變數的型別。比如擴充套件 `String` 型別[23](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/23-merge-global-interface)：
 
 ```typescript
 interface String {
@@ -816,13 +816,13 @@ jQuery.foo({
 });
 ```
 
-### 在 npm 包或 UMD 函式庫中擴充套件全域性變數
+### 在 npm 套件或 UMD 函式庫中擴充套件全域變數
 
-如之前所說，對於一個 npm 包或者 UMD 函式庫的宣告檔案，只有 `export` 匯出的型別宣告才能被匯入。所以對於 npm 包或 UMD 函式庫，如果匯入此函式庫之後會擴充套件全域性變數，則需要使用另一種語法在宣告檔案中擴充套件全域性變數的型別，那就是 `declare global`。
+如之前所說，對於一個 npm 套件或者 UMD 函式庫的宣告檔案，只有 `export` 匯出的型別宣告才能被匯入。所以對於 npm 套件或 UMD 函式庫，如果匯入此函式庫之後會擴充套件全域變數，則需要使用另一種語法在宣告檔案中擴充套件全域變數的型別，那就是 `declare global`。
 
 #### `declare global`
 
-使用 `declare global` 可以在 npm 包或者 UMD 函式庫的宣告檔案中擴充套件全域性變數的型別[25](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/25-declare-global)：
+使用 `declare global` 可以在 npm 套件或者 UMD 函式庫的宣告檔案中擴充套件全域變數的型別[25](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/25-declare-global)：
 
 ```typescript
 // types/foo/index.d.ts
@@ -842,7 +842,7 @@ export {};
 'bar'.prependHello();
 ```
 
-注意即使此宣告檔案不需要匯出任何東西，仍然需要匯出一個空物件，用來告訴編譯器這是一個模組的宣告檔案，而不是一個全域性變數的宣告檔案。
+注意即使此宣告檔案不需要匯出任何東西，仍然需要匯出一個空物件，用來告訴編譯器這是一個模組的宣告檔案，而不是一個全域變數的宣告檔案。
 
 ### 模組外掛
 
@@ -921,12 +921,12 @@ declare module 'moment' {
 
 類似於宣告檔案中的 `import`，它可以用來匯入另一個宣告檔案。與 `import` 的區別是，當且僅當在以下幾個場景下，我們才需要使用三斜線指令替代 `import`：
 
-* 當我們在**書寫**一個全域性變數的宣告檔案時
-* 當我們需要**依賴**一個全域性變數的宣告檔案時
+* 當我們在**書寫**一個全域變數的宣告檔案時
+* 當我們需要**依賴**一個全域變數的宣告檔案時
 
-**書寫一個全域性變數的宣告檔案**
+**書寫一個全域變數的宣告檔案**
 
-這些場景聽上去很拗口，但實際上很好理解——在全域性變數的宣告檔案中，是不允許出現 `import`, `export` 關鍵字的。一旦出現了，那麼他就會被視為一個 npm 包或 UMD 函式庫，就不再是全域性變數的宣告檔案了。故當我們在書寫一個全域性變數的宣告檔案時，如果需要參考另一個函式庫的型別，那麼就必須用三斜線指令了[28](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/28-triple-slash-directives)：
+這些場景聽上去很拗口，但實際上很好理解——在全域變數的宣告檔案中，是不允許出現 `import`, `export` 關鍵字的。一旦出現了，那麼他就會被視為一個 npm 套件或 UMD 函式庫，就不再是全域變數的宣告檔案了。故當我們在書寫一個全域變數的宣告檔案時，如果需要參考另一個函式庫的型別，那麼就必須用三斜線指令了[28](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/28-triple-slash-directives)：
 
 ```typescript
 // types/jquery-plugin/index.d.ts
@@ -946,9 +946,9 @@ foo({});
 
 注意，三斜線指令必須放在檔案的最頂端，三斜線指令的前面只允許出現單行或多行註釋。
 
-**依賴一個全域性變數的宣告檔案**
+**依賴一個全域變數的宣告檔案**
 
-在另一個場景下，當我們需要依賴一個全域性變數的宣告檔案時，由於全域性變數不支援透過 `import` 匯入，當然也就必須使用三斜線指令來引入了[29](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/29-triple-slash-directives-global)：
+在另一個場景下，當我們需要依賴一個全域變數的宣告檔案時，由於全域變數不支援透過 `import` 匯入，當然也就必須使用三斜線指令來引入了[29](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/29-triple-slash-directives-global)：
 
 ```typescript
 // types/node-plugin/index.d.ts
@@ -966,15 +966,15 @@ import { foo } from 'node-plugin';
 foo(global.process);
 ```
 
-在上面的例子中，我們透過三斜線指引入了 `node` 的型別，然後在宣告檔案中使用了 `NodeJS.Process` 這個型別。最後在使用到 `foo` 的時候，傳入了 `node` 中的全域性變數 `process`。
+在上面的例子中，我們透過三斜線指引入了 `node` 的型別，然後在宣告檔案中使用了 `NodeJS.Process` 這個型別。最後在使用到 `foo` 的時候，傳入了 `node` 中的全域變數 `process`。
 
-由於引入的 `node` 中的型別都是全域性變數的型別，它們是沒有辦法透過 `import` 來匯入的，所以這種場景下也只能透過三斜線指令來引入了。
+由於引入的 `node` 中的型別都是全域變數的型別，它們是沒有辦法透過 `import` 來匯入的，所以這種場景下也只能透過三斜線指令來引入了。
 
-以上兩種使用場景下，都是由於需要書寫或需要依賴全域性變數的宣告檔案，所以必須使用三斜線指令。在其他的一些不是必要使用三斜線指令的情況下，就都需要使用 `import` 來匯入。
+以上兩種使用場景下，都是由於需要書寫或需要依賴全域變數的宣告檔案，所以必須使用三斜線指令。在其他的一些不是必要使用三斜線指令的情況下，就都需要使用 `import` 來匯入。
 
 **拆分宣告檔案**
 
-當我們的全域性變數的宣告檔案太大時，可以透過拆分為多個檔案，然後在一個入口檔案中將它們一一引入，來提高程式碼的可維護性。比如 `jQuery` 的宣告檔案就是這樣的：
+當我們的全域變數的宣告檔案太大時，可以透過拆分為多個檔案，然後在一個入口檔案中將它們一一引入，來提高程式碼的可維護性。比如 `jQuery` 的宣告檔案就是這樣的：
 
 ```typescript
 // node_modules/@types/jquery/index.d.ts
