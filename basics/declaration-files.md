@@ -6,24 +6,24 @@
 
 由於本章涉及大量新語法，故在本章開頭列出新語法的索引，方便大家在使用這些新語法時能快速查詢到對應的講解：
 
-* [`declare var`](declaration-files.md#declare-var) 宣告全域變數
-* [`declare function`](declaration-files.md#declare-function) 宣告全域方法
-* [`declare class`](declaration-files.md#declare-class) 宣告全域類別
-* [`declare enum`](declaration-files.md#declare-enum) 宣告全域列舉型別
-* [`declare namespace`](declaration-files.md#declare-namespace) 宣告（含有子屬性的）全域物件
-* [`interface` 和 `type`](declaration-files.md#interface-he-type) 宣告全域型別
+* [`declare var`](declaration-files.md#declare-var) 宣告全域性變數
+* [`declare function`](declaration-files.md#declare-function) 宣告全域性方法
+* [`declare class`](declaration-files.md#declare-class) 宣告全域性類別
+* [`declare enum`](declaration-files.md#declare-enum) 宣告全域性列舉型別
+* [`declare namespace`](declaration-files.md#declare-namespace) 宣告（含有子屬性的）全域性物件
+* [`interface` 和 `type`](declaration-files.md#interface-he-type) 宣告全域性型別
 * [`export`](declaration-files.md#export) 匯出變數
 * [`export namespace`](declaration-files.md#export-namespace) 匯出（含有子屬性的）物件
 * [`export default`](declaration-files.md#export-default) ES6 預設匯出
 * [`export =`](declaration-files.md#export-1) commonjs 匯出模組
-* [`export as namespace`](declaration-files.md#export-as-namespace) UMD 函式庫宣告全域變數
-* [`declare global`](declaration-files.md#declare-global) 擴充套件全域變數
+* [`export as namespace`](declaration-files.md#export-as-namespace) UMD 函式庫宣告全域性變數
+* [`declare global`](declaration-files.md#declare-global) 擴充套件全域性變數
 * [`declare module`](declaration-files.md#declare-module) 擴充套件模組
 * [`/// <reference />`](declaration-files.md#san-xie-xian-zhi-ling) 三斜線指令
 
 ## 什麼是宣告語句
 
-假如我們想使用第三方函式庫 jQuery，一種常見的方式是在 html 中透過 `<script>` 標籤引入 jQuery，然後就可以使用全域變數 `$` 或 `jQuery` 了。
+假如我們想使用第三方函式庫 jQuery，一種常見的方式是在 html 中透過 `<script>` 標籤引入 jQuery，然後就可以使用全域性變數 `$` 或 `jQuery` 了。
 
 我們通常這樣獲取一個 `id` 是 `foo` 的元素：
 
@@ -48,7 +48,7 @@ declare var jQuery: (selector: string) => any;
 jQuery('#foo');
 ```
 
-上例中，`declare var` 並沒有真的定義一個變數，只是定義了全域變數 `jQuery` 的型別，僅僅會用於編譯時的檢查，在編譯結果中會被刪除。它編譯結果是：
+上例中，`declare var` 並沒有真的定義一個變數，只是定義了全域性變數 `jQuery` 的型別，僅僅會用於編譯時的檢查，在編譯結果中會被刪除。它編譯結果是：
 
 ```javascript
 jQuery('#foo');
@@ -86,7 +86,7 @@ jQuery('#foo');
 
 假如仍然無法解析，那麼可以檢查下 `tsconfig.json` 中的 `files`、`include` 和 `exclude` 配置，確保其包含了 `jQuery.d.ts` 檔案。
 
-這裡只演示了全域變數這種模式的宣告檔案，假如是透過模組匯入的方式使用第三方函式庫的話，那麼引入宣告檔案又是另一種方式了，將會在後面詳細介紹。
+這裡只演示了全域性變數這種模式的宣告檔案，假如是透過模組匯入的方式使用第三方函式庫的話，那麼引入宣告檔案又是另一種方式了，將會在後面詳細介紹。
 
 ### 第三方宣告檔案
 
@@ -133,7 +133,7 @@ npm install @types/jquery --save-dev
 
 如果沒有生效，可以檢查下 `tsconfig.json` 中的 `files`、`include` 和 `exclude` 配置，確保其包含了 `jQuery.d.ts` 檔案。
 
-全域變數的宣告檔案主要有以下幾種語法：
+全域性變數的宣告檔案主要有以下幾種語法：
 
 * [`declare var`](declaration-files.md#declare-var) 宣告全域變數
 * [`declare function`](declaration-files.md#declare-function) 宣告全域方法
@@ -190,7 +190,7 @@ declare const jQuery = function(selector) {
 
 #### `declare function`
 
-`declare function` 用來定義全域函式的型別。jQuery 其實就是一個函式，所以也可以用 `function` 來定義：
+`declare function` 用來定義全域性函式的型別。jQuery 其實就是一個函式，所以也可以用 `function` 來定義：
 
 ```typescript
 // src/jQuery.d.ts
@@ -392,7 +392,7 @@ jQuery.fn.extend({
 
 #### `interface` 和 `type`
 
-除了全域變數之外，可能有一些型別我們也希望能暴露出來。在型別宣告檔案中，我們可以直接使用 `interface` 或 `type` 來宣告一個全域的介面或型別[12](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/12-interface)：
+除了全域變數之外，可能有一些型別我們也希望能暴露出來。在型別宣告檔案中，我們可以直接使用 `interface` 或 `type` 來宣告一個全域性的介面或型別[12](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/12-interface)：
 
 ```typescript
 // src/jQuery.d.ts
@@ -424,7 +424,7 @@ jQuery.ajax('/api/post_something', settings);
 
 **防止命名衝突**
 
-暴露在最外層的 `interface` 或 `type` 會作為全域型別作用於整個專案中，我們應該儘可能的減少全域變數或全域型別的數量。故最好將他們放到 `namespace` 下[13](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/13-avoid-name-conflict)：
+暴露在最外層的 `interface` 或 `type` 會作為全域性型別作用於整個專案中，我們應該儘可能的減少全域變數或全域性型別的數量。故最好將他們放到 `namespace` 下[13](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/13-avoid-name-conflict)：
 
 ```typescript
 // src/jQuery.d.ts
