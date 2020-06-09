@@ -46,7 +46,7 @@ function getLength(something: string | number): number {
 //   Property 'length' does not exist on type 'number'.
 ```
 
-上例中，獲取 `something.length` 的時候會報錯。
+上例中，存取 `something.length` 的時候會報錯。
 
 此時可以使用型別斷言，將 `something` 斷言成 `string`：
 
