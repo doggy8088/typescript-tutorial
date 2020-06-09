@@ -4,7 +4,7 @@
 
 ## 簡單的例子
 
-```ts
+```typescript
 type Name = string;
 type NameResolver = () => string;
 type NameOrResolver = Name | NameResolver;
@@ -23,9 +23,7 @@ function getName(n: NameOrResolver): Name {
 
 ## 參考
 
-- [Advanced Types # Type Aliases](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#型別別名)）
+* [Advanced Types \# Type Aliases](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#型別別名)）
+* [上一章：進階](./)
+* [下一章：字串字面量型別](string-literal-types.md)
 
----
-
-- [上一章：進階](../advanced/README.md)
-- [下一章：字串字面量型別](string-literal-types.md)

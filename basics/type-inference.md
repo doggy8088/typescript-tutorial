@@ -6,7 +6,7 @@
 
 以下程式碼雖然沒有指定型別，但是會在編譯的時候報錯：
 
-```ts
+```typescript
 let myFavoriteNumber = 'seven';
 myFavoriteNumber = 7;
 
@@ -15,7 +15,7 @@ myFavoriteNumber = 7;
 
 事實上，它等價於：
 
-```ts
+```typescript
 let myFavoriteNumber: string = 'seven';
 myFavoriteNumber = 7;
 
@@ -26,7 +26,7 @@ TypeScript 會在沒有明確的指定型別的時候推測出一個型別，這
 
 **如果定義的時候沒有賦值，不管之後有沒有賦值，都會被推斷成 `any` 型別而完全不被型別檢查**：
 
-```ts
+```typescript
 let myFavoriteNumber;
 myFavoriteNumber = 'seven';
 myFavoriteNumber = 7;
@@ -34,9 +34,7 @@ myFavoriteNumber = 7;
 
 ## 參考
 
-- [Type Inference](http://www.typescriptlang.org/docs/handbook/type-inference.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Type%20Inference.html)）
+* [Type Inference](http://www.typescriptlang.org/docs/handbook/type-inference.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Type%20Inference.html)）
+* [上一章：任意值](any.md)
+* [下一章：聯合型別](union-types.md)
 
----
-
-- [上一章：任意值](any.md)
-- [下一章：聯合型別](union-types.md)

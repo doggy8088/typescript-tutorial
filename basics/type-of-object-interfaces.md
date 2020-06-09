@@ -10,7 +10,7 @@ TypeScript 中的介面是一個非常靈活的概念，除了可用於[對類�
 
 ## 簡單的例子
 
-```ts
+```typescript
 interface Person {
     name: string;
     age: number;
@@ -28,7 +28,7 @@ let tom: Person = {
 
 定義的變數比介面少了一些屬性是不允許的：
 
-```ts
+```typescript
 interface Person {
     name: string;
     age: number;
@@ -44,7 +44,7 @@ let tom: Person = {
 
 多一些屬性也是不允許的：
 
-```ts
+```typescript
 interface Person {
     name: string;
     age: number;
@@ -66,7 +66,7 @@ let tom: Person = {
 
 有時我們希望不要完全匹配一個形狀，那麼可以用可選屬性：
 
-```ts
+```typescript
 interface Person {
     name: string;
     age?: number;
@@ -77,7 +77,7 @@ let tom: Person = {
 };
 ```
 
-```ts
+```typescript
 interface Person {
     name: string;
     age?: number;
@@ -93,7 +93,7 @@ let tom: Person = {
 
 這時**仍然不允許新增未定義的屬性**：
 
-```ts
+```typescript
 interface Person {
     name: string;
     age?: number;
@@ -113,7 +113,7 @@ let tom: Person = {
 
 有時候我們希望一個介面允許有任意的屬性，可以使用如下方式：
 
-```ts
+```typescript
 interface Person {
     name: string;
     age?: number;
@@ -130,7 +130,7 @@ let tom: Person = {
 
 需要注意的是，**一旦定義了任意屬性，那麼確定屬性和可選屬性的型別都必須是它的型別的子集**：
 
-```ts
+```typescript
 interface Person {
     name: string;
     age?: number;
@@ -158,7 +158,7 @@ let tom: Person = {
 
 有時候我們希望物件中的一些欄位只能在建立的時候被賦值，那麼可以用 `readonly` 定義只讀屬性：
 
-```ts
+```typescript
 interface Person {
     readonly id: number;
     name: string;
@@ -181,7 +181,7 @@ tom.id = 9527;
 
 **注意，只讀的約束存在於第一次給物件賦值的時候，而不是第一次給只讀屬性賦值的時候**：
 
-```ts
+```typescript
 interface Person {
     readonly id: number;
     name: string;
@@ -205,11 +205,9 @@ tom.id = 89757;
 
 第二處是在給 `tom.id` 賦值的時候，由於它是隻讀屬性，所以報錯了。
 
-## 參考 
+## 參考
 
-- [Interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html)）
+* [Interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html)）
+* [上一章：聯合型別](union-types.md)
+* [下一章：陣列的型別](type-of-array.md)
 
----
-
-- [上一章：聯合型別](union-types.md)
-- [下一章：陣列的型別](type-of-array.md)

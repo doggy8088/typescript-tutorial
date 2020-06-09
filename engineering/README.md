@@ -6,9 +6,7 @@
 
 那麼一項大工程應該如何開展呢？本部分的內容就會介紹 TypeScript 工程化的最佳實踐，具體內容包括：
 
-- [程式碼檢查](lint.md)
+* [程式碼檢查](lint.md)
+* [上一章：擴充套件閱讀](../advanced/further-reading.md)
+* [下一章：程式碼檢查](lint.md)
 
----
-
-- [上一章：擴充套件閱讀](../advanced/further-reading.md)
-- [下一章：程式碼檢查](lint.md)

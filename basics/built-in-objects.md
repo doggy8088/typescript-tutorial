@@ -1,6 +1,6 @@
 # 內建物件
 
-JavaScript 中有很多[內建物件][]，它們可以直接在 TypeScript 中當做定義好了的型別。
+JavaScript 中有很多[內建物件](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)，它們可以直接在 TypeScript 中當做定義好了的型別。
 
 內建物件是指根據標準在全域性作用域（Global）上存在的物件。這裡的標準是指 ECMAScript 和其他環境（比如 DOM）的標準。
 
@@ -12,16 +12,16 @@ ECMAScript 標準提供的內建物件有：
 
 我們可以在 TypeScript 中將變數定義為這些型別：
 
-```ts
+```typescript
 let b: Boolean = new Boolean(1);
 let e: Error = new Error('Error occurred');
 let d: Date = new Date();
 let r: RegExp = /[a-z]/;
 ```
 
-更多的內建物件，可以檢視 [MDN 的文件][內建物件]。
+更多的內建物件，可以檢視 [MDN 的文件](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)。
 
-而他們的定義檔案，則在 [TypeScript 核心函式庫的定義檔案][]中。
+而他們的定義檔案，則在 [TypeScript 核心函式庫的定義檔案](https://github.com/Microsoft/TypeScript/tree/master/src/lib)中。
 
 ## DOM 和 BOM 的內建物件
 
@@ -31,7 +31,7 @@ DOM 和 BOM 提供的內建物件有：
 
 TypeScript 中會經常用到這些型別：
 
-```ts
+```typescript
 let body: HTMLElement = document.body;
 let allDiv: NodeList = document.querySelectorAll('div');
 document.addEventListener('click', function(e: MouseEvent) {
@@ -39,15 +39,15 @@ document.addEventListener('click', function(e: MouseEvent) {
 });
 ```
 
-它們的定義檔案同樣在 [TypeScript 核心函式庫的定義檔案][]中。
+它們的定義檔案同樣在 [TypeScript 核心函式庫的定義檔案](https://github.com/Microsoft/TypeScript/tree/master/src/lib)中。
 
 ## TypeScript 核心函式庫的定義檔案
 
-[TypeScript 核心函式庫的定義檔案][]中定義了所有瀏覽器環境需要用到的型別，並且是預置在 TypeScript 中的。
+[TypeScript 核心函式庫的定義檔案](https://github.com/Microsoft/TypeScript/tree/master/src/lib)中定義了所有瀏覽器環境需要用到的型別，並且是預置在 TypeScript 中的。
 
 當你在使用一些常用的方法的時候，TypeScript 實際上已經幫你做了很多型別判斷的工作了，比如：
 
-```ts
+```typescript
 Math.pow(10, '2');
 
 // index.ts(1,14): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
@@ -55,7 +55,7 @@ Math.pow(10, '2');
 
 上面的例子中，`Math.pow` 必須接受兩個 `number` 型別的引數。事實上 `Math.pow` 的型別定義如下：
 
-```ts
+```typescript
 interface Math {
     /**
      * Returns the value of a base expression taken to a specified power.
@@ -68,7 +68,7 @@ interface Math {
 
 再舉一個 DOM 中的例子：
 
-```ts
+```typescript
 document.addEventListener('click', function(e) {
     console.log(e.targetCurrent);
 });
@@ -78,7 +78,7 @@ document.addEventListener('click', function(e) {
 
 上面的例子中，`addEventListener` 方法是在 TypeScript 核心函式庫中定義的：
 
-```ts
+```typescript
 interface Document extends Node, GlobalEventHandlers, NodeSelector, DocumentEvent {
     addEventListener(type: string, listener: (ev: MouseEvent) => any, useCapture?: boolean): void;
 }
@@ -98,13 +98,8 @@ npm install @types/node --save-dev
 
 ## 參考
 
-- [內建物件][]
-- [TypeScript 核心函式庫的定義檔案][]
+* [內建物件](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
+* [TypeScript 核心函式庫的定義檔案](https://github.com/Microsoft/TypeScript/tree/master/src/lib)
+* [上一章：宣告檔案](declaration-files.md)
+* [下一章：進階](../advanced/)
 
-[內建物件]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
-[TypeScript 核心函式庫的定義檔案]: https://github.com/Microsoft/TypeScript/tree/master/src/lib
-
----
-
-- [上一章：宣告檔案](declaration-files.md)
-- [下一章：進階](../advanced/README.md)

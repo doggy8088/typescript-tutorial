@@ -6,7 +6,7 @@
 
 [之前學習過](../basics/type-of-function.md#過載)，我們可以使用過載定義多個函式型別：
 
-```ts
+```typescript
 function reverse(x: number): number;
 function reverse(x: string): string;
 function reverse(x: number | string): number | string {
@@ -22,7 +22,7 @@ function reverse(x: number | string): number | string {
 
 介面中的屬性在合併時會簡單的合併到一個介面中：
 
-```ts
+```typescript
 interface Alarm {
     price: number;
 }
@@ -33,7 +33,7 @@ interface Alarm {
 
 相當於：
 
-```ts
+```typescript
 interface Alarm {
     price: number;
     weight: number;
@@ -42,7 +42,7 @@ interface Alarm {
 
 注意，**合併的屬性的型別必須是唯一的**：
 
-```ts
+```typescript
 interface Alarm {
     price: number;
 }
@@ -52,7 +52,7 @@ interface Alarm {
 }
 ```
 
-```ts
+```typescript
 interface Alarm {
     price: number;
 }
@@ -66,7 +66,7 @@ interface Alarm {
 
 介面中方法的合併，與函式的合併一樣：
 
-```ts
+```typescript
 interface Alarm {
     price: number;
     alert(s: string): string;
@@ -79,7 +79,7 @@ interface Alarm {
 
 相當於：
 
-```ts
+```typescript
 interface Alarm {
     price: number;
     weight: number;
@@ -94,9 +94,7 @@ interface Alarm {
 
 ## 參考
 
-- [Declaration Merging](http://www.typescriptlang.org/docs/handbook/declaration-merging.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Declaration%20Merging.html)）
+* [Declaration Merging](http://www.typescriptlang.org/docs/handbook/declaration-merging.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Declaration%20Merging.html)）
+* [上一章：泛型](generics.md)
+* [下一章：擴充套件閱讀](further-reading.md)
 
----
-
-- [上一章：泛型](generics.md)
-- [下一章：擴充套件閱讀](further-reading.md)

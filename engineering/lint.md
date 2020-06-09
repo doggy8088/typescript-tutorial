@@ -1,14 +1,14 @@
 # 程式碼檢查
 
-目前 TypeScript 的程式碼檢查主要有兩個方案：使用 [TSLint][] 或使用 [ESLint][] + [`typescript-eslint-parser`][]。
+目前 TypeScript 的程式碼檢查主要有兩個方案：使用 [TSLint](https://palantir.github.io/tslint/) 或使用 [ESLint](https://eslint.org/) + [`typescript-eslint-parser`](https://github.com/eslint/typescript-eslint-parser)。
 
 ## 什麼是程式碼檢查
 
 程式碼檢查主要是用來發現程式碼錯誤、統一程式碼風格。
 
-在 JavaScript 專案中，我們一般使用 [ESLint][] 來進行程式碼檢查。它透過外掛化的特性極大的豐富了適用範圍，搭配 [`typescript-eslint-parser`][] 之後，甚至可以用來檢查 TypeScript 程式碼。
+在 JavaScript 專案中，我們一般使用 [ESLint](https://eslint.org/) 來進行程式碼檢查。它透過外掛化的特性極大的豐富了適用範圍，搭配 [`typescript-eslint-parser`](https://github.com/eslint/typescript-eslint-parser) 之後，甚至可以用來檢查 TypeScript 程式碼。
 
-[TSLint][] 與 [ESLint][] 類似，不過除了能檢查常規的 js 程式碼風格之外，TSLint 還能夠透過 TypeScript 的語法解析，利用型別系統做一些 ESLint 做不到的檢查。
+[TSLint](https://palantir.github.io/tslint/) 與 [ESLint](https://eslint.org/) 類似，不過除了能檢查常規的 js 程式碼風格之外，TSLint 還能夠透過 TypeScript 的語法解析，利用型別系統做一些 ESLint 做不到的檢查。
 
 ## 為什麼需要程式碼檢查
 
@@ -16,16 +16,16 @@
 
 因為 TypeScript 關注的重心是型別的匹配，而不是程式碼風格。當團隊的人員越來越多時，同樣的邏輯不同的人寫出來可能會有很大的區別：
 
-- 縮排應該是四個空格還是兩個空格？
-- 是否應該禁用 `var`？
-- 介面名是否應該以 `I` 開頭？
-- 是否應該強制使用 `===` 而不是 `==`？
+* 縮排應該是四個空格還是兩個空格？
+* 是否應該禁用 `var`？
+* 介面名是否應該以 `I` 開頭？
+* 是否應該強制使用 `===` 而不是 `==`？
 
 這些問題 TypeScript 不會關注，但是卻影響到多人協作開發時的效率、程式碼的可理解性以及可維護性。
 
 下面來看一個具體的例子：
 
-```ts
+```typescript
 let myName = 'Tom';
 
 console.log(`My name is ${myNane}`);
@@ -56,7 +56,7 @@ console.log(`My name is ${myName}`)
 ```
 
 | 存在的問題 | `tsc` 是否報錯 | `eslint` 是否報錯 | `tslint` 是否報錯 |
-| --------- | ------------- | ---------------- | ----------------- |
+| :--- | :--- | :--- | :--- |
 | `myName` 被誤寫成了 `myNane` | ✅ | ✅ | ❌ |
 | `toString` 被誤寫成了 `toStrng` | ✅️ | ❌ | ❌ |
 | 少了一個分號 | ❌ | ✅ | ✅ |
@@ -73,7 +73,7 @@ console.log(`My name is ${myName}`)
 
 下圖表示了 `tsc`, `eslint` 和 `tslint` 能覆蓋的檢查：
 
-![TypeScript vs ESLint vs TSLint](../assets/typescript-eslint-tslint.png)
+![TypeScript vs ESLint vs TSLint](../.gitbook/assets/typescript-eslint-tslint.png)
 
 上圖中，`tsc`, `eslint` 和 `tslint` 之間互相都有重疊的部分，也有各自獨立的部分。
 
@@ -96,7 +96,7 @@ ESLint 的優點：
 
 下面來看一些具體的例子：
 
-```ts
+```typescript
 let foo: string = 1 + '1';
 
 // tslint 報錯資訊：
@@ -108,7 +108,7 @@ let foo: string = 1 + '1';
 
 ESLint 無法知道加號兩邊的型別，所以對這種規則無能為力。
 
-```ts
+```typescript
 function foo(a, b, c, d, e, f, g, h) {
     doSomething();
 }
@@ -127,7 +127,7 @@ ESLint 可以檢測出來以上程式碼的函式引數超過了 7 個（需要�
 
 那麼到底該使用哪種程式碼檢測工具呢？經過一些實踐，我建議可以按照以下流程決定：
 
-![流程圖：選擇 ESLint 還是 TSLint](../assets/eslint-or-tslint-process.png)
+![&#x6D41;&#x7A0B;&#x5716;&#xFF1A;&#x9078;&#x64C7; ESLint &#x9084;&#x662F; TSLint](../.gitbook/assets/eslint-or-tslint-process.png)
 
 ## 在 TypeScript 中使用 ESLint
 
@@ -159,7 +159,7 @@ ESLint 需要一個配置檔案來決定對哪些規則進行檢查，配置檔�
 
 我們在專案的根目錄下建立一個 `.eslintrc.js`，內容如下：
 
-```js
+```javascript
 module.exports = {
     parser: 'typescript-eslint-parser',
     plugins: [
@@ -188,9 +188,9 @@ module.exports = {
 
 關閉、警告和報錯的含義如下：
 
-- 關閉：禁用此規則
-- 警告：程式碼檢查時輸出錯誤資訊，但是不會影響到 exit code
-- 報錯：發現錯誤時，不僅會輸出錯誤資訊，而且 exit code 將被設為 1（一般 exit code 不為 0 則表示執行出現錯誤）
+* 關閉：禁用此規則
+* 警告：程式碼檢查時輸出錯誤資訊，但是不會影響到 exit code
+* 報錯：發現錯誤時，不僅會輸出錯誤資訊，而且 exit code 將被設為 1（一般 exit code 不為 0 則表示執行出現錯誤）
 
 ### 檢查一個 ts 檔案
 
@@ -198,7 +198,7 @@ module.exports = {
 
 建立一個新檔案 `index.ts`，將以下內容複製進去：
 
-```ts
+```typescript
 interface person {
     name: string;
     age: number;
@@ -236,7 +236,7 @@ if (tom.age == 25) {
 
 可是每次執行這麼長一段指令碼頗有不便，我們可以透過在 `package.json` 中新增一個 `script` 來建立一個 npm script 來簡化這個步驟：
 
-```json
+```javascript
 {
     "scripts": {
         "eslint": "eslint index.ts"
@@ -250,7 +250,7 @@ if (tom.age == 25) {
 
 我們的專案原始檔一般是放在 `src` 目錄下，所以需要將 `package.json` 中的 `eslint` 指令碼改為對一個目錄進行檢查。由於 `eslint` 預設不會檢查 `.ts` 字尾的檔案，所以需要加上引數 `--ext .ts`：
 
-```json
+```javascript
 {
     "scripts": {
         "eslint": "eslint src --ext .ts"
@@ -266,9 +266,9 @@ if (tom.age == 25) {
 
 要在 VSCode 中整合 ESLint 檢查，我們需要先安裝 ESLint 外掛，點選「擴充套件」按鈕，搜尋 ESLint，然後安裝即可。
 
-VSCode 中的 ESLint 外掛預設是不會檢查 `.ts` 字尾的，需要在「檔案 => 首選項 => 設定」中，新增以下配置：
+VSCode 中的 ESLint 外掛預設是不會檢查 `.ts` 字尾的，需要在「檔案 =&gt; 首選項 =&gt; 設定」中，新增以下配置：
 
-```json
+```javascript
 {
     "eslint.validate": [
         "javascript",
@@ -280,7 +280,7 @@ VSCode 中的 ESLint 外掛預設是不會檢查 `.ts` 字尾的，需要在「�
 
 這時再開啟一個 `.ts` 檔案，將滑鼠移到紅色提示處，即可看到這樣的報錯資訊了：
 
-![VSCode ESLint 錯誤資訊](../assets/vscode-eslint-error.png)
+![VSCode ESLint &#x932F;&#x8AA4;&#x8CC7;&#x8A0A;](../.gitbook/assets/vscode-eslint-error.png)
 
 ### 使用 AlloyTeam 的 ESLint 配置
 
@@ -296,7 +296,7 @@ npm install --save-dev eslint typescript typescript-eslint-parser eslint-plugin-
 
 在你的專案根目錄下建立 `.eslintrc.js`，並將以下內容複製到檔案中：
 
-```js
+```javascript
 module.exports = {
     extends: [
         'eslint-config-alloy/typescript',
@@ -336,7 +336,7 @@ npm install --save-dev eslint-plugin-react
 
 #### package.json 中的 scripts.eslint 新增 `.tsx` 字尾
 
-```json
+```javascript
 {
     "scripts": {
         "eslint": "eslint src --ext .ts,.tsx"
@@ -346,7 +346,7 @@ npm install --save-dev eslint-plugin-react
 
 #### VSCode 的配置中新增 typescriptreact 檢查
 
-```json
+```javascript
 {
     "eslint.validate": [
         "javascript",
@@ -371,7 +371,7 @@ npm install --save-dev tslint
 
 建立配置檔案 `tslint.json`
 
-```json
+```javascript
 {
     "rules": {
         // 必須使用 === 或 !==，禁止使用 == 或 !=，與 null 比較時除外
@@ -390,7 +390,7 @@ npm install --save-dev tslint
 
 為 `package.json` 新增 `tslint` 指令碼
 
-```json
+```javascript
 {
     "scripts": {
         "tslint": "tslint --project . src/**/*.ts src/**/*.tsx",
@@ -416,7 +416,7 @@ npm install --save-dev tslint-config-alloy
 
 安裝之後修改 `tslint.json` 即可
 
-```json
+```javascript
 {
     "extends": "tslint-config-alloy",
     "rules": {
@@ -455,14 +455,14 @@ TSLint 預設支援對 tsx 檔案的檢查，不需要做額外配置。
 
 ### VSCode 沒有顯示出 ESLint 的報錯
 
-1. 檢查「檔案 => 首選項 => 設定」中有沒有配置正確
+1. 檢查「檔案 =&gt; 首選項 =&gt; 設定」中有沒有配置正確
 2. 檢查必要的 npm 包有沒有安裝
 3. 檢查 `.eslintrc.js` 有沒有配置
 4. 檢查檔案是不是在 `.eslintignore` 中
 
-如果以上步驟都不奏效，則可以在「檔案 => 首選項 => 設定」中配置 `"eslint.trace.server": "messages"`，按 `Ctrl`+`Shift`+`U` 開啟輸出面板，然後選擇 ESLint 輸出，檢視具體錯誤。
+如果以上步驟都不奏效，則可以在「檔案 =&gt; 首選項 =&gt; 設定」中配置 `"eslint.trace.server": "messages"`，按 `Ctrl`+`Shift`+`U` 開啟輸出面板，然後選擇 ESLint 輸出，檢視具體錯誤。
 
-![VSCode 的 ESLint 輸出](../assets/vscode-output-eslint.png)
+![VSCode &#x7684; ESLint &#x8F38;&#x51FA;](../.gitbook/assets/vscode-output-eslint.png)
 
 ### 為什麼 ESLint 無法檢查出使用了未定義的變數（`no-undef` 規則為什麼被關閉了）？
 
@@ -474,7 +474,7 @@ TSLint 預設支援對 tsx 檔案的檢查，不需要做額外配置。
 
 因為無法支援這種變數定義的檢查。建議在 `tsconfig.json` 中新增以下配置，使 `tsc` 編譯過程能夠檢查出定義了未使用的變數：
 
-```json
+```javascript
 {
     "compilerOptions": {
         "noUnusedLocals": true,
@@ -485,7 +485,7 @@ TSLint 預設支援對 tsx 檔案的檢查，不需要做額外配置。
 
 ### 啟用了 noUnusedParameters 之後，只使用了第二個引數，但是又必須傳入第一個引數，這就會報錯了
 
-第一個引數以下劃線開頭即可，參考 https://github.com/Microsoft/TypeScript/issues/9458
+第一個引數以下劃線開頭即可，參考 [https://github.com/Microsoft/TypeScript/issues/9458](https://github.com/Microsoft/TypeScript/issues/9458)
 
 ### 為什麼有的錯誤 TSLint 可以檢查出來，vscode 裡的 TSLint 卻檢查不出來？
 
@@ -493,11 +493,6 @@ TSLint 預設支援對 tsx 檔案的檢查，不需要做額外配置。
 
 不僅 `no-unused-variables` 失效了，[TSLint rules](https://palantir.github.io/tslint/rules/) 裡面所有標有 `Requires Type Info` 的規則都失效了。
 
-[TSLint]: https://palantir.github.io/tslint/
-[ESLint]: https://eslint.org/
-[`typescript-eslint-parser`]: https://github.com/eslint/typescript-eslint-parser
+* [上一章：工程](./)
+* [下一章：感謝](../thanks.md)
 
----
-
-- [上一章：工程](README.md)
-- [下一章：感謝](../thanks/README.md)

@@ -4,13 +4,13 @@
 
 ## 簡單的例子
 
-```ts
+```typescript
 let myFavoriteNumber: string | number;
 myFavoriteNumber = 'seven';
 myFavoriteNumber = 7;
 ```
 
-```ts
+```typescript
 let myFavoriteNumber: string | number;
 myFavoriteNumber = true;
 
@@ -26,7 +26,7 @@ myFavoriteNumber = true;
 
 當 TypeScript 不確定一個聯合型別的變數到底是哪個型別的時候，我們**只能訪問此聯合型別的所有型別裡共有的屬性或方法**：
 
-```ts
+```typescript
 function getLength(something: string | number): number {
     return something.length;
 }
@@ -39,7 +39,7 @@ function getLength(something: string | number): number {
 
 訪問 `string` 和 `number` 的共有屬性是沒問題的：
 
-```ts
+```typescript
 function getString(something: string | number): string {
     return something.toString();
 }
@@ -47,7 +47,7 @@ function getString(something: string | number): string {
 
 聯合型別的變數在被賦值的時候，會根據型別推論的規則推斷出一個型別：
 
-```ts
+```typescript
 let myFavoriteNumber: string | number;
 myFavoriteNumber = 'seven';
 console.log(myFavoriteNumber.length); // 5
@@ -63,9 +63,7 @@ console.log(myFavoriteNumber.length); // 編譯時報錯
 
 ## 參考
 
-- [Advanced Types # Union Types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#聯合型別)）
+* [Advanced Types \# Union Types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#聯合型別)）
+* [上一章：型別推論](type-inference.md)
+* [下一章：物件的型別——介面](type-of-object-interfaces.md)
 
----
-
-- [上一章：型別推論](type-inference.md)
-- [下一章：物件的型別——介面](type-of-object-interfaces.md)

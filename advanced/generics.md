@@ -6,7 +6,7 @@
 
 首先，我們來實現一個函式 `createArray`，它可以建立一個指定長度的陣列，同時將每一項都填充一個預設值：
 
-```ts
+```typescript
 function createArray(length: number, value: any): Array<any> {
     let result = [];
     for (let i = 0; i < length; i++) {
@@ -26,9 +26,9 @@ createArray(3, 'x'); // ['x', 'x', 'x']
 
 這時候，泛型就派上用場了：
 
-```ts
+```typescript
 function createArray<T>(length: number, value: T): Array<T> {
-    let result: T[] = [];
+    let result: T[] = [];
     for (let i = 0; i < length; i++) {
         result[i] = value;
     }
@@ -42,7 +42,7 @@ createArray<string>(3, 'x'); // ['x', 'x', 'x']
 
 接著在呼叫的時候，可以指定它具體的型別為 `string`。當然，也可以不手動指定，而讓型別推論自動推算出來：
 
-```ts
+```typescript
 function createArray<T>(length: number, value: T): Array<T> {
     let result: T[] = [];
     for (let i = 0; i < length; i++) {
@@ -58,7 +58,7 @@ createArray(3, 'x'); // ['x', 'x', 'x']
 
 定義泛型的時候，可以一次定義多個型別引數：
 
-```ts
+```typescript
 function swap<T, U>(tuple: [T, U]): [U, T] {
     return [tuple[1], tuple[0]];
 }
@@ -72,7 +72,7 @@ swap([7, 'seven']); // ['seven', 7]
 
 在函式內部使用泛型變數的時候，由於事先不知道它是哪種型別，所以不能隨意的操作它的屬性或方法：
 
-```ts
+```typescript
 function loggingIdentity<T>(arg: T): T {
     console.log(arg.length);
     return arg;
@@ -85,7 +85,7 @@ function loggingIdentity<T>(arg: T): T {
 
 這時，我們可以對泛型進行約束，只允許這個函式傳入那些包含 `length` 屬性的變數。這就是泛型約束：
 
-```ts
+```typescript
 interface Lengthwise {
     length: number;
 }
@@ -100,7 +100,7 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
 
 此時如果呼叫 `loggingIdentity` 的時候，傳入的 `arg` 不包含 `length`，那麼在編譯階段就會報錯了：
 
-```ts
+```typescript
 interface Lengthwise {
     length: number;
 }
@@ -117,7 +117,7 @@ loggingIdentity(7);
 
 多個型別引數之間也可以互相約束：
 
-```ts
+```typescript
 function copyFields<T extends U, U>(target: T, source: U): T {
     for (let id in source) {
         target[id] = (<T>source)[id];
@@ -136,7 +136,7 @@ copyFields(x, { b: 10, d: 20 });
 
 [之前學習過](../basics/type-of-function.md#介面中函式的定義)，可以使用介面的方式來定義一個函式需要符合的形狀：
 
-```ts
+```typescript
 interface SearchFunc {
   (source: string, subString: string): boolean;
 }
@@ -149,7 +149,7 @@ mySearch = function(source: string, subString: string) {
 
 當然也可以使用含有泛型的介面來定義函式的形狀：
 
-```ts
+```typescript
 interface CreateArrayFunc {
     <T>(length: number, value: T): Array<T>;
 }
@@ -168,7 +168,7 @@ createArray(3, 'x'); // ['x', 'x', 'x']
 
 進一步，我們可以把泛型引數提前到介面名上：
 
-```ts
+```typescript
 interface CreateArrayFunc<T> {
     (length: number, value: T): Array<T>;
 }
@@ -191,7 +191,7 @@ createArray(3, 'x'); // ['x', 'x', 'x']
 
 與泛型介面類似，泛型也可以用於類別的型別定義中：
 
-```ts
+```typescript
 class GenericNumber<T> {
     zeroValue: T;
     add: (x: T, y: T) => T;
@@ -206,7 +206,7 @@ myGenericNumber.add = function(x, y) { return x + y; };
 
 在 TypeScript 2.3 以後，我們可以為泛型中的型別引數指定預設型別。當使用泛型時沒有在程式碼中直接指定型別引數，從實際值引數中也無法推測出時，這個預設型別就會起作用。
 
-```ts
+```typescript
 function createArray<T = string>(length: number, value: T): Array<T> {
     let result: T[] = [];
     for (let i = 0; i < length; i++) {
@@ -218,10 +218,8 @@ function createArray<T = string>(length: number, value: T): Array<T> {
 
 ## 參考
 
-- [Generics](http://www.typescriptlang.org/docs/handbook/generics.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/generics.html)）
-- [Generic parameter defaults](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#generic-parameter-defaults)
+* [Generics](http://www.typescriptlang.org/docs/handbook/generics.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/generics.html)）
+* [Generic parameter defaults](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#generic-parameter-defaults)
+* [上一章：類別與介面](class-and-interfaces.md)
+* [下一章：宣告合併](declaration-merging.md)
 
----
-
-- [上一章：類別與介面](class-and-interfaces.md)
-- [下一章：宣告合併](declaration-merging.md)

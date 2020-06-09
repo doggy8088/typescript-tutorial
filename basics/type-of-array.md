@@ -6,13 +6,13 @@
 
 最簡單的方法是使用「型別 + 方括號」來表示陣列：
 
-```ts
+```typescript
 let fibonacci: number[] = [1, 1, 2, 3, 5];
 ```
 
 陣列的項中**不允許**出現其他的型別：
 
-```ts
+```typescript
 let fibonacci: number[] = [1, '1', 2, 3, 5];
 
 // Type 'string' is not assignable to type 'number'.
@@ -20,7 +20,7 @@ let fibonacci: number[] = [1, '1', 2, 3, 5];
 
 陣列的一些方法的引數也會根據陣列在定義時約定的型別進行限制：
 
-```ts
+```typescript
 let fibonacci: number[] = [1, 1, 2, 3, 5];
 fibonacci.push('8');
 
@@ -33,7 +33,7 @@ fibonacci.push('8');
 
 我們也可以使用陣列泛型（Array Generic） `Array<elemType>` 來表示陣列：
 
-```ts
+```typescript
 let fibonacci: Array<number> = [1, 1, 2, 3, 5];
 ```
 
@@ -43,7 +43,7 @@ let fibonacci: Array<number> = [1, 1, 2, 3, 5];
 
 介面也可以用來描述陣列：
 
-```ts
+```typescript
 interface NumberArray {
     [index: number]: number;
 }
@@ -60,7 +60,7 @@ let fibonacci: NumberArray = [1, 1, 2, 3, 5];
 
 類別陣列（Array-like Object）不是陣列型別，比如 `arguments`：
 
-```ts
+```typescript
 function sum() {
     let args: number[] = arguments;
 }
@@ -70,7 +70,7 @@ function sum() {
 
 上例中，`arguments` 實際上是一個類別陣列，不能用普通的陣列的方式來描述，而應該用介面：
 
-```ts
+```typescript
 function sum() {
     let args: {
         [index: number]: number;
@@ -84,7 +84,7 @@ function sum() {
 
 事實上常用的類別陣列都有自己的介面定義，如 `IArguments`, `NodeList`, `HTMLCollection` 等：
 
-```ts
+```typescript
 function sum() {
     let args: IArguments = arguments;
 }
@@ -92,7 +92,7 @@ function sum() {
 
 其中 `IArguments` 是 TypeScript 中定義好了的型別，它實際上就是：
 
-```ts
+```typescript
 interface IArguments {
     [index: number]: any;
     length: number;
@@ -100,22 +100,20 @@ interface IArguments {
 }
 ```
 
-關於內建物件，可以參考[內建物件](./built-in-objects.md)一章。
+關於內建物件，可以參考[內建物件](built-in-objects.md)一章。
 
 ## any 在陣列中的應用
 
 一個比較常見的做法是，用 `any` 表示陣列中允許出現任意型別：
 
-```ts
+```typescript
 let list: any[] = ['xcatliu', 25, { website: 'http://xcatliu.com' }];
 ```
 
 ## 參考
 
-- [Basic Types # Array](http://www.typescriptlang.org/docs/handbook/basic-types.html#array)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Basic%20Types.html#陣列)）
-- [Interfaces # Indexable Types](http://www.typescriptlang.org/docs/handbook/interfaces.html#indexable-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html#陣列型別)）
+* [Basic Types \# Array](http://www.typescriptlang.org/docs/handbook/basic-types.html#array)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Basic%20Types.html#陣列)）
+* [Interfaces \# Indexable Types](http://www.typescriptlang.org/docs/handbook/interfaces.html#indexable-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html#陣列型別)）
+* [上一章：物件的型別——介面](type-of-object-interfaces.md)
+* [下一章：函式的型別](type-of-function.md)
 
----
-
-- [上一章：物件的型別——介面](type-of-object-interfaces.md)
-- [下一章：函式的型別](type-of-function.md)

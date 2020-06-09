@@ -10,7 +10,7 @@
 
 舉例來說，門是一個類別，防盜門是門的子類別。如果防盜門有一個報警器的功能，我們可以簡單的給防盜門新增一個報警方法。這時候如果有另一個類別，車，也有報警器的功能，就可以考慮把報警器提取出來，作為一個介面，防盜門和車都去實現它：
 
-```ts
+```typescript
 interface Alarm {
     alert();
 }
@@ -33,7 +33,7 @@ class Car implements Alarm {
 
 一個類別可以實現多個介面：
 
-```ts
+```typescript
 interface Alarm {
     alert();
 }
@@ -62,7 +62,7 @@ class Car implements Alarm, Light {
 
 介面與介面之間可以是繼承關係：
 
-```ts
+```typescript
 interface Alarm {
     alert();
 }
@@ -79,7 +79,7 @@ interface LightableAlarm extends Alarm {
 
 介面也可以繼承類別：
 
-```ts
+```typescript
 class Point {
     x: number;
     y: number;
@@ -96,7 +96,7 @@ let point3d: Point3d = {x: 1, y: 2, z: 3};
 
 [之前學習過](../basics/type-of-function.md#介面中函式的定義)，可以使用介面的方式來定義一個函式需要符合的形狀：
 
-```ts
+```typescript
 interface SearchFunc {
     (source: string, subString: string): boolean;
 }
@@ -109,7 +109,7 @@ mySearch = function(source: string, subString: string) {
 
 有時候，一個函式還可以有自己的屬性和方法：
 
-```ts
+```typescript
 interface Counter {
     (start: number): string;
     interval: number;
@@ -131,9 +131,7 @@ c.interval = 5.0;
 
 ## 參考
 
-- [Interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html)）
+* [Interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Interfaces.html)）
+* [上一章：類別](class.md)
+* [下一章：泛型](generics.md)
 
----
-
-- [上一章：類別](class.md)
-- [下一章：泛型](generics.md)

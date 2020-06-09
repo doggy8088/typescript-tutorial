@@ -4,13 +4,13 @@
 
 ## 語法
 
-```ts
+```typescript
 <型別>值
 ```
 
 或
 
-```ts
+```typescript
 值 as 型別
 ```
 
@@ -20,7 +20,7 @@
 
 [之前提到過](union-types.md#訪問聯合型別的屬性或方法)，當 TypeScript 不確定一個聯合型別的變數到底是哪個型別的時候，我們**只能訪問此聯合型別的所有型別裡共有的屬性或方法**：
 
-```ts
+```typescript
 function getLength(something: string | number): number {
     return something.length;
 }
@@ -31,7 +31,7 @@ function getLength(something: string | number): number {
 
 而有時候，我們確實需要在還不確定型別的時候就訪問其中一個型別的屬性或方法，比如：
 
-```ts
+```typescript
 function getLength(something: string | number): number {
     if (something.length) {
         return something.length;
@@ -50,7 +50,7 @@ function getLength(something: string | number): number {
 
 此時可以使用型別斷言，將 `something` 斷言成 `string`：
 
-```ts
+```typescript
 function getLength(something: string | number): number {
     if ((<string>something).length) {
         return (<string>something).length;
@@ -64,7 +64,7 @@ function getLength(something: string | number): number {
 
 **型別斷言不是型別轉換，斷言成一個聯合型別中不存在的型別是不允許的**：
 
-```ts
+```typescript
 function toBoolean(something: string | number): boolean {
     return <boolean>something;
 }
@@ -75,10 +75,8 @@ function toBoolean(something: string | number): boolean {
 
 ## 參考
 
-- [TypeScript Deep Dive / Type Assertion](https://basarat.gitbooks.io/typescript/content/docs/types/type-assertion.html)
-- [Advanced Types # Type Guards and Differentiating Types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#型別保護與區分類型（type-guards-and-differentiating-types）)）
+* [TypeScript Deep Dive / Type Assertion](https://basarat.gitbooks.io/typescript/content/docs/types/type-assertion.html)
+* [Advanced Types \# Type Guards and Differentiating Types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#型別保護與區分類型（type-guards-and-differentiating-types）)）
+* [上一章：函式的型別](type-of-function.md)
+* [下一章：宣告檔案](declaration-files.md)
 
----
-
-- [上一章：函式的型別](type-of-function.md)
-- [下一章：宣告檔案](declaration-files.md)

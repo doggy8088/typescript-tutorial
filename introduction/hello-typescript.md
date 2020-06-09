@@ -4,7 +4,7 @@
 
 將以下程式碼複製到 `hello.ts` 中：
 
-```ts
+```typescript
 function sayHello(person: string) {
     return 'Hello, ' + person;
 }
@@ -21,7 +21,7 @@ tsc hello.ts
 
 這時候會產生一個編譯好的檔案 `hello.js`：
 
-```js
+```javascript
 function sayHello(person) {
     return 'Hello, ' + person;
 }
@@ -39,7 +39,7 @@ TypeScript 中，使用 `:` 指定變數的型別，`:` 的前後有沒有空格
 
 下面嘗試把這段程式碼編譯一下：
 
-```ts
+```typescript
 function sayHello(person: string) {
     return 'Hello, ' + person;
 }
@@ -54,9 +54,9 @@ console.log(sayHello(user));
 index.ts(6,22): error TS2345: Argument of type 'number[]' is not assignable to parameter of type 'string'.
 ```
 
-但是還是生成了 js 檔案：
+但是還是建立了 js 檔案：
 
-```js
+```javascript
 function sayHello(person) {
     return 'Hello, ' + person;
 }
@@ -68,7 +68,6 @@ console.log(sayHello(user));
 
 如果要在報錯的時候終止 js 檔案的產生，可以在 `tsconfig.json` 中配置 `noEmitOnError` 即可。關於 `tsconfig.json`，請參閱[官方手冊](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/tsconfig.json.html)）。
 
----
+* [上一章：安裝 TypeScript](get-typescript.md)
+* [下一章：基礎](../basics/)
 
-- [上一章：安裝 TypeScript](get-typescript.md)
-- [下一章：基礎](../basics/README.md)

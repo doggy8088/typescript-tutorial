@@ -4,7 +4,7 @@
 
 ## 簡單的例子
 
-```ts
+```typescript
 type EventNames = 'click' | 'scroll' | 'mousemove';
 function handleEvent(ele: Element, event: EventNames) {
     // do something
@@ -22,9 +22,7 @@ handleEvent(document.getElementById('world'), 'dbclick'); // 報錯，event 不�
 
 ## 參考
 
-- [Advanced Types # Type Aliases](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#字串字面量型別)）
+* [Advanced Types \# Type Aliases](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/Advanced%20Types.html#字串字面量型別)）
+* [上一章：型別別名](type-aliases.md)
+* [下一章：元組](tuple.md)
 
----
-
-- [上一章：型別別名](type-aliases.md)
-- [下一章：元組](tuple.md)
