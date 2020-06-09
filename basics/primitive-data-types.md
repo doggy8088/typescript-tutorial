@@ -2,7 +2,7 @@
 
 JavaScript 的型別分為兩種：原始資料型別（[Primitive data types](https://developer.mozilla.org/en-US/docs/Glossary/Primitive)）和物件型別（Object types）。
 
-原始資料型別包括：布林值、數值、字串、`null`、`undefined` 以及 [ES6 中的新型別 `Symbol`](http://es6.ruanyifeng.com/#docs/symbol)。
+原始資料型別包括：`boolean` \(布林值\)、`number` \(數值\)、`string` \(字串\)、`null`、`undefined` 以及 [ES6 中的新型別 `Symbol`](http://es6.ruanyifeng.com/#docs/symbol)。
 
 本節主要介紹**前五種**原始資料型別在 TypeScript 中的應用。
 
