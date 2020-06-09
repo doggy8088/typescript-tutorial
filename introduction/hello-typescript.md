@@ -54,7 +54,7 @@ console.log(sayHello(user));
 index.ts(6,22): error TS2345: Argument of type 'number[]' is not assignable to parameter of type 'string'.
 ```
 
-但是還是建立了 js 檔案：
+但是還是產生了 js 檔案：
 
 ```javascript
 function sayHello(person) {
