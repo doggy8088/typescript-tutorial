@@ -17,7 +17,7 @@ let isDone: boolean = false;
 // 後面約定，未強調編譯錯誤的程式碼片段，預設為編譯透過
 ```
 
-注意，使用建構函式 `Boolean` 創造的物件**不是**布林值：
+注意：使用建構函式 `Boolean` 建立的物件**不是**布林值：
 
 ```typescript
 let createdByNewBoolean: boolean = new Boolean(1);
