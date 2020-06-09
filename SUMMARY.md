@@ -25,7 +25,7 @@
   * [類別與介面](advanced/class-and-interfaces.md)
   * [泛型](advanced/generics.md)
   * [宣告合併](advanced/declaration-merging.md)
-  * [擴充套件閱讀](advanced/further-reading.md)
+  * [延伸閱讀](advanced/further-reading.md)
 * [工程](engineering/README.md)
   * [程式碼檢查](engineering/lint.md)
 * [感謝](thanks.md)

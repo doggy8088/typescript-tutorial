@@ -1,4 +1,4 @@
-# 擴充套件閱讀
+# 延伸閱讀
 
 此處記錄了[官方手冊](http://www.typescriptlang.org/docs/handbook/basic-types.html)（[中文版](https://zhongsp.gitbooks.io/typescript-handbook/content/)）中包含，但是本書未涉及的概念。
 
