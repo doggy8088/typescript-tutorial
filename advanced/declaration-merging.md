@@ -90,7 +90,9 @@ interface Alarm {
 
 ## 類別的合併
 
-類別的合併與介面的合併規則一致。
+~~類別的合併與介面的合併規則一致。~~
+
+同名的類別會發生宣告衝突，無法直接合併。（原文的內容有誤，已發 [Issue](https://github.com/xcatliu/typescript-tutorial/issues/181) 要求更正）
 
 ## 參考
 
