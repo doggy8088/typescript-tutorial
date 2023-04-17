@@ -13,8 +13,8 @@ JavaScript 的型別分為兩種：原始資料型別（[Primitive data types](h
 ```typescript
 let isDone: boolean = false;
 
-// 編譯透過
-// 後面約定，未強調編譯錯誤的程式碼片段，預設為編譯透過
+// 編譯通過
+// 後面約定，未強調編譯錯誤的程式碼片段，預設為編譯通過
 ```
 
 注意：使用建構函式 `Boolean` 建立的物件**不是**布林值：
