@@ -70,20 +70,21 @@ console.log(c.sayHi()); // Meow, My name is Tom
 
 ```javascript
 class Animal {
-    constructor(name) {
-        this.name = name;
-    }
-    get name() {
-        return 'Jack';
-    }
-    set name(value) {
-        console.log('setter: ' + value);
-    }
+  constructor(name) {
+      this._name = name;
+  }
+  get name() {
+      return this._name;
+  }
+  set name(value) {
+      this._name = value
+      console.log('setter: ' + value);
+  }
 }
 
-let a = new Animal('Kitty'); // setter: Kitty
+let a = new Animal('Jack');
 a.name = 'Tom'; // setter: Tom
-console.log(a.name); // Jack
+console.log(a.name); // Tom
 ```
 
 ### 靜態方法
